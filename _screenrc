@@ -24,7 +24,7 @@
 # between the text and console edge:
 #  '%M/%d/%Y '
 
-# The resultsing command give you a status line that
+# The resulting command gives you a status line that
 #  looks like this:
 #   | Screens: 0* bash  <blanks zapped>         5:30PM  Fri, Jun/25/2004 |
 #  (The pipes indicate the edges of the xterm/console).

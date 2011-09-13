@@ -1,0 +1,102 @@
+#!/bin/bash
+
+# cd to the current Finder window
+cdf () {
+    currFolderPath=$( /usr/bin/osascript <<"    EOT"
+        tell application "Finder"
+            try
+                set currFolder to (folder of the front window as alias)
+            on error
+                set currFolder to (path to desktop folder as alias)
+            end try
+            POSIX path of currFolder
+        end tell
+    EOT
+    )
+    echo "cd to \"$currFolderPath\""
+    cd "$currFolderPath"
+}
+
+# 'quit iTunes' to kill the app
+quit () {
+    for app in $*; do
+        osascript -e 'quit app "'$app'"'
+    done
+}
+
+# sync music from home
+msync () {
+    rsync --ignore-existing --progress --recursive --perms --times --size-only --whole-file --rsh=ssh --exclude='.*' --exclude='Movies' --exclude='Podcasts' $USER@$HOME_IP:"/Volumes/Persepolis/The\ Vault/1.\ Music/" "/Volumes/Persepolis/The Vault/1. Music/"
+}
+
+# ssh into work
+go () {
+    ssh -A bryce@$DEV_IP
+}
+
+# update the locate db
+updatelocate () {
+    sudo /usr/libexec/locate.updatedb
+}
+
+# Git magic
+
+# Show files that have been added, modified, changed, or renamed in the
+# current branch (in a commit)
+function bchanged {
+    git diff-tree --name-only -r $(git merge-base origin/master HEAD) HEAD | sort | uniq
+}
+
+# Filter to only the python files that have been changed in the branch
+function bpychanged {
+    bchanged | grep "\.py$"
+}
+
+# Run pylint on all files that have been modified in the
+# working directory
+function pychk {
+    git status --porcelain | grep "\.py$" | awk '{print $2}' | xargs pylint
+}
+
+# Run pylint on all files that have commited modifications in this branch
+function bpychk {
+    for file in "$(bpychanged)"; do
+        echo $file
+        [ -e $file ] && pylint $file
+    done
+}
+
+__git_ps1 () {
+    local git="$(git rev-parse --git-dir 2>/dev/null)"
+    if [ -n "$git" ]; then
+        local r
+        local branch
+        if [ -d "$git/../.dotest" ]; then
+            rev="|AM/REBASE"
+            branch="$(git symbolic-ref HEAD 2>/dev/null)"
+        elif [ -f "$git/.dotest-merge/interactive" ]; then
+            rev="|REBASE-i"
+            branch="$(cat $git/.dotest-merge/head-name)"
+        elif [ -d "$git/.dotest-merge" ]; then
+            rev="|REBASE-m"
+            branch="$(cat $git/.dotest-merge/head-name)"
+        elif [ -f "$git/MERGE_HEAD" ]; then
+            rev="|MERGING"
+            branch="$(git symbolic-ref HEAD 2>/dev/null)"
+        else
+            if [ -f $git/BISECT_LOG ]; then
+                rev="|BISECTING"
+            fi
+            if ! branch="$(git symbolic-ref HEAD 2>/dev/null)"; then
+                branch="$(cut -c1-7 $git/HEAD)..."
+            fi
+        fi
+
+        if [ -n "$1" ]; then
+            printf "$1" "${branch##refs/heads/}$rev"
+        else
+            printf " (%s)" "${branch##refs/heads/}$rev"
+        fi
+    fi
+}
+

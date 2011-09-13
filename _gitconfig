@@ -1,13 +1,24 @@
-[user]
-    name = John Anderson
-    email = sontek@gmail.com
-
 [color]
-    diff = auto
-    status = auto
-    branch = auto
-
+       ui = true
 [push]
-    default = matching
+       default = current
 [core]
-    editor = vim
+       whitespace = -trailing-space
+       whitespace = trailing-space
+       whitespace = trailing-space
+[alias]
+       log = log --stat
+[color "branch"]
+    current = yellow reverse
+    local = yellow
+    remote = green
+[color "diff"]
+    meta = yellow bold
+    frag = magenta bold
+    old = red
+    new = green
+[color "status"]
+    added = yellow
+    changed = green
+    untracked = cyan
+
