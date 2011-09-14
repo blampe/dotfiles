@@ -1,6 +1,6 @@
 *logs*
 *.log
 *~
-_vim/ropevim/src*
-_vim/ropevim/pylibs*
-*doc/tags
+*.py[co]
+.*.sw[nop]
+.DS_Store

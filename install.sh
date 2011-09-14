@@ -10,7 +10,7 @@ function link_file {
     fi
 
 	echo "    installing $target"
-    ln -sf ${source} ${target}
+    ln -sfn ${source} ${target}
 }
 
 echo "installing dotfile(s)..."
