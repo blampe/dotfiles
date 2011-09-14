@@ -1,5 +1,5 @@
 #!/bin/bash
-alias ipython='ipython-2.6'
+#alias ipython='ipython-2.6'
 
 # Use VIM as a pager for syntax-highlighting goodness
 alias less='vim -u /usr/share/vim/vim72/macros/less.vim'

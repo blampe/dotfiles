@@ -9,7 +9,7 @@ function link_file {
         mv $target $target.bak
     fi
 
-	echo "    installing $source to $target"
+	echo "    installing $target"
     ln -sf ${source} ${target}
 }
 
