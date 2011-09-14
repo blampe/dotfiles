@@ -280,7 +280,17 @@ let g:pyflakes_use_quickfix = 1
        ":PyflakesUpdate
    "end
 "endfunction
+
+" Automatically open, but do not go to (if there are errors) the quickfix /
+" location list window, or close it when is has become empty.
 "
+" Note: Must allow nesting of autocmds to enable any customizations for quickfix
+" buffers.
+" Note: Normally, :cwindow jumps to the quickfix window if the command opens it
+" (but not if it's already open). However, as part of the autocmd, this doesn't
+" seem to happen.
+autocmd QuickFixCmdPost [^l]* nested cwindow
+autocmd QuickFixCmdPost    l* nested lwindow
 
 " Limit the quickfix window's height by the number of errors
 autocmd FileType qf call AdjustQFWindowHeight(2, 10)
