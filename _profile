@@ -27,9 +27,8 @@ if [ -f /etc/bash_completion ]; then
 fi
 
 # python settings
-export PYTHONPATH="$PYTHONPATH:~/bin:~/py-lib"
-if [ -f ~/.pythonrc.py ]; then
-    export PYTHONSTARTUP=~/.pythonrc.py
+if [ -d ~/py-lib ] ; then
+	export PYTHONPATH=~/py-lib:$PYTHONPATH
 fi
 
 # MacPorts
@@ -37,6 +36,10 @@ export PATH=/opt/local/bin:/opt/local/sbin:$PATH
 export CPPFLAGS="-I/opt/local/include"
 export MANPATH=/opt/local/share/man:/opt/local/man:/usr/share/man:/usr/local/share/man
 export LDFLAGS="-L/opt/local/lib"
+
+if [ -d ~/bin ]; then
+	export PATH="${PATH}:~/bin"
+fi
 
 # junit tests for code reviews
 export JUNIT_HOME="/Developer"

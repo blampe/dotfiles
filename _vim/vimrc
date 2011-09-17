@@ -63,18 +63,18 @@ command! W :w
 map <leader>td <Plug>TaskList
 
 " Run pep8
-let g:pep8_map='<leader>8'
+"let g:pep8_map='<leader>8'
 
 " run py.test's
-nmap <silent><Leader>tf <Esc>:Pytest file<CR>
-nmap <silent><Leader>tc <Esc>:Pytest class<CR>
-nmap <silent><Leader>tm <Esc>:Pytest method<CR>
-nmap <silent><Leader>tn <Esc>:Pytest next<CR>
-nmap <silent><Leader>tp <Esc>:Pytest previous<CR>
-nmap <silent><Leader>te <Esc>:Pytest error<CR>
+"nmap <silent><Leader>tf <Esc>:Pytest file<CR>
+"nmap <silent><Leader>tc <Esc>:Pytest class<CR>
+"nmap <silent><Leader>tm <Esc>:Pytest method<CR>
+"nmap <silent><Leader>tn <Esc>:Pytest next<CR>
+"nmap <silent><Leader>tp <Esc>:Pytest previous<CR>
+"nmap <silent><Leader>te <Esc>:Pytest error<CR>
 
 " Run django tests
-map <leader>dt :set makeprg=python\ manage.py\ test\|:call MakeGreen()<CR>
+"map <leader>dt :set makeprg=python\ manage.py\ test\|:call MakeGreen()<CR>
 
 " ,v brings up my .vimrc
 " ,V reloads it -- making all changes active (have to save first)
@@ -112,8 +112,7 @@ map <leader>g :GundoToggle<CR>
 " Jump to the definition of whatever the cursor is on
 map <leader>j :RopeGotoDefinition<CR>
 
-" Rename whatever the cursor is on (including references to it)
-map <leader>r :RopeRename<CR>
+let ropevim_local_prefix="<leader>r"
 
 " awesome, inserts new line without going into insert mode
 map <S-CR> O<ESC>
@@ -267,7 +266,7 @@ colorscheme ir_black
 " Python
 " ==========================================================
 "au BufRead *.py compiler nose
-" au FileType python set omnifunc=pythoncomplete#Complete
+"au FileType python set omnifunc=pythoncomplete#Complete
 au BufRead *.py set efm=%C\ %.%#,%A\ \ File\ \"%f\"\\,\ line\ %l%.%#,%Z%[%^\ ]%\\@=%m
 
 " Let pyflakes use the quickfix window
@@ -313,8 +312,14 @@ au BufRead *.js set makeprg=jslint\ %
 " ==========================================================
 " SuperTab - Allows us to get code completion with tab
 " ==========================================================
-" Try different completion methods depending on its context
-let g:SuperTabDefaultCompletionType = "context"
+" Only use keywords in the current file
+let g:SuperTabDefaultCompletionType = "<c-x><c-n>"
+let g:SuperTabLongestEnhanced = 1
+let g:SuperTabLongestHighlight = 1
+
+" Scroll up/down through the completions popup menu
+inoremap <Up> <C-R>=pumvisible() ? "\<lt>C-P>" : "\<lt>Up>"<CR>
+inoremap <Down> <C-R>=pumvisible() ? "\<lt>C-N>" : "\<lt>Down>"<CR>
 
 " ==========================================================
 " TagList
