@@ -48,12 +48,15 @@ esac
 
 # dircolors... make sure that we have a color terminal, dircolors exists, and ls supports it.
 if $TERM_IS_COLOR && ( grep --color=auto --help ) &> /dev/null; then
-  alias ls="ls -FH"
   alias grep='grep --color=auto'
   alias fgrep='fgrep --color=auto'
   alias egrep='egrep --color=auto'
+fi
+
+if $TERM_IS_COLOR && ( ls --color=auto --help ) &> /dev/null; then
+  alias ls='ls -FH --color=auto'
 else
   # No color, so put a slash at the end of directory names, etc. to differentiate.
-  alias ls="ls -FH"
+  alias ls='ls -FH'
 fi
 

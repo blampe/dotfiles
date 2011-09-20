@@ -1,13 +1,13 @@
 [color]
-       ui = true
+    ui = true
 [push]
-       default = current
+    default = current
 [core]
-       whitespace = -trailing-space
-       whitespace = trailing-space
-       whitespace = trailing-space
+    whitespace = -trailing-space
+    whitespace = trailing-space
+    whitespace = trailing-space
 [alias]
-       log = log --stat
+    log = log --stat
 [color "branch"]
     current = yellow reverse
     local = yellow
