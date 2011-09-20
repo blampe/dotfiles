@@ -42,7 +42,7 @@
 	url = https://github.com/klen/rope-vim.git
 [submodule "_vim/submodules/snipmate"]
 	path = _vim/submodules/snipmate
-	url = https://github.com/msanders/snipmate.vim.git
+	url = https://github.com/garbas/vim-snipmate.git
 [submodule "_vim/submodules/supertab"]
 	path = _vim/submodules/supertab
 	url = https://github.com/vim-scripts/SuperTab-continued..git
@@ -61,3 +61,6 @@
 [submodule "_vim/submodules/vim-surround"]
 	path = _vim/submodules/vim-surround
 	url = https://github.com/tpope/vim-surround.git
+[submodule "_vim/submodules/vim-addon-mw-utils"]
+	path = _vim/submodules/vim-addon-mw-utils
+	url = https://github.com/MarcWeber/vim-addon-mw-utils.git
