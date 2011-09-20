@@ -2,7 +2,9 @@
 #alias ipython='ipython-2.6'
 
 # Use VIM as a pager for syntax-highlighting goodness
-alias less='vim -u /usr/share/vim/vim72/macros/less.vim'
+#VIMRUNTIME="$(vim -e -T dumb --cmd 'exe "set t_cm=\<C-M>"|echo $VIMRUNTIME|quit' | tr -d '\015')"
+#alias less="$VIMRUNTIME/macros/less.sh"
+export MANPAGER="sh -c \"col -b | view -C -c 'set ft=man nomod nolist titlestring=MANPAGE' -c 'map q :qall<CR>' -c 'set smartcase' -\""
 
 alias e='exit'
 
