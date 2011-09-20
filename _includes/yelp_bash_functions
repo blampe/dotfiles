@@ -23,12 +23,20 @@ if [ $YELPCODE ]; then
 
 	sb ()
 	{
-		sandbox --minimal -v bash -login;
+		if [ $YELP_IN_SANDBOX ]; then
+			echo 'already in a sandbox';
+		else
+			sandbox --minimal -v bash -login;
+		fi
 	}
 
 	sb-lucy ()
 	{
-		sandbox -v bash -login;
+		if [ $YELP_IN_SANDBOX ]; then
+			echo 'already in a sandbox';
+		else
+			sandbox -v bash -login;
+		fi
 	}
 
 	scribereader ()
