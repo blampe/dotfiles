@@ -23,12 +23,20 @@ if [ $YELPCODE ]; then
 
 	sb ()
 	{
-		sandbox --minimal -v bash -login;
+		if [ $YELP_IN_SANDBOX ]; then
+			echo 'already in a sandbox';
+		else
+			sandbox --minimal -v bash -login;
+		fi
 	}
 
 	sb-lucy ()
 	{
-		sandbox -v bash -login;
+		if [ $YELP_IN_SANDBOX ]; then
+			echo 'already in a sandbox';
+		else
+			sandbox -v bash -login;
+		fi
 	}
 
 	scribereader ()
@@ -40,4 +48,5 @@ if [ $YELPCODE ]; then
 	alias prod-scribereader="$HOME/pg/loc/tools/scribereader --host=scribe-prod.local.yelpcorp.com"
 	alias stagea-scribereader="$HOME/pg/loc/tools/scribereader --host=stagea.local.yelpcorp.com"
 	alias apperror-nagios='/nail/home/bryce/pg/loc/tools/scribereader --env=prod apperror | egrep '\''yelp/((billing|ordering)/|logic/(alacarte|billing|advertiser|credit_card))'\'' | /nail/home/bryce/pg/loc/tools/pretty_error_log | less -R'
+	alias testify='testify -v --summary'
 fi
