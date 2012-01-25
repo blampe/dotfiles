@@ -64,3 +64,6 @@
 [submodule "_vim/submodules/vim-addon-mw-utils"]
 	path = _vim/submodules/vim-addon-mw-utils
 	url = https://github.com/MarcWeber/vim-addon-mw-utils.git
+[submodule "_vim/submodules/detectindent"]
+	path = _vim/submodules/detectindent
+	url = https://github.com/ciaranm/detectindent.git
