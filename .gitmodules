@@ -67,3 +67,6 @@
 [submodule "_vim/submodules/detectindent"]
 	path = _vim/submodules/detectindent
 	url = https://github.com/ciaranm/detectindent.git
+[submodule "_vim/submodules/tlib_vim"]
+	path = _vim/submodules/tlib_vim
+	url = https://github.com/tomtom/tlib_vim.git
