@@ -40,6 +40,13 @@ go () {
 	fi
 }
 
+swap () {
+	local TMPFILE=tmp.$$
+	mv "$1" $TMPFILE
+	mv "$2" "$1"
+	mv $TMPFILE "$2"
+}
+
 # update the locate db
 updatelocate () {
     sudo /usr/libexec/locate.updatedb

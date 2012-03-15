@@ -345,6 +345,8 @@ autocmd BufWritePre * :call TrimWhiteSpace()
 " This beauty remembers where you were the last time you edited the file, and
 " returns to the same position.
 au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif""
+" Detect which indentation to use
+au BufReadPost * :DetectIndent
 
 " Syntastic
 let g:syntastic_enable_signs = 1
