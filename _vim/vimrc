@@ -60,7 +60,7 @@ let mapleader=","             " change the leader to be a comma vs slash
 command! W :w
 
 " Toggle the tasklist
-map <leader>td <Plug>TaskList
+"map <leader>td <Plug>TaskList
 
 " Run pep8
 "let g:pep8_map='<leader>8'
@@ -103,6 +103,9 @@ map <leader>n :NERDTreeToggle<CR>
 
 " Run command-t file search
 map <leader>f :CommandT<CR>
+let g:CommandTMatchWindowReverse=1
+let g:CommandTMaxFiles=50000
+set wildignore+=*.o,*.obj,.git,build
 " Ack searching
 nmap <leader>a <Esc>:Ack!
 
