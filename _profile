@@ -32,7 +32,7 @@ if [ -d ~/py-lib ] ; then
 fi
 
 # MacPorts
-export PATH=/opt/local/bin:/opt/local/sbin:$PATH
+export PATH=~/pg/data_vault/mongodb/bin:/opt/local/bin:/opt/local/sbin:$PATH
 export CPPFLAGS="-I/opt/local/include"
 export MANPATH=/opt/local/share/man:/opt/local/man:/usr/share/man:/usr/local/share/man
 export LDFLAGS="-L/opt/local/lib"
