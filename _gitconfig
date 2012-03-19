@@ -8,6 +8,7 @@
     whitespace = trailing-space
 [alias]
     log = log --stat
+	co = checkout
 [color "branch"]
     current = yellow reverse
     local = yellow
