@@ -266,6 +266,7 @@ set incsearch               " Incrementally search while typing a /regex
 
 """" Display
 "colorscheme vividchalk
+set t_Co=16                 " 16-colors is more portable
 colorscheme ir_black
 
 " ==========================================================
