@@ -21,21 +21,20 @@ export FIGNORE=.pyc
 shopt -s histappend
 # check the window size after each command and, if necessary, update the values of LINES and COLUMNS.
 shopt -s checkwinsize
+
 # enable bash completion in interactive shells
 if [ -f /etc/bash_completion ]; then
     . /etc/bash_completion
+fi
+# homebrew puts its completions in a different spot
+if [ -f /usr/local/etc/bash_completion ]; then
+    . /usr/local/etc/bash_completion
 fi
 
 # python settings
 if [ -d ~/py-lib ] ; then
 	export PYTHONPATH=~/py-lib:$PYTHONPATH
 fi
-
-# MacPorts
-export PATH=~/pg/data_vault/mongodb/bin:/opt/local/bin:/opt/local/sbin:$PATH
-export CPPFLAGS="-I/opt/local/include"
-export MANPATH=/opt/local/share/man:/opt/local/man:/usr/share/man:/usr/local/share/man
-export LDFLAGS="-L/opt/local/lib"
 
 if [ -d ~/bin ]; then
 	export PATH="${PATH}:~/bin"
