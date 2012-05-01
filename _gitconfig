@@ -23,3 +23,6 @@
     changed = green
     untracked = cyan
 
+[user]
+	name = Bryce Lampe
+	email = brycelampe@gmail.com
