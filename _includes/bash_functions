@@ -35,7 +35,7 @@ go () {
 		ssh -A $USER@$1
 	elif [ $YELPCODE ] ; then
 		cd $YELPCODE
-	else
+	elif [[ `ifconfig` != *$DEV_IP* ]] ; then
 		ssh -A $USER@$DEV_IP
 	fi
 }
@@ -124,3 +124,7 @@ __git_ps1 () {
     fi
 }
 
+function branches()
+{
+   for k in `git branch|sed s/^..//`;do echo -e `git log -1 --pretty=format:"%Cgreen%ci %Cblue%cr%Creset" "$k"`\\t"$k";done|sort
+}
