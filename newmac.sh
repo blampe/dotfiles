@@ -1,25 +1,40 @@
 #!/usr/bin/env bash
+#set -x
+
+BREW=/usr/local/bin/brew
+
+if [ ! `which gcc` ] ; then
+	echo "Please download XCode here:"
+	echo "\thttps://developer.apple.com/downloads/index.action"
+	exit 1
+fi
 
 if [ ! -d /usr/local/Cellar ] ; then
 	echo 'creating /usr/local/Cellar'
 	mkdir -p /usr/local/Cellar
-	chown `whoami` /usr/local/Cellar
+	sudo chown `whoami` /usr/local
+	sudo chown `whoami` /usr/local/etc
+	sudo chown `whoami` /usr/local/lib
+	sudo chown `whoami` /usr/local/share/doc
+	sudo chown `whoami` /usr/local/share/man/*
+	sudo chown `whoami` /usr/local/Cellar
 fi
 
-if [ ! -x /usr/local/bin/brew ] ; then
+if [ ! -x $BREW ] ; then
 	echo 'installing homebrew'
 	/usr/bin/ruby -e "$(/usr/bin/curl -fsSL https://raw.github.com/mxcl/homebrew/master/Library/Contributions/install_homebrew.rb)"
+	echo 'changing xcode path to /'
 fi
 
 echo 'updating homebrew'
-/usr/local/bin/brew update
+$BREW update
 
 if [ ! -x /usr/local/bin/git ] ; then
 	echo 'installing git'
-	/usr/local/bin/brew install git
+	$BREW install git
 fi
 
-/usr/local/bin/brew doctor
+$BREW doctor
 if [ $? -ne 0 ] ; then
 	echo 'bad doctor'
 	exit 1
@@ -27,17 +42,17 @@ fi
 
 if [ ! -x /usr/local/bin/hg ] ; then
 	echo 'installing mercurial'
-	/usr/local/bin/brew install mercurial
+	$BREW install mercurial
 fi
 
 if [ ! -d /usr/local/Cellar/autoconf ] ; then
 	echo 'installing autoconf'
-	/usr/local/bin/brew install autoconf
+	$BREW install autoconf
 fi
 
 if [ ! -d /usr/local/Cellar/automake ] ; then
 	echo 'installing automake'
-	/usr/local/bin/brew install automake
+	$BREW install automake
 fi
 
 if [ ! -x ~/.rvm/bin/rvm ] ; then
@@ -48,14 +63,40 @@ if [ ! -x ~/.rvm/bin/rvm ] ; then
 	echo 'source ~/.profile' >> ~/.bash_profile
 fi
 
-/usr/local/bin/brew install libksba ack wget curl redis memcached libmemcached colordiff nginx sqlite libxml2 libxslt v8 sphinx xz geoip lzo mysql mongodb readline bash-completion ctags
+if [ ! `which ipython` ] ; then
+	echo 'installing ipython'
+	sudo easy_install ipython
+fi
+
+$BREW install libksba
+$BREW install ack
+$BREW install wget
+$BREW install curl
+$BREW install redis
+$BREW install memcached
+$BREW install libmemcached
+$BREW install colordiff
+$BREW install nginx
+$BREW install sqlite
+$BREW install libxml2
+$BREW install libxslt
+$BREW install v8
+$BREW install sphinx
+$BREW install xz
+$BREW install geoip
+$BREW install lzo
+$BREW install mysql
+$BREW install mongodb
+$BREW install readline
+$BREW install bash-completion
+$BREW install ctags
 # breaks some things?
-#/usr/local/bin/brew link readline
+#$BREW link readline
 
 # homebrew's bash completions
 ln -s "/usr/local/Library/Contributions/brew_bash_completion.sh" "/usr/local/etc/bash_completion.d"
 
-/usr/local/bin/brew install https://raw.github.com/AndrewVos/homebrew-alt/master/duplicates/vim.rb
+$BREW install https://raw.github.com/AndrewVos/homebrew-alt/master/duplicates/vim.rb
 
 # Source RVM as a function into local environment.
 [ -s "$HOME/.rvm/scripts/rvm" ] && . "$HOME/.rvm/scripts/rvm"
@@ -63,8 +104,10 @@ ln -s "/usr/local/Library/Contributions/brew_bash_completion.sh" "/usr/local/etc
 # TODO: short-circuit
 $HOME/.rvm/bin/rvm get head
 $HOME/.rvm/bin/rvm install 1.9.3-p125 --enable-shared --with-readline-dir=/usr/local
-$home/.rvm/bin/rvm gemset create
-$HOME/.rvm/rubies/ruby-1.9.3-p125/bin/gem install rails bundler unicorn pg rspec
+$HOME/.rvm/bin/rvm gemset create
+$HOME/.rvm/rubies/ruby-1.9.3-p125/bin/gem install rails bundler unicorn rspec pg
 $HOME/.rvm/bin/rvm pkg install readline
 $HOME/.rvm/bin/rvm --default use 1.9.3-p125
 
+echo "remember to install DejaVu here:"
+echo "\thttp://dejavu-fonts.org/wiki/Download"
