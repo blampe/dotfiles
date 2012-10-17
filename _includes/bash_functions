@@ -33,9 +33,9 @@ msync () {
 go () {
 	if [ $1 ] ; then
 		ssh -A $USER@$1
-	elif [ $YELPCODE ] ; then
-		cd $YELPCODE
-	else
+	elif [ -d ~/pg/loc ] ; then
+		cd ~/pg/loc
+	elif [[ `ifconfig` != *$DEV_IP* ]] ; then
 		ssh -A $USER@$DEV_IP
 	fi
 }
@@ -90,6 +90,74 @@ __expand_tilde_by_ref()
    return 0;
 }
 
+# This script searches .py files for the provided string arguments and outputs them all fancy-like
+pf () {
+   find . -name "*.py" ! -path "*templates*" ! -path "*htdocs*" ! -path "*build*" | xargs grep -n --exclude="*.svn*" "$@" | awk -f ~/dotfiles/formatfind.awk | grep "$@" --color=auto
+}
+
+function branches()
+{
+   for k in `git branch|sed s/^..//`;do echo -e `git log -1 --pretty=format:"%Cgreen%ci %Cblue%cr%Creset" "$k"`\\t"$k";done|sort
+}
+
+# PS1 stuff
+if [ $CLICOLOR ]; then
+    BLD=$(tput bold)
+	BLK=$(tput setaf 0)
+    RST=$(tput sgr0)
+    RED=$BLD$(tput setaf 1)
+    GRN=$BLD$(tput setaf 2)
+    YLW=$BLD$(tput setaf 3)
+    BLU=$BLD$(tput setaf 4)
+    MAG=$(tput setaf 5)
+    CYN=$(tput setaf 6)
+    WHT=$BLD$(tput setaf 7)
+	BRED=$(tput setaf 9) # bright red
+	BGRN=$(tput setaf 10) # bright green
+	BYLW=$(tput setaf 11) # bright yellow
+	BBLU=$(tput setaf 12) # bright blue
+	BMAG=$(tput setaf 13) # bright magenta
+	BCYN=$(tput setaf 14) # bright cyan
+else
+    BLD=""
+    RST=""
+    RED=""
+    GRN=""
+    YLW=""
+    BLU=""
+    MAG=""
+    CYN=""
+    WHT=""
+	BRED=""
+	BGRN=""
+    BYLW=""
+    BBLU=""
+    BMAG=""
+    BCYN=""
+fi
+
+declare -a COLOR_ARRAY
+
+COLOR_ARRAY[1]=$RED
+COLOR_ARRAY[2]=$GRN
+COLOR_ARRAY[3]=$YLW
+COLOR_ARRAY[4]=$BLU
+COLOR_ARRAY[5]=$MAG
+COLOR_ARRAY[6]=$CYN
+COLOR_ARRAY[7]=$WHT
+COLOR_ARRAY[8]=$(tput setab 7) # non-bold white (grey)
+COLOR_ARRAY[9]=$(tput setaf 3) # non-bold yellow (orange)
+COLOR_ARRAY[10]=$(tput setaf 2) # non-bold green
+COLOR_ARRAY[11]=$BRED
+COLOR_ARRAY[12]=$BGRN
+COLOR_ARRAY[13]=$BYLW
+COLOR_ARRAY[14]=$BBLU
+COLOR_ARRAY[15]=$BMAG
+COLOR_ARRAY[16]=$BCYN
+
+HOST_COLOR=${COLOR_ARRAY[$(hostname -s | shasum | head -c 1 | xargs printf '0x%s' | xargs printf '%d')]}
+USER_COLOR=${COLOR_ARRAY[$(echo $USER | shasum | head -c 1 | xargs printf '0x%s' | xargs printf '%d')]}
+
 __git_ps1 () {
     local git="$(git rev-parse --git-dir 2>/dev/null)"
     if [ -n "$git" ]; then
@@ -123,4 +191,3 @@ __git_ps1 () {
         fi
     fi
 }
-

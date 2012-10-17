@@ -42,8 +42,9 @@ fi
 
 # junit tests for code reviews
 export JUNIT_HOME="/Developer"
-export PATH="/usr/local/bin:/usr/local/sbin:$PATH:$JUNIT_HOME"
+export PATH="/usr/local/bin:/usr/local/sbin:/usr/local/share/python:/usr/local/Cellar/python26/2.6.8/bin:$PATH:$JUNIT_HOME"
 export CLASSPATH="$CLASSPATH:$JUNIT_HOME/junit-4.9b2.jar"
+
 
 # grab any local includes
 if [ -d ~/.includes ]; then
@@ -52,10 +53,10 @@ if [ -d ~/.includes ]; then
     done
 fi
 
-PS1='\[\e[1;34m\]\u\[\e[0;39m\]@\[\e[1;32m\]\h\[\e[0;39m\]:\[\e[1;33m\]\w\[\e[0;39m\]$(__git_ps1 " \[\e[1;36m\](%s)\[\e[0;39m\] ") \[\e[1;30m\]\t\n\[\e[1;30m\]\$\[\e[m\] '
+PS1='${BLD}${USER_COLOR}\u${BLD}${CYN}@${BLD}${HOST_COLOR}\h${BLD}${CYN}:${YLW}\w${RST}$(__git_ps1 " ${BLD}${BCYN}(%s)${RST} ") ${BLK}\t\n${BLK}\$${RST} '
 
-if [[ $YELPCODE ]] ; then
-	cd $YELPCODE
+if [[ -d ~/pg/loc ]] ; then
+	cd ~/pg/loc
 else
 	# If I can connect to work, then do it
 	ping -c 1 -t 1 $DEV_IP &> /dev/null && go

@@ -352,7 +352,8 @@ autocmd BufWritePre * :call TrimWhiteSpace()
 " returns to the same position.
 au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif""
 " Detect which indentation to use
-au BufReadPost * :DetectIndent
+" au BufReadPost * :DetectIndent
+" let g:detectindent_preferred_indent = 4
 
 " Syntastic
 let g:syntastic_enable_signs = 1

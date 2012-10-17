@@ -7,7 +7,7 @@
     whitespace = trailing-space
     whitespace = trailing-space
 [alias]
-    log = log --stat
+    lg = log --first-parent
 	co = checkout
 [color "branch"]
     current = yellow reverse
