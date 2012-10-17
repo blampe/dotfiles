@@ -155,8 +155,8 @@ COLOR_ARRAY['d']=$BBLU
 COLOR_ARRAY['e']=$BMAG
 COLOR_ARRAY['f']=$BCYN
 
-HOST_COLOR=${COLOR_ARRAY[$(hostname | shasum| head --bytes 1)]}
-USER_COLOR=${COLOR_ARRAY[$(echo $USER | shasum | head --bytes 1)]}
+HOST_COLOR=${COLOR_ARRAY[$(hostname | shasum| head -c 1)]}
+USER_COLOR=${COLOR_ARRAY[$(echo $USER | shasum | head -c 1)]}
 
 __git_ps1 () {
     local git="$(git rev-parse --git-dir 2>/dev/null)"
