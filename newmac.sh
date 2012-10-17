@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+set -x
 
 if [ ! -d /usr/local/Cellar ] ; then
 	echo 'creating /usr/local/Cellar'
@@ -64,7 +65,7 @@ ln -s "/usr/local/Library/Contributions/brew_bash_completion.sh" "/usr/local/etc
 $HOME/.rvm/bin/rvm get head
 $HOME/.rvm/bin/rvm install 1.9.3-p125 --enable-shared --with-readline-dir=/usr/local
 $home/.rvm/bin/rvm gemset create
-$HOME/.rvm/rubies/ruby-1.9.3-p125/bin/gem install rails bundler unicorn pg rspec
+$HOME/.rvm/rubies/ruby-1.9.3-p125/bin/gem install rails bundler unicorn rspec pg
 $HOME/.rvm/bin/rvm pkg install readline
 $HOME/.rvm/bin/rvm --default use 1.9.3-p125
 
