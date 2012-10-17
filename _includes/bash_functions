@@ -33,8 +33,8 @@ msync () {
 go () {
 	if [ $1 ] ; then
 		ssh -A $USER@$1
-	elif [ $YELPCODE ] ; then
-		cd $YELPCODE
+	elif [ ~/pg/loc ] ; then
+		cd ~/pg/loc
 	elif [[ `ifconfig` != *$DEV_IP* ]] ; then
 		ssh -A $USER@$DEV_IP
 	fi

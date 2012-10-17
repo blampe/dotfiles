@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [ $YELPCODE ]; then
+if [ -d ~/pg/loc ]; then
 	ysql()
 	{
 		mysql -u yelpdev -h devdb1 -A yelp
@@ -49,4 +49,5 @@ if [ $YELPCODE ]; then
 	alias stagea-scribereader="$HOME/pg/loc/tools/scribereader --host=stagea.local.yelpcorp.com"
 	alias apperror-nagios='/nail/home/bryce/pg/loc/tools/scribereader --env=prod apperror | egrep '\''yelp/((billing|ordering)/|logic/(alacarte|billing|advertiser|credit_card))'\'' | /nail/home/bryce/pg/loc/tools/pretty_error_log | less -R'
 	alias testify='testify -v --summary'
+	export PATH="$PATH":"$HOME"/pg/loc/tools
 fi
