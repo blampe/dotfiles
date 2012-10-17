@@ -33,9 +33,9 @@ msync () {
 go () {
 	if [ $1 ] ; then
 		ssh -A $USER@$1
-	elif [ $YELPCODE ] ; then
-		cd $YELPCODE
-	else
+	elif [ ~/pg/loc ] ; then
+		cd ~/pg/loc
+	elif [[ `ifconfig` != *$DEV_IP* ]] ; then
 		ssh -A $USER@$DEV_IP
 	fi
 }
@@ -128,3 +128,9 @@ __git_ps1 () {
 pf () {
    find . -name "*.py" ! -path "*templates*" ! -path "*htdocs*" ! -path "*build*" | xargs grep -n --exclude="*.svn*" "$@" | awk -f ~/dotfiles/formatfind.awk | grep "$@" --color=auto
 }
+
+function branches()
+{
+   for k in `git branch|sed s/^..//`;do echo -e `git log -1 --pretty=format:"%Cgreen%ci %Cblue%cr%Creset" "$k"`\\t"$k";done|sort
+}
+
