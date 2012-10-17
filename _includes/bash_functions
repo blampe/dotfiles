@@ -136,7 +136,7 @@ else
     BCYN=""
 fi
 
-declare -A COLOR_ARRAY
+declare -a COLOR_ARRAY
 
 COLOR_ARRAY[1]=$RED
 COLOR_ARRAY[2]=$GRN
@@ -147,16 +147,16 @@ COLOR_ARRAY[6]=$CYN
 COLOR_ARRAY[7]=$WHT
 COLOR_ARRAY[8]=$(tput setab 7) # non-bold white (grey)
 COLOR_ARRAY[9]=$(tput setaf 3) # non-bold yellow (orange)
-COLOR_ARRAY[0]=$(tput setaf 2) # non-bold green
-COLOR_ARRAY['a']=$BRED
-COLOR_ARRAY['b']=$BGRN
-COLOR_ARRAY['c']=$BYLW
-COLOR_ARRAY['d']=$BBLU
-COLOR_ARRAY['e']=$BMAG
-COLOR_ARRAY['f']=$BCYN
+COLOR_ARRAY[10]=$(tput setaf 2) # non-bold green
+COLOR_ARRAY[11]=$BRED
+COLOR_ARRAY[12]=$BGRN
+COLOR_ARRAY[13]=$BYLW
+COLOR_ARRAY[14]=$BBLU
+COLOR_ARRAY[15]=$BMAG
+COLOR_ARRAY[16]=$BCYN
 
-HOST_COLOR=${COLOR_ARRAY[$(hostname | shasum| head -c 1)]}
-USER_COLOR=${COLOR_ARRAY[$(echo $USER | shasum | head -c 1)]}
+HOST_COLOR=${COLOR_ARRAY[$(hostname | shasum | head -c 1 | xargs printf '0x%s' | xargs printf '%d')]}
+USER_COLOR=${COLOR_ARRAY[$(echo $USER | shasum | head -c 1 | xargs printf '0x%s' | xargs printf '%d')]}
 
 __git_ps1 () {
     local git="$(git rev-parse --git-dir 2>/dev/null)"
