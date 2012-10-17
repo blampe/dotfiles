@@ -155,7 +155,7 @@ COLOR_ARRAY[14]=$BBLU
 COLOR_ARRAY[15]=$BMAG
 COLOR_ARRAY[16]=$BCYN
 
-HOST_COLOR=${COLOR_ARRAY[$(hostname | shasum | head -c 1 | xargs printf '0x%s' | xargs printf '%d')]}
+HOST_COLOR=${COLOR_ARRAY[$(hostname -s | shasum | head -c 1 | xargs printf '0x%s' | xargs printf '%d')]}
 USER_COLOR=${COLOR_ARRAY[$(echo $USER | shasum | head -c 1 | xargs printf '0x%s' | xargs printf '%d')]}
 
 __git_ps1 () {
