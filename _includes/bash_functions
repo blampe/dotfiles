@@ -124,3 +124,7 @@ __git_ps1 () {
     fi
 }
 
+# This script searches .py files for the provided string arguments and outputs them all fancy-like
+pf () {
+   find . -name "*.py" ! -path "*templates*" ! -path "*htdocs*" ! -path "*build*" | xargs grep -n --exclude="*.svn*" "$@" | awk -f ~/dotfiles/formatfind.awk | grep "$@" --color=auto
+}
