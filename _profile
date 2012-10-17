@@ -42,8 +42,9 @@ fi
 
 # junit tests for code reviews
 export JUNIT_HOME="/Developer"
-export PATH="/usr/local/bin:/usr/local/sbin:$PATH:$JUNIT_HOME"
+export PATH="/usr/local/bin:/usr/local/sbin:/usr/local/share/python:/usr/local/Cellar/python26/2.6.8/bin:$PATH:$JUNIT_HOME"
 export CLASSPATH="$CLASSPATH:$JUNIT_HOME/junit-4.9b2.jar"
+
 
 # grab any local includes
 if [ -d ~/.includes ]; then
