@@ -53,7 +53,7 @@ if [ -d ~/.includes ]; then
     done
 fi
 
-PS1='${BLD}${USER_COLOR}\u${BLD}${CYN}@${BLD}${HOST_COLOR}\h${BLD}${CYN}:${YLW}\w${RST}$(__git_ps1 " ${BLD}${BCYN}(%s)${RST} ") ${BLK}\t\n${BLK}\$${RST} '
+PS1='\[${BLD}${USER_COLOR}\]\u\[${BLD}${CYN}\]@\[${HOST_COLOR}\]\h\[${BLD}${CYN}\]:\[${YLW}\]\w\[${RST}\]$(__git_ps1 " \[${BLD}${BCYN}\](%s)\[${RST}\] ") \[${BLK}\]\t\n\[${BLK}\]\$\[${RST}\] '
 
 if [[ -d ~/pg/loc ]] ; then
 	cd ~/pg/loc
