@@ -138,22 +138,23 @@ fi
 
 declare -a COLOR_ARRAY
 
-COLOR_ARRAY[1]=$RED
-COLOR_ARRAY[2]=$GRN
-COLOR_ARRAY[3]=$YLW
-COLOR_ARRAY[4]=$BLU
-COLOR_ARRAY[5]=$MAG
-COLOR_ARRAY[6]=$CYN
-COLOR_ARRAY[7]=$WHT
-COLOR_ARRAY[8]=$(tput setab 7) # non-bold white (grey)
-COLOR_ARRAY[9]=$(tput setaf 3) # non-bold yellow (orange)
-COLOR_ARRAY[10]=$(tput setaf 2) # non-bold green
-COLOR_ARRAY[11]=$BRED
-COLOR_ARRAY[12]=$BGRN
-COLOR_ARRAY[13]=$BYLW
-COLOR_ARRAY[14]=$BBLU
-COLOR_ARRAY[15]=$BMAG
-COLOR_ARRAY[16]=$BCYN
+# for i in 15 203 9 187 11 120 10 22 14 75 33 21 5 90 55 0; do echo `tput bold` `tput setaf $i` hi; done
+COLOR_ARRAY[1]=$(tput setaf 15)
+COLOR_ARRAY[2]=$(tput setaf 203)
+COLOR_ARRAY[3]=$(tput setaf 9)
+COLOR_ARRAY[4]=$(tput setaf 187)
+COLOR_ARRAY[5]=$(tput setaf 11)
+COLOR_ARRAY[6]=$(tput setaf 120)
+COLOR_ARRAY[7]=$(tput setaf 10)
+COLOR_ARRAY[8]=$(tput setaf 22)
+COLOR_ARRAY[9]=$(tput setaf 14)
+COLOR_ARRAY[10]=$(tput setaf 75)
+COLOR_ARRAY[11]=$(tput setaf 33)
+COLOR_ARRAY[12]=$(tput setaf 21)
+COLOR_ARRAY[13]=$(tput setaf 5)
+COLOR_ARRAY[14]=$(tput setaf 90)
+COLOR_ARRAY[15]=$(tput setaf 55)
+COLOR_ARRAY[16]=$(tput setaf 00)
 
 HOST_COLOR=${COLOR_ARRAY[$(hostname -s | shasum | head -c 1 | xargs printf '0x%s' | xargs printf '%d')]}
 USER_COLOR=${COLOR_ARRAY[$(echo $USER | shasum | head -c 1 | xargs printf '0x%s' | xargs printf '%d')]}
