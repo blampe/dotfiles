@@ -73,3 +73,6 @@
 [submodule "_vim/submodules/jsflakes.vim"]
 	path = _vim/submodules/jsflakes.vim
 	url = https://github.com/vim-scripts/jsflakes.vim.git
+[submodule "_vim/submodules/vim-rails"]
+	path = _vim/submodules/vim-rails
+	url = https://github.com/tpope/vim-rails.git
