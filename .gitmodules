@@ -76,3 +76,6 @@
 [submodule "_vim/submodules/vim-rails"]
 	path = _vim/submodules/vim-rails
 	url = https://github.com/tpope/vim-rails.git
+[submodule "j"]
+	path = j
+	url = https://github.com/rupa/j2.git
