@@ -314,6 +314,11 @@ endfunction
 au BufRead *.js set makeprg=jslint\ %
 
 " ==========================================================
+" Markdown
+" ==========================================================
+au BufRead,BufNewFile *.md set filetype=markdown
+
+" ==========================================================
 " SuperTab - Allows us to get code completion with tab
 " ==========================================================
 " Only use keywords in the current file
