@@ -12,6 +12,8 @@ alias ssh='ssh -A'
 
 alias lal='ls -al'
 
+alias activate='source .env/bin/activate'
+
 # Set up TERM variables.
 # vt100 and xterm have no color in vim (at least on unixs), but if we call them xterm-color, they will.
 # (vt100 for F-Secure SSH.)
