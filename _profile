@@ -45,6 +45,8 @@ export JUNIT_HOME="/Developer"
 export PATH="/usr/local/bin:/usr/local/sbin:/usr/local/Cellar/python26/2.6.8/bin:$PATH:$JUNIT_HOME"
 export CLASSPATH="$CLASSPATH:$JUNIT_HOME/junit-4.9b2.jar"
 
+# j
+export JPY=~/dotfiles/j/j.py
 
 # grab any local includes
 if [ -d ~/.includes ]; then

@@ -39,6 +39,15 @@ if [ -d ~/pg/loc ]; then
 		fi
 	}
 
+	sb-prod ()
+	{
+		if [ $YELP_IN_SANDBOX ]; then
+			echo 'already in a sandbox';
+		else
+			sandbox --proddb --minimal -v bash -login;
+		fi
+	}
+
 	scribereader ()
 	{
 		~/pg/yelp-main/tools/scribereader $*

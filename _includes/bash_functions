@@ -95,6 +95,10 @@ pf () {
    find . -name "*.py" ! -path "*templates*" ! -path "*htdocs*" ! -path "*build*" ! -path "*/.*" | xargs grep -n "$@" | awk -f ~/dotfiles/formatfind.awk | grep "$@" --color=auto
 }
 
+yf () {
+   find . -name "*.yaml" ! -path "*templates*" ! -path "*htdocs*" ! -path "*build*" | xargs grep -n --exclude="*.svn*" "$@" | awk -f ~/dotfiles/formatfind.awk | grep "$@" --color=auto
+}
+
 function branches()
 {
    for k in `git branch|sed s/^..//`;do echo -e `git log -1 --pretty=format:"%Cgreen%ci %Cblue%cr%Creset" "$k"`\\t"$k";done|sort
