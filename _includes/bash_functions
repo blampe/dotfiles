@@ -96,7 +96,7 @@ pf () {
 }
 
 yf () {
-   find . -name "*.yaml" ! -path "*templates*" ! -path "*htdocs*" ! -path "*build*" | xargs grep -n --exclude="*.svn*" "$@" | awk -f ~/dotfiles/formatfind.awk | grep "$@" --color=auto
+   find . -name "*.yaml" ! -path "./[^/]*templates/.*" ! -path "*htdocs*" | xargs grep -n --exclude="*.svn*" "$@" | awk -f ~/dotfiles/formatfind.awk | grep "$@" --color=auto
 }
 
 function branches()
