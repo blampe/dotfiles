@@ -1,7 +1,7 @@
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
-export DEV_IP=10.10.1.114
+export DEV_IP=10.56.6.44
 export HOME_IP=boombox.dyndns.info
 export WORK_IP=
 
