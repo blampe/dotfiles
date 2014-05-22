@@ -92,7 +92,14 @@ __expand_tilde_by_ref()
 
 # This script searches .py files for the provided string arguments and outputs them all fancy-like
 pf () {
-   find . -name "*.py" ! -path "*templates*" ! -path "*htdocs*" ! -path "*build*" ! -path "*/.*" | xargs grep -n "$@" | awk -f ~/dotfiles/formatfind.awk | grep "$@" --color=auto
+    find . -name "*.py" \
+        ! -regex "./[^/]*templates/.*" \
+        ! -path "./config/locations/city_hoods.py" \
+        ! -path "*htdocs*" \
+        ! -path "*/.*" \
+    | xargs -d '\n' grep -n --exclude="*.svn*" "$@" \
+    | awk -f ~/dotfiles/formatfind.awk \
+    | grep "$@" --color=auto
 }
 
 yf () {
