@@ -1,0 +1,31 @@
+# Tell ack how to recognize Cheetah templates; then you can search only Cheetah
+# files with `ack --cheetah`
+--type-set
+cheetah=.tmpl
+
+# Also, Sass
+--type-set
+sass=.scss,.sass
+
+# Don't search the build directory
+--ignore-dir
+build
+
+# Skip *.py files in template directories.
+# (This is a zero-width negative lookahead assertion.  Mmm, Perl.)
+-G^(?!\w*templates/.*[.]py)
+
+
+### Less Yelp-specific:
+
+# Sort the list of files before searching; slower, but deterministic and human-friendly
+--sort-files
+
+# If the given regex is all lowercase, ignore case; otherwise preserve it.
+# Like vim's option of the same name.
+--smart-case
+
+# Pipe output into `less`, using the same defaults as git
+--pager
+less -RFSX
+
