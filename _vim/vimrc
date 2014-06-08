@@ -194,9 +194,9 @@ set grepprg=ack-grep          " replace the default grep program with ack
 set completeopt=menuone,longest,preview
 set pumheight=6             " Keep a small completion window
 
-" show a line at column 120
+" show a line at column 100
 if exists("&colorcolumn")
-	set colorcolumn=116
+	set colorcolumn=100
 endif
 
 """ Moving Around/Editing
