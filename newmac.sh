@@ -4,69 +4,77 @@
 BREW=/usr/local/bin/brew
 
 if [ ! `which gcc` ] ; then
-	echo "Please download XCode here:"
-	echo "\thttps://developer.apple.com/downloads/index.action"
-	exit 1
+    echo "Please download XCode here:"
+    echo "\thttps://developer.apple.com/downloads/index.action"
+    exit 1
 fi
 
 if [ ! -d /usr/local/Cellar ] ; then
-	echo 'creating /usr/local/Cellar'
-	mkdir -p /usr/local/Cellar
-	sudo chown `whoami` /usr/local
-	sudo chown `whoami` /usr/local/etc
-	sudo chown `whoami` /usr/local/lib
-	sudo chown `whoami` /usr/local/share/doc
-	sudo chown `whoami` /usr/local/share/man/*
-	sudo chown `whoami` /usr/local/Cellar
+    echo 'creating /usr/local/Cellar'
+    mkdir -p /usr/local/Cellar
+    sudo chown `whoami` /usr/local
+    sudo chown `whoami` /usr/local/etc
+    sudo chown `whoami` /usr/local/lib
+    sudo chown `whoami` /usr/local/share/doc
+    sudo chown `whoami` /usr/local/share/man/*
+    sudo chown `whoami` /usr/local/Cellar
 fi
 
 if [ ! -x $BREW ] ; then
-	echo 'installing homebrew'
-	/usr/bin/ruby -e "$(/usr/bin/curl -fsSL https://raw.github.com/mxcl/homebrew/master/Library/Contributions/install_homebrew.rb)"
-	echo 'changing xcode path to /'
+    echo 'installing homebrew'
+    /usr/bin/ruby -e "$(/usr/bin/curl -fsSL https://raw.github.com/mxcl/homebrew/master/Library/Contributions/install_homebrew.rb)"
+    echo 'changing xcode path to /'
 fi
 
 echo 'updating homebrew'
 $BREW update
 
 if [ ! -x /usr/local/bin/git ] ; then
-	echo 'installing git'
-	$BREW install git
+    echo 'installing git'
+    $BREW install git
 fi
 
 $BREW doctor
 if [ $? -ne 0 ] ; then
-	echo 'bad doctor'
-	exit 1
-fi
-
-if [ ! -x /usr/local/bin/hg ] ; then
-	echo 'installing mercurial'
-	$BREW install mercurial
+    echo 'bad doctor'
+    exit 1
 fi
 
 if [ ! -d /usr/local/Cellar/autoconf ] ; then
-	echo 'installing autoconf'
-	$BREW install autoconf
+    echo 'installing autoconf'
+    $BREW install autoconf
 fi
 
 if [ ! -d /usr/local/Cellar/automake ] ; then
-	echo 'installing automake'
-	$BREW install automake
+    echo 'installing automake'
+    $BREW install automake
 fi
 
 if [ ! -x ~/.rvm/bin/rvm ] ; then
-	echo 'installing rvm'
-	bash -s master < <(curl -s https://raw.github.com/wayneeseguin/rvm/master/binscripts/rvm-installer)
-	echo '[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" # Load RVM function' >> ~/.bash_profile
-	echo '[[ -r $rvm_path/scripts/completion ]] && . $rvm_path/scripts/completion' >> ~/.bash_profile
-	echo 'source ~/.profile' >> ~/.bash_profile
+    echo 'installing rvm'
+    bash -s master < <(curl -s https://raw.github.com/wayneeseguin/rvm/master/binscripts/rvm-installer)
+    echo '[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" # Load RVM function' >> ~/.bash_profile
+    echo '[[ -r $rvm_path/scripts/completion ]] && . $rvm_path/scripts/completion' >> ~/.bash_profile
+    echo 'source ~/.profile' >> ~/.bash_profile
 fi
 
 if [ ! `which ipython` ] ; then
-	echo 'installing ipython'
-	sudo easy_install ipython
+    echo 'installing ipython'
+    pip install ipython
 fi
+
+if [ ! `which yas3fs` ] ; then
+    echo 'installing yas3fs'
+    # https://github.com/danilop/yas3fs/issues/26
+    pip install boto==2.27.0
+    pip install yas3fs
+fi
+
+if [ ! `which boto-rsync` ] ; then
+    echo 'installing boto-rsync'
+    pip install boto-rsync
+fi
+
 
 $BREW install libksba
 $BREW install ack
@@ -90,6 +98,10 @@ $BREW install mongodb
 $BREW install readline
 $BREW install bash-completion
 $BREW install ctags
+$BREW install libyaml
+$BREW install fuse4x
+$BREW install htop-osx
+
 # breaks some things?
 #$BREW link readline
 
@@ -103,11 +115,18 @@ $BREW install https://raw.github.com/AndrewVos/homebrew-alt/master/duplicates/vi
 
 # TODO: short-circuit
 $HOME/.rvm/bin/rvm get head
-$HOME/.rvm/bin/rvm install 1.9.3-p125 --enable-shared --with-readline-dir=/usr/local
+$HOME/.rvm/bin/rvm install 2.1.2 --enable-shared --with-readline-dir=/usr/local
+$HOME/.rvm/bin/rvm use 2.1.2
 $HOME/.rvm/bin/rvm gemset create
-$HOME/.rvm/rubies/ruby-1.9.3-p125/bin/gem install rails bundler unicorn rspec pg
+$HOME/.rvm/rubies/ruby-2.1.2/bin/gem install rails bundler unicorn rspec pg iconv
 $HOME/.rvm/bin/rvm pkg install readline
-$HOME/.rvm/bin/rvm --default use 1.9.3-p125
+$HOME/.rvm/bin/rvm --default use 2.1.2
 
+# don't write DS_Store on network drives
+defaults write com.apple.desktopservices DSDontWriteNetworkStores true
+
+echo
+echo "remember to configure ~/.boto!"
+echo
 echo "remember to install DejaVu here:"
 echo "\thttp://dejavu-fonts.org/wiki/Download"
