@@ -330,17 +330,6 @@ let g:SuperTabLongestHighlight = 1
 inoremap <Up> <C-R>=pumvisible() ? "\<lt>C-P>" : "\<lt>Up>"<CR>
 inoremap <Down> <C-R>=pumvisible() ? "\<lt>C-N>" : "\<lt>Down>"<CR>
 
-" ==========================================================
-" TagList
-" ==========================================================
-if executable('ctags')
-    let Tlist_Auto_Open = 1
-    let Tlist_Exit_OnlyWindow = 1
-    let Tlist_Compact_Format = 1
-    let Tlist_Use_Right_Window = 1
-    source ~/.vim/submodules/taglist-plus/plugin/taglist-plus.vim
-end
-
 " Remove trailing whitespace
 function! TrimWhiteSpace()
     %s/\s*$//

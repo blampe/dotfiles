@@ -23,7 +23,7 @@ do
 	if [ $i == '_Preferences' -a -d "${HOME}/Library" ]; then
 		for pref in _Preferences/*
 		do
-			link_file $pref "${HOME}/Library/${pref/_/}"
+			cp $pref "${HOME}/Library/${pref/_/}"
 		done
 	else
 		link_file $i
@@ -31,6 +31,7 @@ do
 done
 
 echo "updating submodules..."
+git submodule update --init j
 git submodule --quiet sync
 git submodule --quiet init
 git submodule --quiet foreach "git pull -q origin master; git reset --hard HEAD"

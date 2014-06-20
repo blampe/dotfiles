@@ -16,9 +16,6 @@
 [submodule "_vim/submodules/Gundo"]
 	path = _vim/submodules/Gundo
 	url = https://github.com/vim-scripts/Gundo.git
-[submodule "_vim/submodules/minibufexpl"]
-	path = _vim/submodules/minibufexpl
-	url = https://github.com/sontek/minibufexpl.vim.git
 [submodule "_vim/submodules/nerdcommenter"]
 	path = _vim/submodules/nerdcommenter
 	url = https://github.com/scrooloose/nerdcommenter.git
@@ -49,9 +46,6 @@
 [submodule "_vim/submodules/syntastic"]
 	path = _vim/submodules/syntastic
 	url = https://github.com/vim-scripts/Syntastic.git
-[submodule "_vim/submodules/taglist-plus"]
-	path = _vim/submodules/taglist-plus
-	url = https://github.com/vim-scripts/taglist-plus.git
 [submodule "_vim/submodules/tasklist"]
 	path = _vim/submodules/tasklist
 	url = https://github.com/vim-scripts/TaskList.vim.git
