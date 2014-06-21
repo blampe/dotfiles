@@ -2,8 +2,13 @@
 "\e[B": history-search-forward
 "\e[A": history-search-backward
 
+# control left/right arrows
 "\e[1;5D": backward-word
 "\e[1;5C": forward-word
+
+# option left/right arrows
+"\e[1;9D": backward-word
+"\e[1;9C": forward-word
 
 # adds punctuation as word delimiters
 set bind-tty-special-chars off

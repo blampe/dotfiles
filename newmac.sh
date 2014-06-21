@@ -94,6 +94,14 @@ defaults write com.apple.dashboard mcx-disabled -boolean YES
 # cmd + h/j switch tabs
 defaults write NSGlobalDomain NSUserKeyEquivalents '{"Select Previous Tab"="@h"; "Select Next Tab"="@l"; "Next Chat"="@l"; "Show Next Tab"="@l"; "Show Previous Tab"="@h"; "Previous Chat"="@h";}'
 
+# disable mission control's control + arrow shortcuts
+defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 118 "{enabled = 0; value = { parameters = (65535, 18, 262144); type = 'standard'; }; }"
+defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 79 "{enabled = 0; value = { parameters = (65535, 123, 262144); type = 'standard'; }; }"
+defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 80 "{enabled = 0; value = { parameters = (65535, 123, 393216); type = 'standard'; }; }"
+defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 81 "{enabled = 0; value = { parameters = (65535, 124, 262144); type = 'standard'; }; }"
+defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 82 "{enabled = 0; value = { parameters = (65535, 124, 393216); type = 'standard'; }; }"
+defaults import com.apple.symbolichotkeys "$HOME/Library/Preferences/com.apple.symbolichotkeys.plist"
+
 # Remap capslock to control (seriously)
 keyboard_ids=$(ioreg -n IOHIDKeyboard -r | grep -E 'VendorID"|ProductID' | awk '{ print $4 }' | paste -s -d'-\n' -) && echo $keyboard_ids | xargs -I{} defaults -currentHost write -g "com.apple.keyboard.modifiermapping.{}-0" -array "<dict><key>HIDKeyboardModifierMappingDst</key><integer>10</integer><key>HIDKeyboardModifierMappingSrc</key><integer>0</integer></dict>"
 
