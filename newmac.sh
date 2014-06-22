@@ -188,8 +188,12 @@ fi
 # homebrew's bash completions
 ln -s "/usr/local/Library/Contributions/brew_bash_completion.sh" "/usr/local/etc/bash_completion.d"
 
-echo
-echo "Remember to configure ~/.aws/config!"
+if [ -d ~/Music/iTunes ]; then
+    echo 'pointing iTunes to shared library'
+    mv ~/Music/iTunes ~/Music/iTunes.bak
+    ln -s ~/Dropbox/iTunes ~/Music/iTunes
+fi
+
 echo
 echo "Download DejaVu here: http://dejavu-fonts.org/wiki/Download"
 echo
@@ -198,4 +202,6 @@ echo
 echo "Download Adium here: https://adium.im"
 echo
 echo "Download Rescue Time here: rescuetime.com"
+echo
+echo "Download Dropbox here: dropbox.com"
 echo

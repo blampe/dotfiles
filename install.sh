@@ -30,6 +30,15 @@ do
 	fi
 done
 
+if [ ! -d ~/.aws ]; then
+    mkdir ~/.aws
+    mkdir ~/s3
+    cp ~/dotfiles/aws/config ~/.aws/config
+    cp ~/dotfiles/aws/passwd-s3fs ~/.aws/passwd-s3fs
+    chmod 600 ~/.aws/*
+    echo "remember to update AWS credentials in ~/.aws..."
+fi
+
 echo "updating submodules..."
 git submodule update --init j
 git submodule --quiet sync
