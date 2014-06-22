@@ -121,7 +121,7 @@ fi
 echo 'updating homebrew'
 $BREW update
 
-if [ ! -x /usr/local/bin/git ] ; then
+if [ ! `which git` ] ; then
     echo 'installing git'
     $BREW install git
 fi
@@ -132,6 +132,7 @@ if [ $? -ne 0 ] ; then
     exit 1
 fi
 
+$BREW install python
 $BREW install libksba
 $BREW install ack
 $BREW install wget
@@ -158,17 +159,11 @@ $BREW install libyaml
 $BREW install fuse4x
 $BREW install htop-osx
 $BREW install vim
+$BREW install s3fs
 
 if [ ! `which ipython` ] ; then
     echo 'installing ipython'
     $PIP install ipython
-fi
-
-if [ ! `which yas3fs` ] ; then
-    echo 'installing yas3fs'
-    # https://github.com/danilop/yas3fs/issues/26
-    $PIP install boto==2.27.0
-    $PIP install yas3fs
 fi
 
 if [ ! `which aws` ] ; then
