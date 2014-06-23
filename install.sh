@@ -17,17 +17,22 @@ function link_file {
 	ln -sfn ${source} ${target}
 }
 
-echo "installing dotfile(s)..."
+echo "installing dotfiles..."
 for i in _$1*
 do
-	if [ $i == '_Preferences' -a -d "${HOME}/Library" ]; then
-		for pref in _Preferences/*
-		do
-			cp $pref "${HOME}/Library/${pref/_/}"
-		done
-	else
-		link_file $i
-	fi
+    link_file $i
+done
+
+echo "installing fonts..."
+for i in Library/Fonts/*
+do
+    cp $i "${HOME}/$i"
+done
+
+echo "installing preferences..."
+for i in Library/Preferences/*
+do
+    cp $i "${HOME}/$i"
 done
 
 if [ ! -d ~/.aws ]; then

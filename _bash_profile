@@ -42,7 +42,7 @@ fi
 
 # junit tests for code reviews
 export JUNIT_HOME="/Developer"
-export PATH="/usr/local/bin:/usr/local/sbin:/usr/local/Cellar/python26/2.6.8/bin:$PATH:$JUNIT_HOME"
+export PATH="/usr/local/bin:/usr/local/sbin:$PATH:$JUNIT_HOME"
 export CLASSPATH="$CLASSPATH:$JUNIT_HOME/junit-4.9b2.jar"
 
 # j
@@ -63,6 +63,5 @@ else
 	# If I can connect to work, then do it
 	ping -c 1 -t 1 $DEV_IP &> /dev/null && go
 fi
-
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting

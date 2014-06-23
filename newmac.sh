@@ -190,8 +190,6 @@ if [ -d ~/Music/iTunes ]; then
 fi
 
 echo
-echo "Download DejaVu here: http://dejavu-fonts.org/wiki/Download"
-echo
 echo "Download iTerm here: http://www.iterm2.com/#/section/downloads"
 echo
 echo "Download Adium here: https://adium.im"
