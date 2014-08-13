@@ -1,7 +1,6 @@
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
-export DEV_IP=10.56.6.44
 export HOME_IP=boombox.dyndns.info
 export WORK_IP=
 
@@ -57,11 +56,8 @@ fi
 
 PS1='\[${BLD}${USER_COLOR}\]\u\[${BLD}${CYN}\]@\[${HOST_COLOR}\]\h\[${BLD}${CYN}\]:\[${YLW}\]\w\[${RST}\]$(__git_ps1 " \[${BLD}${BCYN}\](%s)\[${RST}\] ") \[${BLK}\]\t\n\[${BLK}\]\$\[${RST}\] '
 
-if [[ -d ~/pg/loc ]] ; then
-	cd ~/pg/loc
-else
-	# If I can connect to work, then do it
-	ping -c 1 -t 1 $DEV_IP &> /dev/null && go
+if [[ -d /home/uber/api ]] ; then
+	cd /home/uber/api
 fi
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
