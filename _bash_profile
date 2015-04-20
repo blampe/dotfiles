@@ -61,3 +61,4 @@ if [[ -d /home/uber/api ]] ; then
 fi
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+export PYTHONSTARTUP="$HOME/.pythonrc.py"
