@@ -73,3 +73,6 @@
 [submodule "j"]
 	path = j
 	url = https://github.com/rupa/j2.git
+[submodule "_vim/submodules/puppet"]
+	path = _vim/submodules/puppet
+	url = git://github.com/rodjek/vim-puppet.git
