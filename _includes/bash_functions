@@ -102,7 +102,7 @@ pf () {
         ! -path "./config/locations/city_hoods.py" \
         ! -path "*htdocs*" \
         ! -path "*/.*" \
-    | xargs -d '\n' grep -n --exclude="*.svn*" "$@" \
+    | xargs grep -n --exclude="*.svn*" "$@" \
     | awk -f ~/dotfiles/formatfind.awk \
     | grep "$@" --color=auto
 }

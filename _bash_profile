@@ -1,6 +1,8 @@
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
+stty -ixon
+
 export HOME_IP=boombox.dyndns.info
 export WORK_IP=
 
@@ -14,6 +16,8 @@ export HISTSIZE=100000                   # big big history
 export HISTFILESIZE=100000               # big big history
 export HISTIGNORE="history *:cd *:df *:exit:e:fg:bg:file:e *:ll:ls:mc:top:"
 export INPUTRC=~/.inputrc
+export EDITOR=vim
+
 # Ignore these filetypes when tab completing
 export FIGNORE=.pyc
 # append to the history file, don't overwrite it
@@ -62,3 +66,4 @@ fi
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 export PYTHONSTARTUP="$HOME/.pythonrc.py"
+export UBER_OWNER="blampe@uber.com"
