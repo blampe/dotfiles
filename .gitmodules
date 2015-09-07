@@ -88,3 +88,6 @@
 [submodule "_vim/submodules/vim-node"]
 	path = _vim/submodules/vim-node
 	url = https://github.com/moll/vim-node
+[submodule "_vim/submodules/YouCompleteMe"]
+	path = _vim/submodules/YouCompleteMe
+	url = https://github.com/Valloric/YouCompleteMe

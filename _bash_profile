@@ -65,5 +65,8 @@ if [[ -d /home/uber/api ]] ; then
 fi
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+export GOPATH="$HOME/go"
+export PATH="$PATH:$GOPATH/bin"
 export PYTHONSTARTUP="$HOME/.pythonrc.py"
 export UBER_OWNER="blampe@uber.com"
+alias china='ssh-agent bash --rcfile ~/.ssh/china/.bash_profile.cn'

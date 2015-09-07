@@ -25,4 +25,6 @@
 
 [user]
 	name = Bryce Lampe
-	email = brycelampe@gmail.com
+	email = blampe@uber.com
+[credential]
+	helper = osxkeychain
