@@ -22,6 +22,7 @@ let g:syntastic_auto_loc_list = 0
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 1
 let g:syntastic_use_quickfix_lists = 1
+let g:syntastic_python_checkers = ['flake8']
 cabbrev ln lNext
 
 Plugin 'vim-scripts/camelcasemotion'
