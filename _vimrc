@@ -66,9 +66,10 @@ set completeopt=menuone,longest
 set pumheight=6
 
 " Snippets
+Plugin 'honza/vim-snippets'
+
 if v:version > 740
     Plugin 'SirVer/ultisnips'
-    Plugin 'honza/vim-snippets'
 
     " YouCompleteMe/Ultisnips compatibility. UltiSnips passes <tab> to SuperTab.
     Plugin 'ervandew/supertab'
@@ -78,6 +79,11 @@ if v:version > 740
     let g:UltiSnipsExpandTrigger = "<tab>"
     let g:UltiSnipsJumpForwardTrigger = "<tab>"
     let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
+else
+    " Snippet support for legacy vim.
+    Plugin 'garbas/vim-snipmate'
+    Plugin 'marcweber/vim-addon-mw-utils'
+    Plugin 'tomtom/tlib_vim'
 endif
 
 call vundle#end()
