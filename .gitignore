@@ -4,3 +4,4 @@
 *.py[co]
 .*.sw[nop]
 .DS_Store
+_vim/bundle
