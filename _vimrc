@@ -27,9 +27,6 @@ let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 
 " Linting
 Plugin 'scrooloose/syntastic'
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 0
 let g:syntastic_check_on_open = 1
@@ -155,6 +152,12 @@ set wildignore+=*.o,*.obj,.git,*.pyc,*.so
 
 " Show title in console title bar.
 set title
+
+" Always show statusline, even if only 1 window.
+set laststatus=2
+if exists('fugitive')
+    set statusline+=%<%f\ (%{&ft})%=%-19(%3l,%02c%03V%)%{fugitive#statusline()}
+endif
 
 " Listen for mouse clicks.
 set mouse=a
