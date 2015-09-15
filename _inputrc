@@ -18,3 +18,4 @@ set show-all-if-ambiguous on
 set mark-directories on
 set completion-query-items 200
 
+TAB: menu-complete
