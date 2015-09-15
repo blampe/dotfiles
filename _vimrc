@@ -50,7 +50,7 @@ Plugin 'rodjek/vim-puppet'
 Plugin 'solarnz/thrift.vim'
 Plugin 'vim-ruby/vim-ruby'
 
-if v:version > 735
+if version > 703
     Plugin 'Valloric/YouCompleteMe'
     let g:ycm_global_ycm_extra_conf = '.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
     let g:ycm_min_num_of_chars_for_completion = 2
@@ -68,7 +68,7 @@ set pumheight=6
 " Snippets
 Plugin 'honza/vim-snippets'
 
-if v:version > 740
+if version > 703
     Plugin 'SirVer/ultisnips'
 
     " YouCompleteMe/Ultisnips compatibility. UltiSnips passes <tab> to SuperTab.
