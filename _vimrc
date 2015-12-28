@@ -20,6 +20,8 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 1
 let g:syntastic_use_quickfix_lists = 1
 let g:syntastic_python_checkers = ['flake8']
+let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
+let g:syntaxed_languages ='vim,tex,python,pyrex,c,cpp,php,js,html,css,cs,java,mkd,markdown,rst,go'
 cabbrev ln lNext
 
 Plugin 'vim-scripts/camelcasemotion'
@@ -39,11 +41,17 @@ Plugin 'tpope/vim-unimpaired'
 " All the basics.
 Plugin 'tpope/vim-sensible'
 
-" gblame ilu ;)
+" git blame ilu ;)
 Plugin 'tpope/vim-fugitive'
 
 " Language support
 Plugin 'fatih/vim-go'
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_structs = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_build_constraints = 1
+let g:go_fmt_command = "goimports"
 Plugin 'tpope/vim-rails'
 Plugin 'moll/vim-node'
 Plugin 'rodjek/vim-puppet'
