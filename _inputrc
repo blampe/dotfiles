@@ -13,9 +13,13 @@
 # adds punctuation as word delimiters
 set bind-tty-special-chars off
 
-set completion-ignore-case on
 set show-all-if-ambiguous on
 set mark-directories on
 set completion-query-items 200
+set completion-ignore-case on
+# Treat dashes/hyphens as the same.
+set completion-map-case on
 
-TAB: menu-complete
+Tab: menu-complete
+# Shift tab to go backwards.
+"\e[Z": "\e-1\C-i"
