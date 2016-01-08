@@ -20,7 +20,7 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 1
 let g:syntastic_use_quickfix_lists = 1
 let g:syntastic_python_checkers = ['flake8']
-let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
+let g:syntastic_go_checkers = ['go', 'golint', 'govet', 'errcheck']
 let g:syntaxed_languages ='vim,tex,python,pyrex,c,cpp,php,js,html,css,cs,java,mkd,markdown,rst,go'
 cabbrev ln lNext
 
