@@ -17,11 +17,13 @@ Plugin 'scrooloose/syntastic'
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 0
 let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 1
+let g:syntastic_check_on_wq = 0
 let g:syntastic_use_quickfix_lists = 1
 let g:syntastic_python_checkers = ['flake8']
 let g:syntastic_go_checkers = ['go', 'golint', 'govet', 'errcheck']
-let g:syntaxed_languages ='vim,tex,python,pyrex,c,cpp,php,js,html,css,cs,java,mkd,markdown,rst,go'
+"let g:syntastic_go_checkers = ['gofmt', 'golint', 'gometalinter', 'gotype', 'govet', 'errcheck']
+let g:syntastic_javascript_checkers = ['jshint']
+let g:syntaxed_languages ='vim,tex,python,pyrex,c,cpp,php,js,html,css,cs,java,md,mkd,markdown,rst,go,node,js'
 cabbrev ln lNext
 
 Plugin 'vim-scripts/camelcasemotion'
@@ -200,3 +202,8 @@ autocmd BufWritePre * :call TrimWhiteSpace()
 " This beauty remembers where you were the last time you edited the file, and
 " returns to the same position.
 au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif""
+
+" Enable spell checking for markdown files and git commits.
+autocmd BufRead,BufNewFile *.md setlocal spell
+autocmd FileType gitcommit setlocal spell
+autocmd filetype crontab setlocal nobackup nowritebackup
