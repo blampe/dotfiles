@@ -50,8 +50,8 @@ export JUNIT_HOME="/Developer"
 export PATH="/usr/local/bin:/usr/local/sbin:$PATH:$JUNIT_HOME"
 export CLASSPATH="$CLASSPATH:$JUNIT_HOME/junit-4.9b2.jar"
 
-# j
-export JPY=~/dotfiles/j/j.py
+# z
+export _Z_CMD=j
 
 # grab any local includes
 if [ -d ~/.includes ]; then
