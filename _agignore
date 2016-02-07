@@ -1,0 +1,6 @@
+.git/*
+Godeps/*
+env/*
+
+*.pyc
+*.swp
