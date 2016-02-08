@@ -1,6 +1,6 @@
-.git/*
-Godeps/*
-env/*
+.git
+Godeps/_workspace
+env
 
 *.pyc
 *.swp
