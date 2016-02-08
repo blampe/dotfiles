@@ -13,17 +13,31 @@ Plugin 'gmarik/vundle'
 Plugin 'scrooloose/nerdcommenter'
 
 " Linting
-Plugin 'scrooloose/syntastic'
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 0
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-let g:syntastic_use_quickfix_lists = 1
-let g:syntastic_python_checkers = ['flake8']
-let g:syntastic_go_checkers = ['go', 'golint', 'govet', 'errcheck']
-"let g:syntastic_go_checkers = ['gofmt', 'golint', 'gometalinter', 'gotype', 'govet', 'errcheck']
-let g:syntastic_javascript_checkers = ['jshint']
-let g:syntaxed_languages ='vim,tex,python,pyrex,c,cpp,php,js,html,css,cs,java,md,mkd,markdown,rst,go,node,js'
+if has('nvim')
+    Plugin 'benekastah/neomake'
+
+    let g:neomake_warning_sign = {'text': 'w', 'texthl': 'WarningMsg'}
+    let g:neomake_error_sign = {'text': 'EE', 'texthl': 'ErrorMsg'}
+    let g:neomake_logfile='/tmp/neomake.err.log'
+    let g:neomake_go_enabled_makers = ['gometalinter']
+
+    autocmd! BufWritePost * Neomake
+    autocmd! BufEnter * Neomake
+
+    let g:python_host_prog = '/usr/local/bin/python'
+else
+    Plugin 'scrooloose/syntastic'
+    let g:syntastic_always_populate_loc_list = 1
+    let g:syntastic_auto_loc_list = 0
+    let g:syntastic_check_on_open = 1
+    let g:syntastic_check_on_wq = 0
+    let g:syntastic_use_quickfix_lists = 1
+    let g:syntastic_python_checkers = ['flake8']
+    let g:syntastic_go_checkers = ['go', 'golint', 'govet', 'errcheck']
+    "let g:syntastic_go_checkers = ['gofmt', 'golint', 'gometalinter', 'gotype', 'govet', 'errcheck']
+    let g:syntastic_javascript_checkers = ['jshint']
+    let g:syntaxed_languages ='vim,tex,python,pyrex,c,cpp,php,js,html,css,cs,java,md,mkd,markdown,rst,go,node,js'
+endif
 cabbrev ln lNext
 
 Plugin 'vim-scripts/camelcasemotion'
@@ -54,6 +68,7 @@ let g:go_highlight_structs = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
 let g:go_fmt_command = "goimports"
+
 Plugin 'tpope/vim-rails'
 Plugin 'moll/vim-node'
 Plugin 'rodjek/vim-puppet'
@@ -70,7 +85,6 @@ endif
 
 " Don't show the preview window on autocompletions.
 set completeopt=menuone,longest
-"set completeopt=menuone,longest,preview
 "
 " Keep a small completion window.
 set pumheight=6
