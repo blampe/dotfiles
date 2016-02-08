@@ -40,6 +40,12 @@ else
 endif
 cabbrev ln lNext
 
+" Fuzzy search
+Plugin 'junegunn/fzf'
+Plugin 'junegunn/fzf.vim'
+nmap <silent> <C-P> :Files<CR>
+let g:fzf_layout = { 'down': '~15%' }
+
 Plugin 'vim-scripts/camelcasemotion'
 " Replace the default 'w', 'b' and 'e' mappings instead of defining additional
 " mappings',w', ',b' and ',e' for CamelCase (and_underscore) movement.
