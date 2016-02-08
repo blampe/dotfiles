@@ -183,9 +183,9 @@ set expandtab
 set cursorline
 set cursorcolumn
 
-" Show a line at column 100
+" Show a line at column 80
 if exists("&colorcolumn")
-    set colorcolumn=100
+    let &colorcolumn="80,".join(range(100,999),",")
 endif
 
 " Don't wrap text at the edge of the window.
