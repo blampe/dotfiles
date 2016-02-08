@@ -126,7 +126,12 @@ if has('nvim')
     Plugin 'sjl/badwolf'
     Plugin 'vim-scripts/vilight.vim'
     Plugin 'ninja/sky'
+    Plugin 'notpratheek/vim-luna'
 endif
+
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+let g:airline_powerline_fonts = 1
 
 call vundle#end()
 
