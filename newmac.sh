@@ -160,6 +160,8 @@ $BREW install fuse4x
 $BREW install htop-osx
 $BREW install vim
 $BREW install s3fs
+$BREW install the_silver_searcher
+$BREW install fzf
 
 go get github.com/alecthomas/gometalinter
 gometalinter --install --update
