@@ -103,25 +103,24 @@ defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 82 "{ena
 defaults import com.apple.symbolichotkeys "$HOME/Library/Preferences/com.apple.symbolichotkeys.plist"
 
 # Remap capslock to control (seriously)
-keyboard_ids=$(ioreg -n IOHIDKeyboard -r | grep -E 'VendorID"|ProductID' | awk '{ print $4 }' | paste -s -d'-\n' -) && echo $keyboard_ids | xargs -I{} defaults -currentHost write -g "com.apple.keyboard.modifiermapping.{}-0" -array "<dict><key>HIDKeyboardModifierMappingDst</key><integer>10</integer><key>HIDKeyboardModifierMappingSrc</key><integer>0</integer></dict>"
+keyboard_ids=$(ioreg -n IOHIDKeyboard -r | grep -E 'VendorID"|ProductID' | awk '{ print $4 }' | paste -s -d'-\n' -) && echo "$keyboard_ids" | xargs -I{} defaults -currentHost write -g "com.apple.keyboard.modifiermapping.{}-0" -array "<dict><key>HIDKeyboardModifierMappingDst</key><integer>10</integer><key>HIDKeyboardModifierMappingSrc</key><integer>0</integer></dict>"
 
 
-if [ ! `which gcc` ] ; then
-    echo "Please download XCode here:"
-    echo "\thttps://developer.apple.com/downloads/index.action"
+if [ ! "$(which gcc)" ] ; then
+    echo "Please download XCode here: https://developer.apple.com/downloads/index.action"
     exit 1
 fi
 
 if [ ! -x $BREW ] ; then
     echo 'installing homebrew'
-    echo export PATH='/usr/local/bin:$PATH' >> ~/.bash_profile
+    echo export PATH="/usr/local/bin:\$PATH" >> ~/.bash_profile
     ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
 fi
 
 echo 'updating homebrew'
 $BREW update
 
-if [ ! `which git` ] ; then
+if [ ! "$(which git)" ] ; then
     echo 'installing git'
     $BREW install git
 fi
@@ -133,6 +132,7 @@ if [ $? -ne 0 ] ; then
 fi
 
 $BREW install python
+$BREW install go
 $BREW install libksba
 $BREW install ack
 $BREW install wget
@@ -161,23 +161,23 @@ $BREW install htop-osx
 $BREW install vim
 $BREW install s3fs
 
-if [ ! `which ipython` ] ; then
+if [ ! "$(which ipython)" ] ; then
     echo 'installing ipython'
     $PIP install ipython
 fi
 
-if [ ! `which aws` ] ; then
+if [ ! "$(which aws)" ] ; then
     echo 'installing awscli'
     $PIP install awscli
     complete -C aws_completer aws
 fi
 
-if [ ! `which rvm` ] ; then
+if [ ! "$(which rvm)" ] ; then
     echo 'installing rvm'
     curl -sSL https://get.rvm.io | bash -s stable --ruby
     # workaround for https://github.com/Homebrew/homebrew/issues/23938
-    source /Users/$USER/.rvm/scripts/rvm
-    /Users/$USER/.rvm/bin/rvm system
+    source "/Users/$USER/.rvm/scripts/rvm"
+    "/Users/$USER/.rvm/bin/rvm" system
 fi
 
 # homebrew's bash completions
