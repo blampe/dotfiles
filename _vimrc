@@ -116,6 +116,18 @@ else
     Plugin 'tomtom/tlib_vim'
 endif
 
+if has('nvim')
+    " Colorschemes
+    let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+    Plugin 'nanotech/jellybeans.vim'
+    Plugin 'chriskempson/vim-tomorrow-theme'
+    Plugin 'Lokaltog/vim-distinguished'
+    Plugin 'atelierbram/vim-colors_duotones' " base16-duotones
+    Plugin 'sjl/badwolf'
+    Plugin 'vim-scripts/vilight.vim'
+    Plugin 'ninja/sky'
+endif
+
 call vundle#end()
 
 " ===========================================================
@@ -123,8 +135,14 @@ call vundle#end()
 " ===========================================================
 
 " Syntax highlighting.
-set t_Co=16
-colorscheme ir_black
+if has('nvim')
+    colorscheme jellybeans
+    "colorscheme Tomorrow-Night-Bright
+else
+    set t_Co=16
+    colorscheme ir_black
+endif
+
 set background=dark
 
 filetype on                   " try to detect filetypes
