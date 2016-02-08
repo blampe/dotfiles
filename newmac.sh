@@ -161,6 +161,9 @@ $BREW install htop-osx
 $BREW install vim
 $BREW install s3fs
 
+go get github.com/alecthomas/gometalinter
+gometalinter --install --update
+
 if [ ! "$(which ipython)" ] ; then
     echo 'installing ipython'
     $PIP install ipython
