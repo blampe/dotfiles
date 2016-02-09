@@ -116,18 +116,15 @@ else
     Plugin 'tomtom/tlib_vim'
 endif
 
-if has('nvim')
-    " Colorschemes
-    let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-    Plugin 'nanotech/jellybeans.vim'
-    Plugin 'chriskempson/vim-tomorrow-theme'
-    Plugin 'Lokaltog/vim-distinguished'
-    Plugin 'atelierbram/vim-colors_duotones' " base16-duotones
-    Plugin 'sjl/badwolf'
-    Plugin 'vim-scripts/vilight.vim'
-    Plugin 'ninja/sky'
-    Plugin 'notpratheek/vim-luna'
-endif
+" Colorschemes
+Plugin 'chriskempson/vim-tomorrow-theme'
+Plugin 'Lokaltog/vim-distinguished'
+Plugin 'atelierbram/vim-colors_duotones' " base16-duotones
+Plugin 'sjl/badwolf'
+Plugin 'vim-scripts/vilight.vim'
+Plugin 'ninja/sky'
+Plugin 'notpratheek/vim-luna'
+Plugin 'nanotech/jellybeans.vim'
 
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
@@ -140,17 +137,11 @@ call vundle#end()
 " ===========================================================
 
 " Syntax highlighting.
-if has('nvim')
-    colorscheme jellybeans
-    "colorscheme Tomorrow-Night-Bright
-else
-    set t_Co=16
-    colorscheme ir_black
-endif
-
+let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 set background=dark
+colorscheme jellybeans
 
-filetype on                   " try to detect filetypes
+filetype off                  " need to turn this off fof the next line to work
 filetype plugin indent on     " enable loading indent file for filetype
 
 " Multiple windows, when created, are equal in size.
