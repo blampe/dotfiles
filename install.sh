@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 function link_file {
 	source="${PWD}/$1"
-	if [ $2 ]; then
+	if [ "$2" ]; then
 		target=$2
 	else
 		target="${HOME}/${1/_/.}"
@@ -10,29 +10,29 @@ function link_file {
 	# backup if the file is already there (and not a symlink)
 	if [ -e "${target}" -a ! -L "${target}" ]; then
 		echo "	backing up $target"
-		mv $target $target.bak
+		mv "$target" "$target.bak"
 	fi
 
 	echo "	installing $target"
-	ln -sfn ${source} ${target}
+	ln -sfn "$source" "$target"
 }
 
 echo "installing dotfiles..."
 for i in _$1*
 do
-    link_file $i
+    link_file "$i"
 done
 
 echo "installing fonts..."
 for i in Library/Fonts/*
 do
-    cp $i "${HOME}/$i"
+    cp "$i" "${HOME}/$i"
 done
 
 echo "installing preferences..."
 for i in Library/Preferences/*
 do
-    cp $i "${HOME}/$i"
+    cp "$i" "${HOME}/$i"
 done
 
 if [ ! -d ~/.aws ]; then
@@ -57,7 +57,7 @@ if [ ! -f _vim/bundle/YouCompleteMe/third_party/ycmd/ycm_core.so ]; then
     pushd ~/.vim/bundle/YouCompleteMe
 
     make clean
-    ./install.py --clang-completer --gocode-completer --system-libclang
+    ./install.py --clang-completer --gocode-completer
     make ycm_support_libs
 
     popd
