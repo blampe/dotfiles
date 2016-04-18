@@ -93,8 +93,6 @@ set completeopt=menuone,longest
 set pumheight=6
 
 " Snippets
-Plug 'honza/vim-snippets'
-
 if version > 703
     Plug 'SirVer/ultisnips'
 
@@ -109,6 +107,7 @@ if version > 703
 else
     " Snippet support for legacy vim.
     Plug 'garbas/vim-snipmate'
+    Plug 'honza/vim-snippets'
     Plug 'marcweber/vim-addon-mw-utils'
     Plug 'tomtom/tlib_vim'
 endif
@@ -125,8 +124,9 @@ Plug 'nanotech/jellybeans.vim'
 Plug 'justinmk/molokai'
 
 Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
 let g:airline_powerline_fonts = 1
+let g:airline_extensions = ['branch']
+set noshowmode
 
 call plug#end()
 
