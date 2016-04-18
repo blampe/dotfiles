@@ -4,17 +4,13 @@ set nocompatible
 " PLUGINS
 " ===========================================================
 "
-set rtp+=~/.vim/bundle/vundle/
-call vundle#begin()
+call plug#begin('~/.vim/bundle')
 
-" Let Vundle manage Vundle
-Plugin 'gmarik/vundle'
-
-Plugin 'scrooloose/nerdcommenter'
+Plug 'scrooloose/nerdcommenter'
 
 " Linting
 if has('nvim')
-    Plugin 'benekastah/neomake'
+    Plug 'benekastah/neomake'
 
     let g:neomake_warning_sign = {'text': 'w', 'texthl': 'WarningMsg'}
     let g:neomake_error_sign = {'text': 'EE', 'texthl': 'ErrorMsg'}
@@ -26,7 +22,7 @@ if has('nvim')
 
     let g:python_host_prog = '/usr/local/bin/python'
 else
-    Plugin 'scrooloose/syntastic'
+    Plug 'scrooloose/syntastic'
     let g:syntastic_always_populate_loc_list = 1
     let g:syntastic_auto_loc_list = 0
     let g:syntastic_check_on_open = 1
@@ -41,12 +37,12 @@ endif
 cabbrev ln lNext
 
 " Fuzzy search
-Plugin 'junegunn/fzf'
-Plugin 'junegunn/fzf.vim'
+Plug 'junegunn/fzf'
+Plug 'junegunn/fzf.vim'
 nmap <silent> <C-P> :Files<CR>
 let g:fzf_layout = { 'down': '~15%' }
 
-Plugin 'vim-scripts/camelcasemotion'
+Plug 'vim-scripts/camelcasemotion'
 " Replace the default 'w', 'b' and 'e' mappings instead of defining additional
 " mappings',w', ',b' and ',e' for CamelCase (and_underscore) movement.
 " (Note shift+W/B preserves the default behavior.)
@@ -58,16 +54,16 @@ sunmap b
 sunmap e
 
 " For ]l and [l to jump between errors.
-Plugin 'tpope/vim-unimpaired'
+Plug 'tpope/vim-unimpaired'
 
 " All the basics.
-Plugin 'tpope/vim-sensible'
+Plug 'tpope/vim-sensible'
 
 " git blame ilu ;)
-Plugin 'tpope/vim-fugitive'
+Plug 'tpope/vim-fugitive'
 
 " Language support
-Plugin 'fatih/vim-go'
+Plug 'fatih/vim-go', {'for': 'go'}
 let g:go_highlight_functions = 1
 let g:go_highlight_methods = 1
 let g:go_highlight_structs = 1
@@ -75,14 +71,15 @@ let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
 let g:go_fmt_command = "goimports"
 
-Plugin 'tpope/vim-rails'
-Plugin 'moll/vim-node'
-Plugin 'rodjek/vim-puppet'
-Plugin 'solarnz/thrift.vim'
-Plugin 'vim-ruby/vim-ruby'
+Plug 'tpope/vim-rails', {'for': 'ruby'}
+Plug 'moll/vim-node', {'for': 'javascript'}
+Plug 'rodjek/vim-puppet', {'for': 'puppet'}
+Plug 'solarnz/thrift.vim', {'for': 'thrift'}
+Plug 'vim-ruby/vim-ruby', {'for': 'ruby'}
 
 if version > 703
-    Plugin 'Valloric/YouCompleteMe'
+    Plug 'Valloric/YouCompleteMe',
+        \ {'do': './install.py --clang-completer --gocode-completer'}
     let g:ycm_global_ycm_extra_conf = '.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
     let g:ycm_min_num_of_chars_for_completion = 2
     let g:ycm_autoclose_preview_window_after_completion = 1
@@ -96,13 +93,13 @@ set completeopt=menuone,longest
 set pumheight=6
 
 " Snippets
-Plugin 'honza/vim-snippets'
+Plug 'honza/vim-snippets'
 
 if version > 703
-    Plugin 'SirVer/ultisnips'
+    Plug 'SirVer/ultisnips'
 
     " YouCompleteMe/Ultisnips compatibility. UltiSnips passes <tab> to SuperTab.
-    Plugin 'ervandew/supertab'
+    Plug 'ervandew/supertab'
     let g:SuperTabDefaultCompletionType = '<C-n>'
     let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
     let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
@@ -111,26 +108,27 @@ if version > 703
     let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 else
     " Snippet support for legacy vim.
-    Plugin 'garbas/vim-snipmate'
-    Plugin 'marcweber/vim-addon-mw-utils'
-    Plugin 'tomtom/tlib_vim'
+    Plug 'garbas/vim-snipmate'
+    Plug 'marcweber/vim-addon-mw-utils'
+    Plug 'tomtom/tlib_vim'
 endif
 
 " Colorschemes
-Plugin 'chriskempson/vim-tomorrow-theme'
-Plugin 'Lokaltog/vim-distinguished'
-Plugin 'atelierbram/vim-colors_duotones' " base16-duotones
-Plugin 'sjl/badwolf'
-Plugin 'vim-scripts/vilight.vim'
-Plugin 'ninja/sky'
-Plugin 'notpratheek/vim-luna'
-Plugin 'nanotech/jellybeans.vim'
+Plug 'chriskempson/vim-tomorrow-theme'
+Plug 'Lokaltog/vim-distinguished'
+Plug 'atelierbram/vim-colors_duotones' " base16-duotones
+Plug 'sjl/badwolf'
+Plug 'vim-scripts/vilight.vim'
+Plug 'ninja/sky'
+Plug 'notpratheek/vim-luna'
+Plug 'nanotech/jellybeans.vim'
+Plug 'justinmk/molokai'
 
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 let g:airline_powerline_fonts = 1
 
-call vundle#end()
+call plug#end()
 
 " ===========================================================
 " EDITOR SETTINGS

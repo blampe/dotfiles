@@ -51,14 +51,4 @@ git submodule --quiet init
 git submodule --quiet foreach "git pull -q origin master; git reset --hard HEAD"
 git submodule update --merge --recursive
 
-vim +BundleInstall +qall
-
-if [ ! -f _vim/bundle/YouCompleteMe/third_party/ycmd/ycm_core.so ]; then
-    pushd ~/.vim/bundle/YouCompleteMe
-
-    make clean
-    ./install.py --clang-completer --gocode-completer
-    make ycm_support_libs
-
-    popd
-fi
+vim +PlugInstall +qall
