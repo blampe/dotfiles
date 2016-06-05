@@ -1,6 +1,7 @@
 .git
 Godeps/_workspace
 env
+vendor
 
 *.pyc
 *.swp
