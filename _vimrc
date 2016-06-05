@@ -10,7 +10,7 @@ Plug 'scrooloose/nerdcommenter'
 
 " Linting
 if has('nvim')
-    Plug 'benekastah/neomake'
+    Plug 'blampe/neomake', { 'branch': 'go' }
 
     let g:neomake_warning_sign = {'text': 'w', 'texthl': 'WarningMsg'}
     let g:neomake_error_sign = {'text': 'EE', 'texthl': 'ErrorMsg'}
