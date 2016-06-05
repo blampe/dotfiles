@@ -157,11 +157,13 @@ $BREW install bash-completion
 $BREW install ctags
 $BREW install libyaml
 $BREW install fuse4x
+$BREW install fuse4x-kext
 $BREW install htop-osx
 $BREW install vim
 $BREW install s3fs
 $BREW install the_silver_searcher
 $BREW install fzf
+$BREW install neovim/neovim/neovim
 
 go get github.com/alecthomas/gometalinter
 gometalinter --install --update
@@ -184,6 +186,8 @@ if [ ! "$(which rvm)" ] ; then
     source "/Users/$USER/.rvm/scripts/rvm"
     "/Users/$USER/.rvm/bin/rvm" system
 fi
+
+$PIP install --user neovim flake8 pylint pep8
 
 # homebrew's bash completions
 ln -s "/usr/local/Library/Contributions/brew_bash_completion.sh" "/usr/local/etc/bash_completion.d"
