@@ -31,7 +31,7 @@ msync () {
 
 # mount s3 music
 mmount () {
-    s3fs daboombox ~/s3 -o passwd_file=~/.aws/passwd-s3fs -o uid=`id -u` -o gid=`id -g` -o volname=DABOOMBOX -o host=http://s3-us-west-1.amazonaws.com -o noappledouble -o nobrowse -o max_stat_cache_size=100000 -o use_cache=/tmp/s3fs -o del_cache
+    s3fs daboombox ~/s3 -o passwd_file=~/.aws/passwd-s3fs -o uid=`id -u` -o gid=`id -g` -o volname=DABOOMBOX -o host=http://s3-us-west-1.amazonaws.com -o noappledouble -o nobrowse -o max_stat_cache_size=100000 -o use_cache=/tmp/s3fs
 }
 
 swap () {
