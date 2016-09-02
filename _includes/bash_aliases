@@ -12,6 +12,8 @@ alias ssh='ssh -A'
 
 alias lal='ls -al'
 
+alias ag='ag -U'
+
 alias activate='source .env/bin/activate'
 
 if [ -x /usr/local/bin/nvim ]; then
