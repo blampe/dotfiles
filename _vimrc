@@ -17,8 +17,8 @@ if has('nvim')
     let g:neomake_logfile='/tmp/neomake.err.log'
     let g:neomake_go_enabled_makers = ['gometalinter']
 
-    autocmd! BufWritePost * Neomake
-    autocmd! BufEnter * Neomake
+    autocmd! BufWritePost * Neomake!
+    autocmd! BufEnter * Neomake!
 
     let g:python_host_prog = '/usr/local/bin/python'
 else
