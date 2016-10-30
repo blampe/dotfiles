@@ -1,1 +1,1 @@
-/Users/brycelampe/.vimrc
+../_vimrc
