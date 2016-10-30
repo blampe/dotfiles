@@ -163,6 +163,7 @@ $BREW install vim
 $BREW install s3fs
 $BREW install the_silver_searcher
 $BREW install fzf
+$BREW install fasd
 $BREW install neovim/neovim/neovim
 
 go get github.com/alecthomas/gometalinter
