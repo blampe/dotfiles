@@ -5,3 +5,4 @@
 .*.sw[nop]
 .DS_Store
 _vim/bundle
+_vim/.netrwhist
