@@ -11,6 +11,10 @@ Plug 'scrooloose/nerdcommenter'
 " Linting
 if has('nvim')
     Plug 'blampe/neomake', { 'branch': 'go' }
+    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+    Plug 'zchee/deoplete-go', { 'do': 'make'}
+
+    let g:deoplete#enable_at_startup = 1
 
     let g:neomake_warning_sign = {'text': 'w', 'texthl': 'WarningMsg'}
     let g:neomake_error_sign = {'text': 'EE', 'texthl': 'ErrorMsg'}
@@ -19,8 +23,6 @@ if has('nvim')
 
     autocmd! BufWritePost * Neomake!
     autocmd! BufEnter * Neomake!
-
-    let g:python_host_prog = '/usr/local/bin/python'
 else
     Plug 'scrooloose/syntastic'
     let g:syntastic_always_populate_loc_list = 1
@@ -70,6 +72,8 @@ let g:go_highlight_structs = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
 let g:go_fmt_command = "goimports"
+let g:go_fmt_fail_silently = 1
+let g:go_def_mode = 'godef'
 
 Plug 'tpope/vim-rails', {'for': 'ruby'}
 Plug 'moll/vim-node', {'for': 'javascript'}
@@ -77,14 +81,14 @@ Plug 'rodjek/vim-puppet', {'for': 'puppet'}
 Plug 'solarnz/thrift.vim', {'for': 'thrift'}
 Plug 'vim-ruby/vim-ruby', {'for': 'ruby'}
 
-if version > 703
-    Plug 'Valloric/YouCompleteMe',
-        \ {'do': './install.py --clang-completer --gocode-completer'}
-    let g:ycm_global_ycm_extra_conf = '.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
-    let g:ycm_min_num_of_chars_for_completion = 2
-    let g:ycm_autoclose_preview_window_after_completion = 1
-    let g:ycm_autoclose_preview_window_after_insertion = 1
-endif
+"if version > 703
+    "Plug 'Valloric/YouCompleteMe',
+        "\ {'do': './install.py --clang-completer --gocode-completer'}
+    "let g:ycm_global_ycm_extra_conf = '.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
+    "let g:ycm_min_num_of_chars_for_completion = 2
+    "let g:ycm_autoclose_preview_window_after_completion = 1
+    "let g:ycm_autoclose_preview_window_after_insertion = 1
+"endif
 
 " Don't show the preview window on autocompletions.
 set completeopt=menuone,longest
