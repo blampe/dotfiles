@@ -197,3 +197,12 @@ __git_ps1 () {
         fi
     fi
 }
+
+day () {
+    /Users/blampe/src/gcalcli/env/bin/gcalcli --calendar=blampe@uber.com --detail_url=long --details=length --details=location --color_owner=red --color_freebusy=blue --nodeclined agenda 8am 8pm
+}
+
+week () {
+    WIDTH=$(echo "(`tput cols` - 6) / 5" | bc)
+    /Users/blampe/src/gcalcli/env/bin/gcalcli --calendar=blampe@uber.com calw --width=$WIDTH --noweekend --nodeclined
+}
