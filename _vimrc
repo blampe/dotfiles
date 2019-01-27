@@ -10,7 +10,7 @@ Plug 'scrooloose/nerdcommenter'
 
 " Linting
 if has('nvim')
-    Plug 'blampe/neomake', { 'branch': 'go' }
+    Plug 'neomake/neomake', { 'branch': 'go' }
     Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
     Plug 'zchee/deoplete-go', { 'do': 'make'}
 
