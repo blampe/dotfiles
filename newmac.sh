@@ -191,12 +191,6 @@ $PIP install --user neovim flake8 pylint pep8
 # homebrew's bash completions
 ln -s "/usr/local/Library/Contributions/brew_bash_completion.sh" "/usr/local/etc/bash_completion.d"
 
-if [ -d ~/Music/iTunes ]; then
-    echo 'pointing iTunes to shared library'
-    mv ~/Music/iTunes ~/Music/iTunes.bak
-    ln -s ~/Dropbox/iTunes ~/Music/iTunes
-fi
-
 ./install.sh
 
 echo
