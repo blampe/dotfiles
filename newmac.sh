@@ -4,6 +4,7 @@ set -ex
 
 BREW=/usr/local/bin/brew
 PIP=/usr/local/bin/pip
+PIP3=/usr/local/bin/pip3
 
 # don't write DS_Store on network drives
 defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
@@ -159,6 +160,7 @@ $BREW install ag
 $BREW install rg
 $BREW install fzf
 $BREW install fasd
+$BREW install cmake
 $BREW install neovim/neovim/neovim
 $BREW cask install iterm2
 $BREW cask install rescuetime
@@ -187,6 +189,7 @@ if [ ! "$(which rvm)" ] ; then
 fi
 
 $PIP install --user neovim flake8 pylint pep8
+$PIP3 install neovim
 
 # homebrew's bash completions
 ln -s "/usr/local/Library/Contributions/brew_bash_completion.sh" "/usr/local/etc/bash_completion.d"

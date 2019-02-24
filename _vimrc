@@ -10,9 +10,10 @@ Plug 'scrooloose/nerdcommenter'
 
 " Linting
 if has('nvim')
-    Plug 'neomake/neomake', { 'branch': 'go' }
+    Plug 'neomake/neomake', { 'branch': 'master' }
     Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
     Plug 'zchee/deoplete-go', { 'do': 'make'}
+    Plug 'Raimondi/delimitMate'
 
     let g:deoplete#enable_at_startup = 1
 
@@ -81,17 +82,16 @@ Plug 'rodjek/vim-puppet', {'for': 'puppet'}
 Plug 'solarnz/thrift.vim', {'for': 'thrift'}
 Plug 'vim-ruby/vim-ruby', {'for': 'ruby'}
 
-"if version > 703
-    "Plug 'Valloric/YouCompleteMe',
-        "\ {'do': './install.py --clang-completer --gocode-completer'}
-    "let g:ycm_global_ycm_extra_conf = '.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
-    "let g:ycm_min_num_of_chars_for_completion = 2
-    "let g:ycm_autoclose_preview_window_after_completion = 1
-    "let g:ycm_autoclose_preview_window_after_insertion = 1
-"endif
+if version > 703
+    Plug 'Valloric/YouCompleteMe',
+        \ {'do': './install.py --clang-completer --go-completer --java-completer'}
+    let g:ycm_min_num_of_chars_for_completion = 2
+    let g:ycm_autoclose_preview_window_after_completion = 1
+    let g:ycm_autoclose_preview_window_after_insertion = 1
+endif
 
 " Don't show the preview window on autocompletions.
-set completeopt=menuone,longest
+set completeopt=menu,menuone,preview,noselect,noinsert
 "
 " Keep a small completion window.
 set pumheight=6
