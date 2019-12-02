@@ -1,8 +1,6 @@
 export UBER_HOME=~/Uber
 export UBER_LDAP_UID="blampe"
 
-if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
-
 goclone() {
   mkdir -p $GOPATH/src/code.uber.internal/$1
   git clone gitolite@code.uber.internal:$1 $GOPATH/src/code.uber.internal/$1 --recursive
