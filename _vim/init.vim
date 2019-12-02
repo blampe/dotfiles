@@ -10,13 +10,11 @@ Plug 'scrooloose/nerdcommenter'
 
 " Linting
 if has('nvim')
-    "Plug 'blampe/neomake', { 'branch': 'go' }
     Plug 'neomake/neomake'
 
     let g:neomake_warning_sign = {'text': 'w', 'texthl': 'WarningMsg'}
     let g:neomake_error_sign = {'text': 'EE', 'texthl': 'ErrorMsg'}
     let g:neomake_logfile='/tmp/neomake.err.log'
-    "let g:neomake_go_enabled_makers = ['gometalinter']
     let g:neomake_enabled_makers = []
 
     autocmd! BufWritePost * Neomake!
@@ -78,12 +76,6 @@ function! s:buildWiki(path)
 		\ 'path': a:path,
 		\ }
 endfunction
-" Use ~/.notes as the wiki location by default. Support overriding by setting
-" VIMWIKI_PATH.
-let g:vimwiki_list = [s:buildWiki('~/.notes')]
-if $VIMWIKI_PATH != ""
-	call insert(g:vimwiki_list, s:buildWiki($VIMWIKI_PATH))
-endif
 let g:vimwiki_hl_headers = 1
 let g:vimwiki_hl_cb_checked = 1
 let g:vimwiki_ext2syntax = {'.md': 'markdown'}
@@ -101,6 +93,8 @@ let g:go_highlight_structs = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
 let g:go_fmt_command = "goimports"
+let g:go_fmt_fail_silently = 1
+let g:go_def_mode = 'godef'
 
 Plug 'tpope/vim-rails', {'for': 'ruby'}
 Plug 'moll/vim-node', {'for': 'javascript'}
@@ -110,7 +104,7 @@ Plug 'vim-ruby/vim-ruby', {'for': 'ruby'}
 
 if version > 703
     Plug 'Valloric/YouCompleteMe',
-        \ {'do': './install.py --clang-completer --gocode-completer'}
+        \ {'do': './install.py --clang-completer --go-completer --java-completer'}
     let g:ycm_global_ycm_extra_conf = '.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
     let g:ycm_min_num_of_chars_for_completion = 2
     let g:ycm_autoclose_preview_window_after_completion = 1
@@ -118,6 +112,7 @@ if version > 703
 endif
 
 " Don't show the preview window on autocompletions.
+" set completeopt=menu,menuone,preview,noselect,noinsert
 set completeopt=menuone,longest
 "
 " Keep a small completion window.

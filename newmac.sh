@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -ex
+
 BREW=/usr/local/bin/brew
 PIP=/usr/local/opt/python/libexec/bin/pip
 
@@ -11,9 +13,6 @@ defaults write com.apple.Finder FXPreferredViewStyle Nlsv
 
 # turn on dock hiding
 defaults write com.apple.dock autohide -bool true
-
-# 2d dock
-defaults write com.apple.dock no-glass -bool true
 
 # open new windows in my home dir
 defaults write com.apple.finder NewWindowTarget -string "PfLo"
@@ -49,7 +48,8 @@ defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
 defaults write -g ApplePressAndHoldEnabled -bool false
 
 # set a blazingly fast keyboard repeat rate
-defaults write NSGlobalDomain KeyRepeat -int .5
+defaults write NSGlobalDomain KeyRepeat -float .5
+defaults write NSGlobalDomain InitialKeyRepeat -int 25
 
 # enable text selection in QuickLook
 defaults write com.apple.finder QLEnableTextSelection -boolean true
@@ -131,47 +131,48 @@ if [ $? -ne 0 ] ; then
     exit 1
 fi
 
-$BREW install task
-$BREW install python
-$BREW install go
-$BREW install libksba
 $BREW install ack
-$BREW install wget
-$BREW install curl
-$BREW install redis
-$BREW install memcached
-$BREW install libmemcached
+$BREW install ag
+$BREW install bash-completion
+$BREW install cmake
 $BREW install colordiff
-$BREW install nginx
-$BREW install sqlite
+$BREW install ctags
+$BREW install curl
+$BREW install fasd
+$BREW install fzf
+$BREW install geoip
+$BREW install go
+$BREW install htop-osx
+$BREW install jq
+$BREW install libksba
+$BREW install libmemcached
 $BREW install libxml2
 $BREW install libxslt
-$BREW install v8
-$BREW install sphinx
-$BREW install xz
-$BREW install geoip
-$BREW install lzo
-$BREW install mysql
-$BREW install mongodb
-$BREW install readline
-$BREW install bash-completion
-$BREW install ctags
 $BREW install libyaml
-$BREW install fuse4x
-$BREW install fuse4x-kext
-$BREW install htop-osx
-$BREW install vim
-$BREW install nvim
-$BREW install s3fs
-$BREW install the_silver_searcher
-$BREW install fzf
-$BREW install fasd
-$BREW install jq
+$BREW install lzo
+$BREW install memcached
+$BREW install mongodb
 $BREW install moreutils
-$BREW install neovim/neovim/neovim
+$BREW install mysql
+$BREW install nginx
+$BREW install nvim
+$BREW install python
+$BREW install readline
+$BREW install redis
+$BREW install rg
+$BREW install sphinx
+$BREW install sqlite
+$BREW install task
+$BREW install v8
+$BREW install vim
+$BREW install wget
+$BREW install xz
+$BREW cask install iterm2
+$BREW cask install rescuetime
+$BREW cleanup
 
-go get github.com/alecthomas/gometalinter
-gometalinter --install --update
+defaults write com.apple.dock persistent-apps -array-add "<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/Applications/iTerm.app</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>"; killall Dock
+
 
 if [ ! "$(which ipython)" ] ; then
     echo 'installing ipython'
@@ -189,16 +190,7 @@ $PIP install --user neovim flake8 pylint pep8 virtualenv
 # homebrew's bash completions
 ln -s "/usr/local/Library/Contributions/brew_bash_completion.sh" "/usr/local/etc/bash_completion.d"
 
-if [ -d ~/Music/iTunes ]; then
-    echo 'pointing iTunes to shared library'
-    mv ~/Music/iTunes ~/Music/iTunes.bak
-    ln -s ~/Dropbox/iTunes ~/Music/iTunes
-fi
+./install.sh
 
 echo
-echo "Download iTerm here: http://www.iterm2.com/#/section/downloads"
-echo
-echo "Download Rescue Time here: rescuetime.com"
-echo
-echo "Download Dropbox here: dropbox.com"
-echo
+echo "now log out"
