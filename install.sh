@@ -45,7 +45,6 @@ if [ ! -d ~/.aws ]; then
 fi
 
 echo "updating submodules..."
-git submodule update --init j
 git submodule --quiet sync
 git submodule --quiet init
 git submodule --quiet foreach "git pull -q origin master; git reset --hard HEAD"

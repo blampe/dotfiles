@@ -1,16 +1,13 @@
 #!/usr/bin/env bash
 
 BREW=/usr/local/bin/brew
-PIP=/usr/local/bin/pip
+PIP=/usr/local/opt/python/libexec/bin/pip
 
 # don't write DS_Store on network drives
 defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
 
 # default list view in finder
 defaults write com.apple.Finder FXPreferredViewStyle Nlsv
-
-# reverse scroll direction
-defaults write ~/Library/Preferences/.GlobalPreferences com.apple.swipescrolldirection -bool false
 
 # turn on dock hiding
 defaults write com.apple.dock autohide -bool true
@@ -102,8 +99,11 @@ defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 81 "{ena
 defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 82 "{enabled = 0; value = { parameters = (65535, 124, 393216); type = 'standard'; }; }"
 defaults import com.apple.symbolichotkeys "$HOME/Library/Preferences/com.apple.symbolichotkeys.plist"
 
-# Remap capslock to control (seriously)
-keyboard_ids=$(ioreg -n IOHIDKeyboard -r | grep -E 'VendorID"|ProductID' | awk '{ print $4 }' | paste -s -d'-\n' -) && echo "$keyboard_ids" | xargs -I{} defaults -currentHost write -g "com.apple.keyboard.modifiermapping.{}-0" -array "<dict><key>HIDKeyboardModifierMappingDst</key><integer>10</integer><key>HIDKeyboardModifierMappingSrc</key><integer>0</integer></dict>"
+# Remap capslock to control
+# https://stackoverflow.com/questions/127591/using-caps-lock-as-esc-in-mac-os-x
+# https://apple.stackexchange.com/questions/283252/how-do-i-remap-a-key-in-macos-sierra-e-g-right-alt-to-right-control/349440#349440
+hidutil property --set '{"UserKeyMapping":[{"HIDKeyboardModifierMappingSrc":0x700000039,"HIDKeyboardModifierMappingDst":0x7000000E0}]}'
+sudo defaults write com.apple.loginwindow LoginHook ~/dotfiles/key-remap.sh
 
 
 if [ ! "$(which gcc)" ] ; then
@@ -114,7 +114,7 @@ fi
 if [ ! -x $BREW ] ; then
     echo 'installing homebrew'
     echo export PATH="/usr/local/bin:\$PATH" >> ~/.bash_profile
-    ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
+    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 fi
 
 echo 'updating homebrew'
@@ -131,6 +131,7 @@ if [ $? -ne 0 ] ; then
     exit 1
 fi
 
+$BREW install task
 $BREW install python
 $BREW install go
 $BREW install libksba
@@ -160,10 +161,13 @@ $BREW install fuse4x
 $BREW install fuse4x-kext
 $BREW install htop-osx
 $BREW install vim
+$BREW install nvim
 $BREW install s3fs
 $BREW install the_silver_searcher
 $BREW install fzf
 $BREW install fasd
+$BREW install jq
+$BREW install moreutils
 $BREW install neovim/neovim/neovim
 
 go get github.com/alecthomas/gometalinter
@@ -180,15 +184,7 @@ if [ ! "$(which aws)" ] ; then
     complete -C aws_completer aws
 fi
 
-if [ ! "$(which rvm)" ] ; then
-    echo 'installing rvm'
-    curl -sSL https://get.rvm.io | bash -s stable --ruby
-    # workaround for https://github.com/Homebrew/homebrew/issues/23938
-    source "/Users/$USER/.rvm/scripts/rvm"
-    "/Users/$USER/.rvm/bin/rvm" system
-fi
-
-$PIP install --user neovim flake8 pylint pep8
+$PIP install --user neovim flake8 pylint pep8 virtualenv
 
 # homebrew's bash completions
 ln -s "/usr/local/Library/Contributions/brew_bash_completion.sh" "/usr/local/etc/bash_completion.d"
@@ -201,8 +197,6 @@ fi
 
 echo
 echo "Download iTerm here: http://www.iterm2.com/#/section/downloads"
-echo
-echo "Download Adium here: https://adium.im"
 echo
 echo "Download Rescue Time here: rescuetime.com"
 echo
