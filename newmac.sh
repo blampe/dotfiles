@@ -178,6 +178,17 @@ fi
 
 $PIP install --user neovim flake8 pylint pep8
 
+if [ ! -d "~/src/gcalcli" ] ; then
+    echo 'installing gcalcli'
+    mkdir -p ~/src
+    git clone https://github.com/insanum/gcalcli.git ~/src/gcalcli
+    pushd ~/src/gcalcli
+    python3 -m venv env
+    . env/bin/activate
+    python3 setup.py install
+    deactivate
+    popd
+fi
 
 ./install.sh
 
