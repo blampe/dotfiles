@@ -81,7 +81,7 @@ _expand()
 
 __expand_tilde_by_ref()
 {
-   return 0;
+    return 0;
 }
 
 # This script searches .py files for the provided string arguments and outputs them all fancy-like
@@ -97,12 +97,27 @@ pf () {
 }
 
 yf () {
-   find . -name "*.yaml" ! -path "./[^/]*templates/.*" ! -path "*htdocs*" | xargs grep -n --exclude="*.svn*" "$@" | awk -f ~/dotfiles/formatfind.awk | grep "$@" --color=auto
+    find . -name "*.yaml" ! -path "./[^/]*templates/.*" ! -path "*htdocs*" | xargs grep -n --exclude="*.svn*" "$@" | awk -f ~/dotfiles/formatfind.awk | grep "$@" --color=auto
 }
 
 function branches()
 {
-   for k in `git branch|sed s/^..//`;do echo -e `git log -1 --pretty=format:"%Cgreen%ci %Cblue%cr%Creset" "$k"`\\t"$k";done|sort
+    for k in `git branch|sed s/^..//`;do echo -e `git log -1 --pretty=format:"%Cgreen%ci %Cblue%cr%Creset" "$k"`\\t"$k";done|sort
+}
+
+function task() {
+    if [[ $1 == "context" ]]; then
+        if [[ $2 == "none" ]]; then
+            unset TASK_CONTEXT
+        else
+            export TASK_CONTEXT=$2
+        fi
+        return
+    fi
+    if [ ! -z $TASK_CONTEXT ]; then
+        ARG=rc.context=${TASK_CONTEXT}
+    fi
+    command task $ARG "$@"
 }
 
 # PS1 stuff

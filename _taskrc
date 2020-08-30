@@ -1,0 +1,10 @@
+data.location=~/.task
+
+include ~/.taskrc.d/local
+include ~/.taskrc.d/theme
+
+context.work=+work
+context.life=-work
+
+urgency.blocking.coefficient=5.0
+urgency.uda.priority.L.coefficient=-1.0
