@@ -1,0 +1,35 @@
+{
+  "title": "Change Esc to Hyper (ctrl+alt+cmd)",
+  "rules": [
+    {
+      "description": "Post Esc if tapped, Hyper if held.",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "escape",
+            "modifiers": {
+              "optional": [
+                "any"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "left_command",
+              "modifiers": [
+                  "left_control",
+                  "left_option"
+              ]
+            }
+          ],
+          "to_if_alone": [
+            {
+              "key_code": "escape"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

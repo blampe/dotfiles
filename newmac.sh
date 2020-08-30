@@ -140,7 +140,6 @@ $BREW install libxslt
 $BREW install libyaml
 $BREW install lzo
 $BREW install memcached
-$BREW install mongodb
 $BREW install moreutils
 $BREW install mysql
 $BREW install nginx
@@ -159,6 +158,7 @@ $BREW install wget
 $BREW install xz
 $BREW cask install iterm2
 $BREW cask install karabiner-elements
+$BREW cask install hammerspoon
 $BREW cask install rescuetime
 $BREW cleanup
 
