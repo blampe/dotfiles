@@ -29,6 +29,10 @@ do
     cp "$i" "${HOME}/$i"
 done
 
+echo "installing zsh themes and plugins..."
+link_file "zsh/plugins" "${HOME}/.oh-my-zsh/custom/plugins"
+link_file "zsh/themes" "${HOME}/.oh-my-zsh/custom/themes"
+
 echo "installing preferences..."
 for i in Library/Preferences/*
 do

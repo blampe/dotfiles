@@ -5,10 +5,6 @@
     my vim configuration
 .screenrc
     my screen configuration
-.weechat
-    my configuration for weechat, a great irc client
-.gimp
-    my tweaks/additions to gimp (fonts, brushes, etc)
 
 ## Instructions
 ### Creating source files
@@ -16,11 +12,11 @@ Any file which matches the shell glob `_*` will be linked into `$HOME` as a syml
 
 For example:
 
-    _bashrc
+    _zshrc
 
 becomes
 
-    ${HOME}/.bashrc
+    ${HOME}/.zshrc
 
 ### Installing source files
 It's as simple as running:
@@ -30,4 +26,4 @@ It's as simple as running:
 From this top-level directory.
 
 ## Requirements
-* bash
+* zsh

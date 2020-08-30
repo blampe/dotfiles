@@ -199,10 +199,10 @@ __git_ps1 () {
 }
 
 day () {
-    /Users/blampe/src/gcalcli/env/bin/gcalcli --calendar=blampe@uber.com --detail_url=long --details=length --details=location --color_owner=red --color_freebusy=blue --nodeclined agenda 7am 10pm
+    $HOME/src/gcalcli/env/bin/gcalcli agenda --calendar=bryce@retain.ai --details url --details length --details location --color-owner=red --color-freebusy=blue --nodeclined 7am 10p
 }
 
 week () {
     WIDTH=$(echo "(`tput cols` - 6) / 5" | bc)
-    /Users/blampe/src/gcalcli/env/bin/gcalcli --calendar=blampe@uber.com calw --width=$WIDTH --noweekend --nodeclined
+    $HOME/src/gcalcli/env/bin/gcalcli calw --calendar=bryce@retain.ai--width=$WIDTH --noweekend --nodeclined
 }

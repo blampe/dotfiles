@@ -1,8 +1,0 @@
-export UBER_HOME=~/Uber
-export UBER_LDAP_UID="blampe"
-
-goclone() {
-  mkdir -p $GOPATH/src/code.uber.internal/$1
-  git clone gitolite@code.uber.internal:$1 $GOPATH/src/code.uber.internal/$1 --recursive
-}
-

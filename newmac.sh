@@ -133,7 +133,6 @@ fi
 
 $BREW install ack
 $BREW install ag
-$BREW install bash-completion
 $BREW install cmake
 $BREW install colordiff
 $BREW install ctags
@@ -163,6 +162,7 @@ $BREW install rg
 $BREW install sphinx
 $BREW install sqlite
 $BREW install task
+$BREW install thefuck
 $BREW install v8
 $BREW install vim
 $BREW install wget
@@ -187,8 +187,6 @@ fi
 
 $PIP install --user neovim flake8 pylint pep8 virtualenv
 
-# homebrew's bash completions
-ln -s "/usr/local/Library/Contributions/brew_bash_completion.sh" "/usr/local/etc/bash_completion.d"
 
 ./install.sh
 
