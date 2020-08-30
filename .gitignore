@@ -4,5 +4,6 @@
 *.py[co]
 .*.sw[nop]
 .DS_Store
-_vim/bundle
+_config/karabiner/automatic_backups
 _vim/.netrwhist
+_vim/bundle

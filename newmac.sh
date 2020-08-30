@@ -48,8 +48,8 @@ defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
 defaults write -g ApplePressAndHoldEnabled -bool false
 
 # set a blazingly fast keyboard repeat rate
-defaults write NSGlobalDomain KeyRepeat -float .5
-defaults write NSGlobalDomain InitialKeyRepeat -int 25
+defaults write NSGlobalDomain KeyRepeat -int 2
+defaults write NSGlobalDomain InitialKeyRepeat -int 15
 
 # enable text selection in QuickLook
 defaults write com.apple.finder QLEnableTextSelection -boolean true
@@ -88,9 +88,6 @@ defaults write com.apple.iTunes show-store-arrow-links -bool false
 # Disable dashboard
 defaults write com.apple.dashboard mcx-disabled -boolean YES
 
-# cmd + h/j switch tabs
-defaults write NSGlobalDomain NSUserKeyEquivalents '{"Select Previous Tab"="@h"; "Select Next Tab"="@l"; "Next Chat"="@l"; "Show Next Tab"="@l"; "Show Previous Tab"="@h"; "Previous Chat"="@h";}'
-
 # disable mission control's control + arrow shortcuts
 defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 118 "{enabled = 0; value = { parameters = (65535, 18, 262144); type = 'standard'; }; }"
 defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 79 "{enabled = 0; value = { parameters = (65535, 123, 262144); type = 'standard'; }; }"
@@ -98,13 +95,6 @@ defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 80 "{ena
 defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 81 "{enabled = 0; value = { parameters = (65535, 124, 262144); type = 'standard'; }; }"
 defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 82 "{enabled = 0; value = { parameters = (65535, 124, 393216); type = 'standard'; }; }"
 defaults import com.apple.symbolichotkeys "$HOME/Library/Preferences/com.apple.symbolichotkeys.plist"
-
-# Remap capslock to control
-# https://stackoverflow.com/questions/127591/using-caps-lock-as-esc-in-mac-os-x
-# https://apple.stackexchange.com/questions/283252/how-do-i-remap-a-key-in-macos-sierra-e-g-right-alt-to-right-control/349440#349440
-hidutil property --set '{"UserKeyMapping":[{"HIDKeyboardModifierMappingSrc":0x700000039,"HIDKeyboardModifierMappingDst":0x7000000E0}]}'
-sudo defaults write com.apple.loginwindow LoginHook ~/dotfiles/key-remap.sh
-
 
 if [ ! "$(which gcc)" ] ; then
     echo "Please download XCode here: https://developer.apple.com/downloads/index.action"
@@ -168,6 +158,7 @@ $BREW install vim
 $BREW install wget
 $BREW install xz
 $BREW cask install iterm2
+$BREW cask install karabiner-elements
 $BREW cask install rescuetime
 $BREW cleanup
 
