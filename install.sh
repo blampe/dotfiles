@@ -30,7 +30,7 @@ link_file "zsh/themes" "${HOME}/.oh-my-zsh/custom/themes"
 echo "installing preferences..."
 for i in Library/Preferences/*
 do
-    cp "$i" "${HOME}/$i"
+    link_file "$i" "${HOME}/$i"
 done
 
 echo "installing vim plugins..."
