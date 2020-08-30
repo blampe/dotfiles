@@ -23,12 +23,6 @@ do
     link_file "$i"
 done
 
-echo "installing fonts..."
-for i in Library/Fonts/*
-do
-    cp "$i" "${HOME}/$i"
-done
-
 echo "installing zsh themes and plugins..."
 link_file "zsh/plugins" "${HOME}/.oh-my-zsh/custom/plugins"
 link_file "zsh/themes" "${HOME}/.oh-my-zsh/custom/themes"
@@ -40,3 +34,9 @@ do
 done
 
 vim +PlugInstall +qall
+
+echo "installing fonts..."
+brew tap homebrew/cask-fonts
+brew cask install font-fira-code-nerd-font
+brew cask install font-dejavu-sans-mono-nerd-font
+
