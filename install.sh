@@ -33,6 +33,7 @@ do
     cp "$i" "${HOME}/$i"
 done
 
+echo "installing vim plugins..."
 vim +PlugInstall +qall
 
 echo "installing fonts..."

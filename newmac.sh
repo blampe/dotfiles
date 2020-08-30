@@ -3,7 +3,7 @@
 set -ex
 
 BREW=/usr/local/bin/brew
-PIP=/usr/local/opt/python/libexec/bin/pip
+PIP=/usr/local/opt/python3/libexec/bin/pip
 
 # don't write DS_Store on network drives
 defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
@@ -185,7 +185,7 @@ if [ ! "$(which aws)" ] ; then
     complete -C aws_completer aws
 fi
 
-$PIP install --user neovim flake8 pylint pep8 virtualenv
+$PIP install --user neovim flake8 pylint pep8
 
 
 ./install.sh

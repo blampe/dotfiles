@@ -14,7 +14,6 @@ if has('nvim')
 
     let g:neomake_warning_sign = {'text': 'w', 'texthl': 'WarningMsg'}
     let g:neomake_error_sign = {'text': 'EE', 'texthl': 'ErrorMsg'}
-    let g:neomake_logfile='/tmp/neomake.err.log'
     let g:neomake_enabled_makers = []
 
     autocmd! BufWritePost * Neomake!
@@ -81,7 +80,7 @@ let g:vimwiki_hl_cb_checked = 1
 let g:vimwiki_ext2syntax = {'.md': 'markdown'}
 let g:vimwiki_autowriteall = 1
 let g:vimwiki_auto_chdir = 1
-let g:neomake_verbose = 3
+"let g:neomake_verbose = 3
 "let g:vimwiki_folding = 'expr'
 let g:vimwiki_use_mouse = 1
 
