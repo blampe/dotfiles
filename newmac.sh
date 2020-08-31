@@ -121,45 +121,45 @@ if [ $? -ne 0 ] ; then
     exit 1
 fi
 
-$BREW install ack
-$BREW install ag
-$BREW install cmake
-$BREW install colordiff
-$BREW install ctags
-$BREW install curl
-$BREW install fasd
-$BREW install fzf
-$BREW install geoip
-$BREW install go
-$BREW install htop-osx
-$BREW install jq
-$BREW install libksba
-$BREW install libmemcached
-$BREW install libxml2
-$BREW install libxslt
-$BREW install libyaml
-$BREW install lzo
-$BREW install memcached
-$BREW install moreutils
-$BREW install mysql
-$BREW install nginx
-$BREW install nvim
-$BREW install python
-$BREW install readline
-$BREW install redis
-$BREW install rg
-$BREW install sphinx
-$BREW install sqlite
-$BREW install task
-$BREW install thefuck
-$BREW install v8
-$BREW install vim
-$BREW install wget
-$BREW install xz
-$BREW cask install iterm2
-$BREW cask install karabiner-elements
-$BREW cask install hammerspoon
-$BREW cask install rescuetime
+$BREW install ack || true
+$BREW install ag || true
+$BREW install cmake || true
+$BREW install colordiff || true
+$BREW install ctags || true
+$BREW install curl || true
+$BREW install fasd || true
+$BREW install fzf || true
+$BREW install geoip || true
+$BREW install go || true
+$BREW install htop-osx || true
+$BREW install jq || true
+$BREW install libksba || true
+$BREW install libmemcached || true
+$BREW install libxml2 || true
+$BREW install libxslt || true
+$BREW install libyaml || true
+$BREW install lzo || true
+$BREW install memcached || true
+$BREW install moreutils || true
+$BREW install mysql || true
+$BREW install nginx || true
+$BREW install nvim || true
+$BREW install python || true
+$BREW install readline || true
+$BREW install redis || true
+$BREW install rg || true
+$BREW install sphinx || true
+$BREW install sqlite || true
+$BREW install task || true
+$BREW install thefuck || true
+$BREW install v8 || true
+$BREW install vim || true
+$BREW install wget || true
+$BREW install xz || true
+$BREW cask install iterm2 || true
+$BREW cask install karabiner-elements || true
+$BREW cask install hammerspoon || true
+$BREW cask install rescuetime || true
 $BREW cleanup
 
 defaults write com.apple.dock persistent-apps -array-add "<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/Applications/iTerm.app</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>"; killall Dock
