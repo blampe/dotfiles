@@ -23,6 +23,8 @@ do
     link_file "$i"
 done
 
+git submodule update --init
+
 echo "installing zsh themes and plugins..."
 link_file "zsh/plugins" "${HOME}/.oh-my-zsh/custom/plugins"
 link_file "zsh/themes" "${HOME}/.oh-my-zsh/custom/themes"
@@ -38,6 +40,5 @@ vim +PlugInstall +qall
 
 echo "installing fonts..."
 brew tap homebrew/cask-fonts
-brew cask install font-fira-code-nerd-font
-brew cask install font-dejavu-sans-mono-nerd-font
-
+brew cask upgrade font-fira-code-nerd-font
+brew cask upgrade font-dejavu-sans-mono-nerd-font
