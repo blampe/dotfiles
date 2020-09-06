@@ -3,8 +3,6 @@
 [push]
     default = current
 [core]
-    whitespace = -trailing-space
-    whitespace = trailing-space
     whitespace = trailing-space
 [alias]
     lg = log --first-parent
@@ -22,13 +20,12 @@
     added = yellow
     changed = green
     untracked = cyan
-
 [user]
 	name = Bryce Lampe
 	email = brycelampe@gmail.com
 [credential]
 	helper = osxkeychain
-[url "ssh://gitolite@code.uber.internal:2222/"]
-	insteadOf = https://code.uber.internal/
 [url "https://github.com/"]
 	insteadOf = git://github.com/
+[init]
+	defaultBranch = main
