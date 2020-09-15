@@ -10,14 +10,26 @@ Plug 'scrooloose/nerdcommenter'
 
 " Linting
 if has('nvim')
-    Plug 'neomake/neomake'
-
-    let g:neomake_warning_sign = {'text': 'w', 'texthl': 'WarningMsg'}
-    let g:neomake_error_sign = {'text': 'EE', 'texthl': 'ErrorMsg'}
-    let g:neomake_enabled_makers = []
-
-    autocmd! BufWritePost * Neomake!
-    autocmd! BufEnter * Neomake!
+    Plug 'w0rp/ale'
+    let g:ale_open_list = 1
+    let g:ale_sign_error='⊘'
+    let g:ale_sign_warning='⚠'
+    let g:ale_lint_on_save = 1
+    let g:ale_lint_on_enter = 0
+    let g:ale_lint_on_text_changed = 0
+    let g:ale_emit_conflict_warnings = 0
+    let g:ale_linters = {
+    \   'ruby': ['standardrb', 'rubocop', 'rails_best_practices'],
+    \   'python': ['flake8', 'pylint'],
+    \}
+    let g:ale_ruby_standardrb_executable = 'bundle'
+    let g:ale_ruby_rubocop_executable = 'bundle'
+    let g:ale_ruby_rails_best_practices_executable = 'bundle'
+    let g:ale_linter_aliases = {}
+    let g:ale_fixers = {
+    \   'ruby': ['standardrb'],
+    \}
+    let g:ale_fix_on_save = 1
 
     let g:python_host_prog = '/usr/local/bin/python'
 else
@@ -39,7 +51,7 @@ cabbrev ln lNext
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 nmap <silent> <C-P> :Files<CR>
-let g:fzf_layout = { 'down': '~15%' }
+let g:fzf_layout = { 'down': '~25%' }
 
 Plug 'vim-scripts/camelcasemotion'
 " Replace the default 'w', 'b' and 'e' mappings instead of defining additional
@@ -51,6 +63,9 @@ map <silent> e <Plug>CamelCaseMotion_e
 sunmap w
 sunmap b
 sunmap e
+
+" MRU startup screen
+Plug 'mhinz/vim-startify'
 
 " For ]l and [l to jump between errors.
 Plug 'tpope/vim-unimpaired'
@@ -86,6 +101,7 @@ let g:vimwiki_use_mouse = 1
 
 " Language support
 Plug 'fatih/vim-go', {'for': 'go'}
+Plug 'tpope/vim-rails'
 let g:go_highlight_functions = 1
 let g:go_highlight_methods = 1
 let g:go_highlight_structs = 1
