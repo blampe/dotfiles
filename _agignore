@@ -2,6 +2,9 @@
 Godeps/_workspace
 env
 vendor
+node_modules
+packs
+tmp
 
 *.pyc
 *.swp
