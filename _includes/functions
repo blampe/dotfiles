@@ -112,6 +112,7 @@ function task() {
         else
             export TASK_CONTEXT=$2
         fi
+        echo $TASK_CONTEXT > ~/.taskrc.d/context || true
         return
     fi
     if [ ! -z $TASK_CONTEXT ]; then

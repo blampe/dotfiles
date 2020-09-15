@@ -7,5 +7,6 @@
 _config/karabiner/automatic_backups
 _task/*
 _taskrc.d/local
+_taskrc.d/context
 _vim/.netrwhist
 _vim/bundle

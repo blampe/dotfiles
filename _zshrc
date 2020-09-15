@@ -131,3 +131,4 @@ set opt AUTO_CD
 
 # lowercase tab-completes for uppercase matches
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+export TASK_CONTEXT=`cat ~/.taskrc.d/context || echo life`
