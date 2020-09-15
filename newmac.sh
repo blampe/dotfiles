@@ -141,10 +141,13 @@ $BREW install libyaml || true
 $BREW install lzo || true
 $BREW install memcached || true
 $BREW install moreutils || true
+$BREW install node || true
 $BREW install mysql || true
 $BREW install nginx || true
 $BREW install nvim || true
+$BREW install postgres || true
 $BREW install python || true
+$BREW install rbenv || true
 $BREW install readline || true
 $BREW install redis || true
 $BREW install rg || true
@@ -155,10 +158,12 @@ $BREW install thefuck || true
 $BREW install v8 || true
 $BREW install vim || true
 $BREW install wget || true
+$BREW install yarn || true
 $BREW install xz || true
 $BREW cask install iterm2 || true
 $BREW cask install karabiner-elements || true
 $BREW cask install hammerspoon || true
+$BREW cask install postman || true
 $BREW cask install rescuetime || true
 $BREW cleanup
 
