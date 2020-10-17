@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 function link_file {
 	source="${PWD}/$1"
 	if [ "$2" ]; then
@@ -29,16 +29,18 @@ echo "installing zsh themes and plugins..."
 link_file "zsh/plugins" "${HOME}/.oh-my-zsh/custom/plugins"
 link_file "zsh/themes" "${HOME}/.oh-my-zsh/custom/themes"
 
-echo "installing preferences..."
-for i in Library/Preferences/*
-do
-    link_file "$i" "${HOME}/$i"
-done
-
 echo "installing vim plugins..."
 vim +PlugInstall +qall
 
-echo "installing fonts..."
-brew tap homebrew/cask-fonts
-brew cask upgrade font-fira-code-nerd-font
-brew cask upgrade font-dejavu-sans-mono-nerd-font
+if [[ `uname` =~ "Darwin" ]]; then
+    echo "installing preferences..."
+    for i in Library/Preferences/*
+    do
+        link_file "$i" "${HOME}/$i"
+    done
+
+    echo "installing fonts..."
+    brew tap homebrew/cask-fonts
+    brew cask upgrade font-fira-code-nerd-font
+    brew cask upgrade font-dejavu-sans-mono-nerd-font
+fi
