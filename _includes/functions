@@ -73,12 +73,6 @@ function bpychk {
     done
 }
 
-# disable bash-completion for tildes
-_expand()
-{
-	return 0;
-}
-
 __expand_tilde_by_ref()
 {
     return 0;
