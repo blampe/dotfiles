@@ -1,59 +1,59 @@
+" vim:fdm=marker
 set nocompatible
 
 " ===========================================================
 " PLUGINS
 " ===========================================================
-"
+
 call plug#begin('~/.vim/bundle')
 
-Plug 'scrooloose/nerdcommenter'
+Plug 'fatih/vim-go', {'for': 'go'} " Language support
+Plug 'honza/vim-snippets' " Snippets
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim' " Fuzzy search
+Plug 'mhinz/vim-startify' " MRU startup screen
+Plug 'moll/vim-node', {'for': 'javascript'} " Language support
+Plug 'rodjek/vim-puppet', {'for': 'puppet'} " Language support
+Plug 'scrooloose/nerdcommenter' " Smart comment blocks
+Plug 'solarnz/thrift.vim', {'for': 'thrift'} " Language support
+Plug 'tbabej/taskwiki', {'do': 'pip3 install --upgrade git+git://github.com/tbabej/tasklib@develop'} " Taskwarrior TODO lists
+Plug 'tpope/vim-rails', {'for': 'ruby'} " Language support
+Plug 'tpope/vim-sensible' " Sensible defaults for basics
+Plug 'tpope/vim-unimpaired' " ]* and *[ helper commands
+Plug 'vim-airline/vim-airline'
+Plug 'vim-ruby/vim-ruby', {'for': 'ruby'} " Language support
+Plug 'vim-scripts/camelcasemotion' " Navigation within words
+Plug 'vimwiki/vimwiki' " Smart markdown wikis
 
-" Linting
+" colorschemes{{{
+Plug 'Lokaltog/vim-distinguished'
+Plug 'atelierbram/vim-colors_duotones' " base16-duotones
+Plug 'chriskempson/vim-tomorrow-theme'
+Plug 'justinmk/molokai'
+Plug 'nanotech/jellybeans.vim'
+Plug 'ninja/sky'
+Plug 'notpratheek/vim-luna'
+Plug 'sjl/badwolf'
+Plug 'vim-scripts/vilight.vim'"}}}
+
 if has('nvim')
-    Plug 'w0rp/ale'
-    let g:ale_open_list = 1
-    let g:ale_sign_error='⊘'
-    let g:ale_sign_warning='⚠'
-    let g:ale_lint_on_save = 1
-    let g:ale_lint_on_enter = 0
-    let g:ale_lint_on_text_changed = 0
-    let g:ale_emit_conflict_warnings = 0
-    let g:ale_linters = {
-    \   'ruby': ['standardrb', 'rubocop', 'rails_best_practices'],
-    \   'python': ['flake8', 'pylint'],
-    \}
-    let g:ale_ruby_standardrb_executable = 'bundle'
-    let g:ale_ruby_rubocop_executable = 'bundle'
-    let g:ale_ruby_rails_best_practices_executable = 'bundle'
-    let g:ale_linter_aliases = {}
-    let g:ale_fixers = {
-    \   'ruby': ['standardrb'],
-    \}
-    let g:ale_fix_on_save = 1
-
-    let g:python_host_prog = '/usr/local/bin/python'
+    source ~/.vim/custom/neovim.vim
 else
-    Plug 'scrooloose/syntastic'
-    let g:syntastic_always_populate_loc_list = 1
-    let g:syntastic_auto_loc_list = 0
-    let g:syntastic_check_on_open = 1
-    let g:syntastic_check_on_wq = 0
-    let g:syntastic_use_quickfix_lists = 1
-    let g:syntastic_python_checkers = ['flake8']
-    let g:syntastic_go_checkers = ['go', 'golint', 'govet', 'errcheck']
-    "let g:syntastic_go_checkers = ['gofmt', 'golint', 'gometalinter', 'gotype', 'govet', 'errcheck']
-    let g:syntastic_javascript_checkers = ['jshint']
-    let g:syntaxed_languages ='vim,tex,python,pyrex,c,cpp,php,js,html,css,cs,java,md,mkd,markdown,rst,go,node,js'
+    source ~/.vim/custom/vanilla.vim
 endif
-cabbrev ln lNext
 
-" Fuzzy search
-Plug 'junegunn/fzf'
-Plug 'junegunn/fzf.vim'
+call plug#end()
+
+" ===========================================================
+" PLUGIN CONFIGS
+" ===========================================================
+
+" junegunn/fzf{{{
 nmap <silent> <C-P> :Files<CR>
 let g:fzf_layout = { 'down': '~25%' }
+"}}}
 
-Plug 'vim-scripts/camelcasemotion'
+" vim-scripts/camelcasemotion{{{
 " Replace the default 'w', 'b' and 'e' mappings instead of defining additional
 " mappings',w', ',b' and ',e' for CamelCase (and_underscore) movement.
 " (Note shift+W/B preserves the default behavior.)
@@ -63,22 +63,13 @@ map <silent> e <Plug>CamelCaseMotion_e
 sunmap w
 sunmap b
 sunmap e
+"}}}
 
-" MRU startup screen
-Plug 'mhinz/vim-startify'
+" mhinz/vim-startify{{{
+let g:startify_change_to_vcs_root = 1
+"}}}
 
-" For ]l and [l to jump between errors.
-Plug 'tpope/vim-unimpaired'
-
-" All the basics.
-Plug 'tpope/vim-sensible'
-
-" git blame ilu ;)
-Plug 'tpope/vim-fugitive'
-
-" TaskWarrior TODO lists
-Plug 'vimwiki/vimwiki'
-Plug 'tbabej/taskwiki', {'do': 'pip3 install --upgrade git+git://github.com/tbabej/tasklib@develop'}
+" vimwiki/vimwiki{{{
 let g:taskwiki_markup_syntax = "markdown"
 let g:taskwiki_disable_concealcursor = 1
 function! s:buildWiki(path)
@@ -95,13 +86,10 @@ let g:vimwiki_hl_cb_checked = 1
 let g:vimwiki_ext2syntax = {'.md': 'markdown'}
 let g:vimwiki_autowriteall = 1
 let g:vimwiki_auto_chdir = 1
-"let g:neomake_verbose = 3
-"let g:vimwiki_folding = 'expr'
 let g:vimwiki_use_mouse = 1
+"}}}
 
-" Language support
-Plug 'fatih/vim-go', {'for': 'go'}
-Plug 'tpope/vim-rails'
+" faith/vim-go{{{
 let g:go_highlight_functions = 1
 let g:go_highlight_methods = 1
 let g:go_highlight_structs = 1
@@ -110,78 +98,44 @@ let g:go_highlight_build_constraints = 1
 let g:go_fmt_command = "goimports"
 let g:go_fmt_fail_silently = 1
 let g:go_def_mode = 'godef'
+"}}}
 
-Plug 'tpope/vim-rails', {'for': 'ruby'}
-Plug 'moll/vim-node', {'for': 'javascript'}
-Plug 'rodjek/vim-puppet', {'for': 'puppet'}
-Plug 'solarnz/thrift.vim', {'for': 'thrift'}
-Plug 'vim-ruby/vim-ruby', {'for': 'ruby'}
-
-if version > 703
-    Plug 'Valloric/YouCompleteMe',
-        \ {'do': './install.py --clang-completer --go-completer --java-completer'}
-    let g:ycm_global_ycm_extra_conf = '.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
-    let g:ycm_min_num_of_chars_for_completion = 2
-    let g:ycm_autoclose_preview_window_after_completion = 1
-    let g:ycm_autoclose_preview_window_after_insertion = 1
-endif
-
-" Don't show the preview window on autocompletions.
-" set completeopt=menu,menuone,preview,noselect,noinsert
-set completeopt=menuone,longest
-"
-" Keep a small completion window.
-set pumheight=6
-
-" Snippets
-if version > 703
-    Plug 'SirVer/ultisnips'
-
-    " YouCompleteMe/Ultisnips compatibility. UltiSnips passes <tab> to SuperTab.
-    Plug 'ervandew/supertab'
-    let g:SuperTabDefaultCompletionType = '<C-n>'
-    let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
-    let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
-    let g:UltiSnipsExpandTrigger = "<tab>"
-    let g:UltiSnipsJumpForwardTrigger = "<tab>"
-    let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
-else
-    " Snippet support for legacy vim.
-    Plug 'garbas/vim-snipmate'
-    Plug 'honza/vim-snippets'
-    Plug 'marcweber/vim-addon-mw-utils'
-    Plug 'tomtom/tlib_vim'
-endif
-
-" Colorschemes
-Plug 'chriskempson/vim-tomorrow-theme'
-Plug 'Lokaltog/vim-distinguished'
-Plug 'atelierbram/vim-colors_duotones' " base16-duotones
-Plug 'sjl/badwolf'
-Plug 'vim-scripts/vilight.vim'
-Plug 'ninja/sky'
-Plug 'notpratheek/vim-luna'
-Plug 'nanotech/jellybeans.vim'
-Plug 'justinmk/molokai'
-
-Plug 'vim-airline/vim-airline'
+" vim-airline/vim-airline{{{
 let g:airline_powerline_fonts = 1
 let g:airline_extensions = ['branch']
 set noshowmode
-
-call plug#end()
+"}}}
 
 " ===========================================================
 " EDITOR SETTINGS
 " ===========================================================
 
-" Syntax highlighting.
+" Syntax highlighting and color.
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 set background=dark
 colorscheme jellybeans
+highlight Pmenu ctermbg=NONE ctermfg=white guibg=NONE guifg=white
 
 filetype off                  " need to turn this off fof the next line to work
 filetype plugin indent on     " enable loading indent file for filetype
+
+" Show a line at column 80
+if exists("&colorcolumn")
+    let &colorcolumn="80,".join(range(100,999),",")
+endif
+
+" Show lint errors in the same column as line numbers
+"set signcolumn=number
+
+" Don't show the preview window on autocompletions.
+" set completeopt=menu,menuone,preview,noselect,noinsert
+"set completeopt=menuone,longest
+set completeopt=noinsert,menuone,noselect,preview
+
+" Keep a small completion window.
+set pumheight=9
+
+set foldmethod=marker
 
 " Multiple windows, when created, are equal in size.
 set equalalways
@@ -192,23 +146,11 @@ set splitbelow splitright
 " Display line numbers on the left side.
 set number
 
-" Inserts new line without going into insert mode.
-map <S-CR> O<ESC>
-map <CR> o<ESC>
-
-" Change the leader to be a comma vs slash.
-let mapleader=","
-
-" Toggle invisible chars
-map <leader>i :set list!<CR>
-
 " <tab> inserts 4 spaces.
 set tabstop=4
-
-" but an indent level is 2 spaces wide.
 set shiftwidth=4
 
-" <BS> over an autoindent deletes both spaces.
+" <BS> over an autoindent deletes all spaces.
 set softtabstop=4
 
 " Use spaces, not tabs, for autoindent/tab key.
@@ -217,11 +159,6 @@ set expandtab
 " Have a line indicate the cursor location.
 set cursorline
 set cursorcolumn
-
-" Show a line at column 80
-if exists("&colorcolumn")
-    let &colorcolumn="80,".join(range(100,999),",")
-endif
 
 " Don't wrap text at the edge of the window.
 set nowrap
@@ -247,12 +184,6 @@ set wildignore+=*.o,*.obj,.git,*.pyc,*.so
 " Show title in console title bar.
 set title
 
-" Always show statusline, even if only 1 window.
-set laststatus=2
-if exists('fugitive')
-    set statusline+=%<%f\ (%{&ft})%=%-19(%3l,%02c%03V%)%{fugitive#statusline()}
-endif
-
 " Listen for mouse clicks.
 set mouse=a
 
@@ -262,11 +193,30 @@ set confirm
 " Disable all bells. I hate ringing/flashing.
 set vb t_vb=
 
+" ===========================================================
+" KEY BINDINGS
+" ===========================================================
+
+" Inserts new line without going into insert mode.
+map <S-CR> O<ESC>
+map <CR> o<ESC>
+
+" Change the leader to be a comma vs slash.
+let mapleader=","
+
+" Toggle invisible chars
+map <leader>i :set list!<CR>
+
+" ===========================================================
+" BUFFERS AND FILE TYPES
+" ===========================================================
+
 " Remove trailing whitespace on saves.
 function! TrimWhiteSpace()
     %s/\s*$//
     ''
 :endfunction
+
 autocmd FileWritePre * :call TrimWhiteSpace()
 autocmd FileAppendPre * :call TrimWhiteSpace()
 autocmd FilterWritePre * :call TrimWhiteSpace()
@@ -276,7 +226,12 @@ autocmd BufWritePre * :call TrimWhiteSpace()
 " returns to the same position.
 au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif""
 
+" In the quickfix window, <CR> is used to jump to the error under the
+" cursor, so undefine any mappings there.
+autocmd BufReadPost quickfix nnoremap <buffer> <CR> <CR>
+
 " Enable spell checking for markdown files and git commits.
-autocmd BufRead,BufNewFile *.md setlocal spell
+autocmd Filetype markdown setlocal spell
+autocmd Filetype vimwiki setlocal spell
 autocmd FileType gitcommit setlocal spell
 autocmd filetype crontab setlocal nobackup nowritebackup

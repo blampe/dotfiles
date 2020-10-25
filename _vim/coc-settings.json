@@ -1,0 +1,23 @@
+{
+    "diagnostic.checkCurrentLine": true,
+    "diagnostic.enable": true,
+    "diagnostic.locationlistUpdate": true,
+    "diagnostic.messageDelay": 0,
+
+    "git.addGBlameToVirtualText": true,
+
+    "coc.preferences.formatOnSaveFiletypes": [
+        "bash",
+        "go",
+        "python",
+        "ruby"
+    ],
+
+    "python.formatting.provider": "black",
+
+    "solargraph.diagnostics": false,
+    "solargraph.hover": true,
+
+    "suggest.numberSelect": true,
+    "suggest.removeDuplicateItems": true
+}
