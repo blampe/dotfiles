@@ -8,16 +8,44 @@
 
     "coc.preferences.formatOnSaveFiletypes": [
         "bash",
+        "css",
         "go",
+        "markdown",
         "python",
-        "ruby"
+        "ruby",
+        "javascript",
+        "terraform",
+        "typescript"
     ],
 
+    "languageserver": {
+        "golang": {
+          "command": "gopls",
+          "rootPatterns": ["go.mod", ".git/"],
+          "disableWorkspaceFolders": false,
+          "filetypes": ["go"],
+          "initializationOptions": {
+            "completeUnimported": true
+          }
+        },
+        "terraform": {
+          "command": "terraform-ls",
+          "args": ["serve"],
+          "filetypes": [
+            "terraform",
+            "tf"
+          ],
+          "initializationOptions": {},
+          "settings": {}
+        }
+    },
+
     "python.formatting.provider": "black",
+    "python.linting.pylintEnabled": false,
+    "python.linting.flake8Enabled": true,
 
-    "solargraph.diagnostics": false,
-    "solargraph.hover": true,
+    "prettier.disableSuccessMessage": true,
 
-    "suggest.numberSelect": true,
-    "suggest.removeDuplicateItems": true
+    "solargraph.diagnostics": true,
+    "solargraph.hover": true
 }

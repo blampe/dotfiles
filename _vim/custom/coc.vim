@@ -1,6 +1,18 @@
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+
 let g:coc_global_extensions = [
+            \ 'coc-eslint',
             \ 'coc-git',
             \ 'coc-go',
             \ 'coc-html',
