@@ -12,18 +12,25 @@ endfunction
 
 
 let g:coc_global_extensions = [
+            \ 'coc-docker',
             \ 'coc-eslint',
+            \ 'coc-diagnostic',
             \ 'coc-git',
             \ 'coc-go',
             \ 'coc-html',
             \ 'coc-json',
+            \ 'coc-prettier',
             \ 'coc-python',
             \ 'coc-snippets',
             \ 'coc-solargraph',
+            \ 'coc-tsserver',
             \ 'coc-yaml',
             \ ]
 set updatetime=300
 set shortmess+=c
+
+" Ctrl+Space triggers completion
+inoremap <silent><expr> <c-space> coc#refresh()
 
 " <Tab>: completion forward
 inoremap <silent><expr> <TAB>

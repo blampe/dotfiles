@@ -1,51 +1,65 @@
 {
-    "diagnostic.checkCurrentLine": true,
-    "diagnostic.enable": true,
-    "diagnostic.locationlistUpdate": true,
-    "diagnostic.messageDelay": 0,
+  "diagnostic.checkCurrentLine": true,
+  "diagnostic.enable": true,
+  "diagnostic.locationlistUpdate": true,
+  "diagnostic.messageDelay": 0,
 
-    "git.addGBlameToVirtualText": true,
+  "git.addGBlameToVirtualText": true,
 
-    "coc.preferences.formatOnSaveFiletypes": [
-        "bash",
-        "css",
-        "go",
-        "markdown",
-        "python",
-        "ruby",
-        "javascript",
-        "terraform",
-        "typescript"
-    ],
+  "coc.preferences.formatOnSaveFiletypes": [
+    "bash",
+    "css",
+    "dockerfile",
+    "go",
+    "javascript",
+    "json",
+    "markdown",
+    "python",
+    "ruby",
+    "sh",
+    "terraform",
+    "typescript",
+    "yaml"
+  ],
 
-    "languageserver": {
-        "golang": {
-          "command": "gopls",
-          "rootPatterns": ["go.mod", ".git/"],
-          "disableWorkspaceFolders": false,
-          "filetypes": ["go"],
-          "initializationOptions": {
-            "completeUnimported": true
-          }
-        },
-        "terraform": {
-          "command": "terraform-ls",
-          "args": ["serve"],
-          "filetypes": [
-            "terraform",
-            "tf"
-          ],
-          "initializationOptions": {},
-          "settings": {}
-        }
+  "diagnostic-languageserver.filetypes": {
+    "sh": "shellcheck"
+  },
+  "diagnostic-languageserver.formatFiletypes": {
+    "sh": "shfmt"
+  },
+  "diagnostic-languageserver.formatters": {
+    "shfmt": {
+      "command": "shfmt",
+      "args": ["-i", "2", "-bn", "-ci", "-sr"]
+    }
+  },
+
+  "languageserver": {
+    "golang": {
+      "command": "gopls",
+      "rootPatterns": ["go.mod", ".git/"],
+      "disableWorkspaceFolders": false,
+      "filetypes": ["go"],
+      "initializationOptions": {
+        "completeUnimported": true
+      }
     },
+    "terraform": {
+      "command": "terraform-ls",
+      "args": ["serve"],
+      "filetypes": ["terraform", "tf"],
+      "initializationOptions": {},
+      "settings": {}
+    }
+  },
 
-    "python.formatting.provider": "black",
-    "python.linting.pylintEnabled": false,
-    "python.linting.flake8Enabled": true,
+  "python.formatting.provider": "black",
+  "python.linting.pylintEnabled": false,
+  "python.linting.flake8Enabled": true,
 
-    "prettier.disableSuccessMessage": true,
+  "prettier.disableSuccessMessage": true,
 
-    "solargraph.diagnostics": true,
-    "solargraph.hover": true
+  "solargraph.diagnostics": true,
+  "solargraph.hover": true
 }
