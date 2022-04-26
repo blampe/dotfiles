@@ -24,7 +24,7 @@
 	name = Bryce Lampe
 	email = brycelampe@gmail.com
 [credential]
-	helper = osxkeychain
+	helper = /usr/local/share/gcm-core/git-credential-manager-core
 [url "https://github.com/"]
 	insteadOf = git://github.com/
 [init]
