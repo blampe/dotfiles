@@ -1,0 +1,9 @@
+*.pyc
+*.swp
+.git
+env
+logs
+node_modules
+packs
+tmp
+vendor
