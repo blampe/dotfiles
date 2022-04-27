@@ -96,29 +96,31 @@ defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 81 "{ena
 defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 82 "{enabled = 0; value = { parameters = (65535, 124, 393216); type = 'standard'; }; }"
 defaults import com.apple.symbolichotkeys "$HOME/Library/Preferences/com.apple.symbolichotkeys.plist"
 
-if [ ! "$(which gcc)" ] ; then
-    echo "Please download XCode here: https://developer.apple.com/downloads/index.action"
-    exit 1
+if [ ! "$(which gcc)" ]; then
+  echo "Please download XCode here: https://developer.apple.com/downloads/index.action"
+  exit 1
 fi
 
-if [ ! -x $BREW ] ; then
-    echo 'installing homebrew'
-    echo export PATH="/usr/local/bin:\$PATH" >> ~/.bash_profile
-    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+if [ ! -x $BREW ]; then
+  echo 'installing homebrew'
+  echo export PATH="/usr/local/bin:\$PATH" >> ~/.bash_profile
+  /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 fi
 
 echo 'updating homebrew'
 $BREW update
 
-if [ ! "$(which git)" ] ; then
-    echo 'installing git'
-    $BREW install git
+if [ ! "$(which git)" ]; then
+  echo 'installing git'
+  $BREW install git
+  $BREW tap microsoft/git
+  $BREW install --cask git-credential-manager-core
 fi
 
 $BREW doctor
-if [ $? -ne 0 ] ; then
-    echo 'bad doctor'
-    exit 1
+if [ $? -ne 0 ]; then
+  echo 'bad doctor'
+  exit 1
 fi
 
 $BREW install ack || true
@@ -134,6 +136,7 @@ $BREW install geoip || true
 $BREW install go || true
 $BREW install htop-osx || true
 $BREW install jq || true
+$BREW install kubectl || true
 $BREW install libksba || true
 $BREW install libmemcached || true
 $BREW install libxml2 || true
@@ -157,6 +160,7 @@ $BREW install sphinx || true
 $BREW install sqlite || true
 $BREW install task || true
 $BREW install thefuck || true
+$BREW install tree || true
 $BREW install v8 || true
 $BREW install vim || true
 $BREW install watchman || true
@@ -164,40 +168,45 @@ $BREW install wget || true
 $BREW install xz || true
 $BREW install yarn || true
 $BREW install yq || true
-$BREW cask install iterm2 || true
-$BREW cask install karabiner-elements || true
-$BREW cask install hammerspoon || true
-$BREW cask install postman || true
-$BREW cask install rescuetime || true
+$BREW install --cask iterm2 || true
+$BREW install --cask karabiner-elements || true
+$BREW install --cask hammerspoon || true
+$BREW install --cask postman || true
+$BREW install --cask rescuetime || true
 $BREW tap homebrew/services || true
 $BREW cleanup
 
-defaults write com.apple.dock persistent-apps -array-add "<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/Applications/iTerm.app</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>"; killall Dock
+defaults write com.apple.dock persistent-apps -array-add "<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/Applications/iTerm.app</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>"
+killall Dock
 
-
-if [ ! "$(which ipython)" ] ; then
-    echo 'installing ipython'
-    $PIP install ipython
+if [ ! "$(which ipython)" ]; then
+  echo 'installing ipython'
+  $PIP install ipython
 fi
 
-if [ ! "$(which aws)" ] ; then
-    echo 'installing awscli'
-    $PIP install awscli
-    complete -C aws_completer aws
+if [ ! "$(which aws)" ]; then
+  echo 'installing awscli'
+  $PIP install awscli
+  complete -C aws_completer aws
+fi
+
+if [ ! "$(which gcloud)" ]; then
+  echo 'installing gcloud'
+  $BREW install --cask google-cloud-sdk
 fi
 
 $PIP install --user neovim flake8 pylint pep8
 
-if [ ! -d "~/src/gcalcli" ] ; then
-    echo 'installing gcalcli'
-    mkdir -p ~/src
-    git clone https://github.com/insanum/gcalcli.git ~/src/gcalcli
-    pushd ~/src/gcalcli
-    python3 -m venv env
-    . env/bin/activate
-    python3 setup.py install
-    deactivate
-    popd
+if [ ! -d "$HOME/src/gcalcli" ]; then
+  echo 'installing gcalcli'
+  mkdir -p ~/src
+  git clone https://github.com/insanum/gcalcli.git ~/src/gcalcli
+  pushd ~/src/gcalcli
+  python3 -m venv env
+  . env/bin/activate
+  python3 setup.py install
+  deactivate
+  popd
 fi
 
 ./install.sh
