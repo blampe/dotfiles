@@ -133,6 +133,9 @@ set opt AUTO_CD
 # lowercase tab-completes for uppercase matches
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 export TASK_CONTEXT=`cat ~/.taskrc.d/context || echo life`
+export HOMEBREW_NO_ANALYTICS=1
+export HOMEBREW_NO_AUTO_UPDATE=1
+export HOMEBREW_NO_INSTALLED_DEPENDENTS_CHECK=1
 
 [[ /usr/local/bin/kubectl ]] && source <(kubectl completion zsh)
 
