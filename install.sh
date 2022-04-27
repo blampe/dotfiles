@@ -1,4 +1,5 @@
 #!/usr/bin/env zsh
+
 function link_file {
 	source="${PWD}/$1"
 	if [ "$2" ]; then
@@ -16,6 +17,51 @@ function link_file {
 	echo "	installing $target"
 	ln -sfn "$source" "$target"
 }
+
+# Grab developer tools in parallel
+if [ ! "$(which gcc)" ]; then
+  echo 'installing developer tools'
+  xcode-select --install >/dev/null &
+fi
+
+
+if [ ! "$(which brew)" ]; then # TODO(Darwin)
+  echo 'installing homebrew'
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+fi
+
+if [ ! "$(which git)" ]; then
+  echo 'installing git'
+  brew install git
+fi
+
+if [ ! -d $HOME/src ]; then
+  echo 'creating ~/src'
+  mkdir $HOME/src
+fi
+
+pushd $HOME/src
+
+if [ ! -d $HOME/src/dotfiles ]; then
+  echo 'cloning dotfiles into ~/src'
+  git clone git@github.com:blampe/dotfiles.git
+  cd dotfiles # TODO(remove)
+  git checkout origin/refactor # TODO(remove)
+fi
+
+pushd $HOME/src/dotfiles
+
+for tap in $(cat brew/taps); do
+  brew tap $tap
+done
+
+brew fetch --casks $(cat brew/casks | tr '\n' ' ') >/dev/null &
+brew fetch --deps $(cat brew/formulae | tr '\n' ' ') >/dev/null &
+
+brew install --casks $(cat brew/casks | tr '\n' ' ')
+brew install $(cat brew/formulae | tr '\n' ' ')
+
+brew cleanup
 
 echo "installing dotfiles..."
 for i in _$1*
@@ -38,11 +84,6 @@ if [[ `uname` =~ "Darwin" ]]; then
     do
         link_file "$i" "${HOME}/$i"
     done
-
-    echo "installing fonts..."
-    brew tap homebrew/cask-fonts
-    brew upgrade --cask font-fira-code-nerd-font
-    brew upgrade --cask font-dejavu-sans-mono-nerd-font
 
     if [ -f ~/.macos ]; then
         . ~/.macos
