@@ -1,8 +1,9 @@
 #!/bin/bash
 
 # cd to the current Finder window
-cdf () {
-    currFolderPath=$( /usr/bin/osascript <<"    EOT"
+cdf() {
+  currFolderPath=$(
+    /usr/bin/osascript << "    EOT"
         tell application "Finder"
             try
                 set currFolder to (folder of the front window as alias)
@@ -12,38 +13,38 @@ cdf () {
             POSIX path of currFolder
         end tell
     EOT
-    )
-    echo "cd to \"$currFolderPath\""
-    cd "$currFolderPath"
+  )
+  echo "cd to \"$currFolderPath\""
+  cd "$currFolderPath"
 }
 
 # 'quit iTunes' to kill the app
-quit () {
-    for app in $*; do
-        osascript -e 'quit app "'$app'"'
-    done
+quit() {
+  for app in $*; do
+    osascript -e 'quit app "'$app'"'
+  done
 }
 
 # sync music from home
-msync () {
-    aws s3 sync --acl private --storage-class REDUCED_REDUNDANCY --sse --exclude '*.DS_Store' --exclude '*/Movies' --exclude '*/iTunes U' "/Volumes/Persepolis/The Vault/1. Music" "s3://daboombox/1. Music/"
+msync() {
+  aws s3 sync --acl private --storage-class REDUCED_REDUNDANCY --sse --exclude '*.DS_Store' --exclude '*/Movies' --exclude '*/iTunes U' "/Volumes/Persepolis/The Vault/1. Music" "s3://daboombox/1. Music/"
 }
 
 # mount s3 music
-mmount () {
-    s3fs daboombox ~/s3 -o passwd_file=~/.aws/passwd-s3fs -o uid=`id -u` -o gid=`id -g` -o volname=DABOOMBOX -o host=http://s3-us-west-1.amazonaws.com -o noappledouble -o nobrowse -o max_stat_cache_size=100000 -o use_cache=/tmp/s3fs
+mmount() {
+  s3fs daboombox ~/s3 -o passwd_file=~/.aws/passwd-s3fs -o uid=$(id -u) -o gid=$(id -g) -o volname=DABOOMBOX -o host=http://s3-us-west-1.amazonaws.com -o noappledouble -o nobrowse -o max_stat_cache_size=100000 -o use_cache=/tmp/s3fs
 }
 
-swap () {
-	local TMPFILE=tmp.$$
-	mv "$1" $TMPFILE
-	mv "$2" "$1"
-	mv $TMPFILE "$2"
+swap() {
+  local TMPFILE=tmp.$$
+  mv "$1" $TMPFILE
+  mv "$2" "$1"
+  mv $TMPFILE "$2"
 }
 
 # update the locate db
-updatelocate () {
-    sudo /usr/libexec/locate.updatedb
+updatelocate() {
+  sudo /usr/libexec/locate.updatedb
 }
 
 # Git magic
@@ -51,104 +52,86 @@ updatelocate () {
 # Show files that have been added, modified, changed, or renamed in the
 # current branch (in a commit)
 function bchanged {
-    git diff-tree --name-only -r $(git merge-base origin/master HEAD) HEAD | sort | uniq
+  git diff-tree --name-only -r $(git merge-base origin/master HEAD) HEAD | sort | uniq
 }
 
 # Filter to only the python files that have been changed in the branch
 function bpychanged {
-    bchanged | grep "\.py$"
+  bchanged | grep "\.py$"
 }
 
 # Run pylint on all files that have been modified in the
 # working directory
 function pychk {
-    git status --porcelain | grep "\.py$" | awk '{print $2}' | xargs pylint
+  git status --porcelain | grep "\.py$" | awk '{print $2}' | xargs pylint
 }
 
 # Run pylint on all files that have commited modifications in this branch
 function bpychk {
-    for file in "$(bpychanged)"; do
-        echo $file
-        [ -e $file ] && pylint $file
-    done
+  for file in "$(bpychanged)"; do
+    echo $file
+    [ -e $file ] && pylint $file
+  done
 }
 
-__expand_tilde_by_ref()
-{
-    return 0;
+__expand_tilde_by_ref() {
+  return 0
 }
 
-# This script searches .py files for the provided string arguments and outputs them all fancy-like
-pf () {
-    find . -name "*.py" \
-        ! -regex "./[^/]*templates/.*" \
-        ! -path "./config/locations/city_hoods.py" \
-        ! -path "*htdocs*" \
-        ! -path "*/.*" \
-    | xargs grep -n --exclude="*.svn*" "$@" \
-    | awk -f ~/dotfiles/formatfind.awk \
-    | grep "$@" --color=auto
-}
-
-yf () {
-    find . -name "*.yaml" ! -path "./[^/]*templates/.*" ! -path "*htdocs*" | xargs grep -n --exclude="*.svn*" "$@" | awk -f ~/dotfiles/formatfind.awk | grep "$@" --color=auto
-}
-
-function branches()
-{
-    for k in `git branch | sed 's/^..//'`; do echo -e `git log -1 --pretty=format:"%Cgreen%ci %Cblue%cr%Creset" "$k"`\\t"$k"; done | sort
+function branches() {
+  for k in $(git branch | sed 's/^..//'); do echo -e $(git log -1 --pretty=format:"%Cgreen%ci %Cblue%cr%Creset" "$k")\\t"$k"; done | sort
 }
 
 function task() {
-    if [[ $1 == "context" ]]; then
-        if [[ $2 == "none" ]]; then
-            unset TASK_CONTEXT
-        else
-            export TASK_CONTEXT=$2
-        fi
-        echo $TASK_CONTEXT > ~/.taskrc.d/context || true
-        return
+  if [[ $1 == "context" ]]; then
+    if [[ $2 == "none" ]]; then
+      unset TASK_CONTEXT
+    else
+      export TASK_CONTEXT=$2
     fi
-    if [ ! -z $TASK_CONTEXT ]; then
-        ARG=rc.context=${TASK_CONTEXT}
-    fi
-    command task $ARG "$@"
+    echo $TASK_CONTEXT > ~/.taskrc.d/context || true
+    return
+  fi
+  if [ ! -z $TASK_CONTEXT ]; then
+    ARG=rc.context=${TASK_CONTEXT}
+  fi
+  command task $ARG "$@"
 }
 
 # PS1 stuff
 if [ $CLICOLOR ]; then
-    BLD=$(tput bold)
-	BLK=$(tput setaf 0)
-    RST=$(tput sgr0)
-    RED=$BLD$(tput setaf 1)
-    GRN=$BLD$(tput setaf 2)
-    YLW=$BLD$(tput setaf 3)
-    BLU=$BLD$(tput setaf 4)
-    MAG=$(tput setaf 5)
-    CYN=$(tput setaf 6)
-    WHT=$BLD$(tput setaf 7)
-	BRED=$(tput setaf 9) # bright red
-	BGRN=$(tput setaf 10) # bright green
-	BYLW=$(tput setaf 11) # bright yellow
-	BBLU=$(tput setaf 12) # bright blue
-	BMAG=$(tput setaf 13) # bright magenta
-	BCYN=$(tput setaf 14) # bright cyan
+  BLD=$(tput bold)
+  BLK=$(tput setaf 0)
+  RST=$(tput sgr0)
+  RED=$BLD$(tput setaf 1)
+  GRN=$BLD$(tput setaf 2)
+  YLW=$BLD$(tput setaf 3)
+  BLU=$BLD$(tput setaf 4)
+  MAG=$(tput setaf 5)
+  CYN=$(tput setaf 6)
+  WHT=$BLD$(tput setaf 7)
+  BRED=$(tput setaf 9)  # bright red
+  BGRN=$(tput setaf 10) # bright green
+  BYLW=$(tput setaf 11) # bright yellow
+  BBLU=$(tput setaf 12) # bright blue
+  BMAG=$(tput setaf 13) # bright magenta
+  BCYN=$(tput setaf 14) # bright cyan
 else
-    BLD=""
-    RST=""
-    RED=""
-    GRN=""
-    YLW=""
-    BLU=""
-    MAG=""
-    CYN=""
-    WHT=""
-	BRED=""
-	BGRN=""
-    BYLW=""
-    BBLU=""
-    BMAG=""
-    BCYN=""
+  BLD=""
+  RST=""
+  RED=""
+  GRN=""
+  YLW=""
+  BLU=""
+  MAG=""
+  CYN=""
+  WHT=""
+  BRED=""
+  BGRN=""
+  BYLW=""
+  BBLU=""
+  BMAG=""
+  BCYN=""
 fi
 
 declare -a COLOR_ARRAY
@@ -174,45 +157,45 @@ COLOR_ARRAY[16]=$(tput setaf 00)
 HOST_COLOR=${COLOR_ARRAY[$(hostname -s | shasum | head -c 1 | xargs printf '0x%s' | xargs printf '%d')]}
 USER_COLOR=${COLOR_ARRAY[$(echo $USER | shasum | head -c 1 | xargs printf '0x%s' | xargs printf '%d')]}
 
-__git_ps1 () {
-    local git="$(git rev-parse --git-dir 2>/dev/null)"
-    if [ -n "$git" ]; then
-        local r
-        local branch
-        if [ -d "$git/../.dotest" ]; then
-            rev="|AM/REBASE"
-            branch="$(git symbolic-ref HEAD 2>/dev/null)"
-        elif [ -f "$git/.dotest-merge/interactive" ]; then
-            rev="|REBASE-i"
-            branch="$(cat $git/.dotest-merge/head-name)"
-        elif [ -d "$git/.dotest-merge" ]; then
-            rev="|REBASE-m"
-            branch="$(cat $git/.dotest-merge/head-name)"
-        elif [ -f "$git/MERGE_HEAD" ]; then
-            rev="|MERGING"
-            branch="$(git symbolic-ref HEAD 2>/dev/null)"
-        else
-            if [ -f $git/BISECT_LOG ]; then
-                rev="|BISECTING"
-            fi
-            if ! branch="$(git symbolic-ref HEAD 2>/dev/null)"; then
-                branch="$(cut -c1-7 $git/HEAD)..."
-            fi
-        fi
-
-        if [ -n "$1" ]; then
-            printf "$1" "${branch##refs/heads/}$rev"
-        else
-            printf " (%s)" "${branch##refs/heads/}$rev"
-        fi
+__git_ps1() {
+  local git="$(git rev-parse --git-dir 2> /dev/null)"
+  if [ -n "$git" ]; then
+    local r
+    local branch
+    if [ -d "$git/../.dotest" ]; then
+      rev="|AM/REBASE"
+      branch="$(git symbolic-ref HEAD 2> /dev/null)"
+    elif [ -f "$git/.dotest-merge/interactive" ]; then
+      rev="|REBASE-i"
+      branch="$(cat $git/.dotest-merge/head-name)"
+    elif [ -d "$git/.dotest-merge" ]; then
+      rev="|REBASE-m"
+      branch="$(cat $git/.dotest-merge/head-name)"
+    elif [ -f "$git/MERGE_HEAD" ]; then
+      rev="|MERGING"
+      branch="$(git symbolic-ref HEAD 2> /dev/null)"
+    else
+      if [ -f $git/BISECT_LOG ]; then
+        rev="|BISECTING"
+      fi
+      if ! branch="$(git symbolic-ref HEAD 2> /dev/null)"; then
+        branch="$(cut -c1-7 $git/HEAD)..."
+      fi
     fi
+
+    if [ -n "$1" ]; then
+      printf "$1" "${branch##refs/heads/}$rev"
+    else
+      printf " (%s)" "${branch##refs/heads/}$rev"
+    fi
+  fi
 }
 
-day () {
-    $HOME/src/gcalcli/env/bin/gcalcli agenda --calendar=bryce@retain.ai --details url --details length --details location --color-owner=red --color-freebusy=blue --nodeclined 7am 10p
+day() {
+  $HOME/src/gcalcli/env/bin/gcalcli agenda --calendar=bryce@retain.ai --details url --details length --details location --color-owner=red --color-freebusy=blue --nodeclined 7am 10p
 }
 
-week () {
-    WIDTH=$(echo "(`tput cols` - 6) / 5" | bc)
-    $HOME/src/gcalcli/env/bin/gcalcli calw --calendar=bryce@retain.ai--width=$WIDTH --noweekend --nodeclined
+week() {
+  WIDTH=$(echo "($(tput cols) - 6) / 5" | bc)
+  $HOME/src/gcalcli/env/bin/gcalcli calw --calendar=bryce@retain.ai--width=$WIDTH --noweekend --nodeclined
 }
