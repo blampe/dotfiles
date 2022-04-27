@@ -120,7 +120,7 @@ let g:terraform_fmt_on_save=1
 " Syntax highlighting and color.
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 set background=dark
-colorscheme jellybeans
+silent! colorscheme jellybeans
 highlight Pmenu ctermbg=NONE ctermfg=white guibg=NONE guifg=white
 
 filetype off                  " need to turn this off fof the next line to work
