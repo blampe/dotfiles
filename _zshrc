@@ -153,9 +153,6 @@ export TASK_CONTEXT=`cat ~/.taskrc.d/context || echo life`
 export HOMEBREW_NO_AUTO_UPDATE=1
 export HOMEBREW_NO_INSTALLED_DEPENDENTS_CHECK=1
 
-# Generated for envman. Do not edit.
-[ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
-
 which direnv >/dev/null && emulate zsh -c "$(direnv hook zsh)"
 which kubectl >/dev/null && source <(kubectl completion zsh)
 which plz >/dev/null && source <(plz --completion_script)
