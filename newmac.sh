@@ -101,10 +101,9 @@ if [ ! "$(which gcc)" ]; then
   exit 1
 fi
 
-if [ ! -x $BREW ]; then
+if [ ! -x $BREW ]; then # TODO(Darwin)
   echo 'installing homebrew'
-  echo export PATH="/usr/local/bin:\$PATH" >> ~/.bash_profile
-  /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 fi
 
 echo 'updating homebrew'
