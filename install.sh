@@ -41,6 +41,10 @@ if [[ `uname` =~ "Darwin" ]]; then
 
     echo "installing fonts..."
     brew tap homebrew/cask-fonts
-    brew cask upgrade font-fira-code-nerd-font
-    brew cask upgrade font-dejavu-sans-mono-nerd-font
+    brew upgrade --cask font-fira-code-nerd-font
+    brew upgrade --cask font-dejavu-sans-mono-nerd-font
+
+    if [ -f ~/.macos ]; then
+        . ~/.macos
+    fi
 fi

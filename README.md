@@ -1,29 +1,19 @@
-## Files
-.vim
-    directory of file type configurations and plugins
-.vimrc
-    my vim configuration
-.screenrc
-    my screen configuration
+# Dotfiles
+
+These are my dotfiles. There are many like them, but these are mine.
+
+My dotfiles are my best friend. They are my life. I must master them as I must
+master my life.
+
 
 ## Instructions
-### Creating source files
-Any file which matches the shell glob `_*` will be linked into `$HOME` as a symlink with the first `_`  replaced with a `.`
 
-For example:
+You can clone the repo and run `./install.sh`, however recent versions of macOS
+require you have XCode Developer Tools be able to even invoke `git`.
 
-    _zshrc
+For a "cold boot", run the `install.sh` script directly and it will
+handle installing Developer Tools in parallel with everything else.
 
-becomes
-
-    ${HOME}/.zshrc
-
-### Installing source files
-It's as simple as running:
-
-    ./install.sh
-
-From this top-level directory.
-
-## Requirements
-* zsh
+```
+$ bash -c "$(curl -fsSL https://raw.githubusercontent.com/blampe/dotfiles/refactor/install.sh)"
+```
