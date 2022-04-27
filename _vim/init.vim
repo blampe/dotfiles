@@ -24,6 +24,9 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-ruby/vim-ruby', {'for': 'ruby'} " Language support
 Plug 'vim-scripts/camelcasemotion' " Navigation within words
 Plug 'vimwiki/vimwiki' " Smart markdown wikis
+Plug 'hashivim/vim-terraform'
+Plug 'google/vim-maktaba'
+Plug 'bazelbuild/vim-bazel'
 
 " colorschemes{{{
 Plug 'Lokaltog/vim-distinguished'
@@ -105,6 +108,10 @@ let g:airline_powerline_fonts = 1
 let g:airline_extensions = ['branch']
 set noshowmode
 "}}}
+
+" hashivim/vim-terraform
+let g:terraform_align=1
+let g:terraform_fmt_on_save=1
 
 " ===========================================================
 " EDITOR SETTINGS
