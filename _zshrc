@@ -98,7 +98,9 @@ plugins=(
     command-not-found
     fast-syntax-highlighting
     fzf
+    gcloud
     git
+    history
     lxd
     rbenv
     taskwarrior
