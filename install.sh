@@ -18,21 +18,9 @@ function link_file {
 	ln -sfn "$source" "$target"
 }
 
-# Grab developer tools in parallel
-if [ ! "$(which gcc)" ]; then
-  echo 'installing developer tools'
-  xcode-select --install >/dev/null &
-fi
-
-
 if [ ! "$(which brew)" ]; then # TODO(Darwin)
   echo 'installing homebrew'
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-fi
-
-if [ ! "$(which git)" ]; then
-  echo 'installing git'
-  brew install git
 fi
 
 if [ ! -d $HOME/src ]; then
@@ -42,9 +30,14 @@ fi
 
 pushd $HOME/src
 
+if [ ! $HOME/.ssh/known_hosts ]; then
+    mkdir -p $HOME/.ssh
+    ssh-keyscan github.com > $HOME/.ssh/known_hosts
+fi
+
 if [ ! -d $HOME/src/dotfiles ]; then
   echo 'cloning dotfiles into ~/src'
-  git clone git@github.com:blampe/dotfiles.git
+  git clone https://github.com/blampe/dotfiles.git
   cd dotfiles # TODO(remove)
   git checkout origin/refactor # TODO(remove)
 fi

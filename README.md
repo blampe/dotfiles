@@ -11,8 +11,8 @@ master my life.
 You can clone the repo and run `./install.sh`, however recent versions of macOS
 require you have XCode Developer Tools be able to even invoke `git`.
 
-For a "cold boot", run the `install.sh` script directly and it will
-handle installing Developer Tools in parallel with everything else.
+For a "cold boot", run the `install.sh` script directly and it will piggyback
+on `brew` to handle installing Developer Tools along with everything else.
 
 ```
 $ bash -c "$(curl -fsSL https://raw.githubusercontent.com/blampe/dotfiles/refactor/install.sh)"
