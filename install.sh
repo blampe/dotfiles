@@ -19,8 +19,9 @@ function link_file {
 }
 
 if [ ! "$(which brew)" ]; then # TODO(Darwin)
-  echo 'installing homebrew'
-  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  echo 'installing homebrew (requires sudo)'
+  /usr/bin/sudo -v
+  /bin/bash -c "NONINTERACTIVE=1 $(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 fi
 
 if [ ! -d $HOME/src ]; then
