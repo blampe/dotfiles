@@ -11,6 +11,7 @@ fzf
 geoip
 git
 go
+google-cloud-sdk
 htop-osx
 jq
 kubectl
@@ -20,6 +21,7 @@ libxml2
 libxslt
 libyaml
 lzo
+mas
 memcached
 moreutils
 mysql

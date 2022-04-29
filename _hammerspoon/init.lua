@@ -1,6 +1,8 @@
-hyper = {"ctrl", "alt", "cmd"}
+Hyper = {"ctrl", "alt", "cmd"}
 
-hs.window.animationDuration = 0.3
+hs.loadSpoon("ReloadConfiguration")
 
-require('position')
 require('clipboard')
+require('position')
+require('screens')
+require('windows')

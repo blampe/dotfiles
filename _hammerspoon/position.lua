@@ -15,8 +15,6 @@
 -- OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 -- DEALINGS IN THE SOFTWARE.
 
-hs.window.animationDuration = 0
-
 local sizes = {2, 1}
 local fullScreenSizes = {1, 4/3, 2}
 
@@ -109,7 +107,7 @@ function fullDimension(dim)
   end
 end
 
-hs.hotkey.bind(hyper, "down", function ()
+hs.hotkey.bind(Hyper, "down", function ()
   pressed.down = true
   if pressed.up then
     fullDimension('h')
@@ -123,7 +121,7 @@ end, function ()
   pressed.down = false
 end)
 
-hs.hotkey.bind(hyper, "right", function ()
+hs.hotkey.bind(Hyper, "right", function ()
   pressed.right = true
   if pressed.left then
     fullDimension('w')
@@ -137,7 +135,7 @@ end, function ()
   pressed.right = false
 end)
 
-hs.hotkey.bind(hyper, "left", function ()
+hs.hotkey.bind(Hyper, "left", function ()
   pressed.left = true
   if pressed.right then
     fullDimension('w')
@@ -151,7 +149,7 @@ end, function ()
   pressed.left = false
 end)
 
-hs.hotkey.bind(hyper, "up", function ()
+hs.hotkey.bind(Hyper, "up", function ()
   pressed.up = true
   if pressed.down then
       fullDimension('h')
@@ -165,6 +163,6 @@ end, function ()
   pressed.up = false
 end)
 
-hs.hotkey.bind(hyper, "return", function ()
+hs.hotkey.bind(Hyper, "return", function ()
   nextFullScreenStep()
 end)
