@@ -89,7 +89,51 @@ defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 81 "{ena
 defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 82 "{enabled = 0; value = { parameters = (65535, 124, 393216); type = 'standard'; }; }"
 defaults import com.apple.symbolichotkeys "$HOME/Library/Preferences/com.apple.symbolichotkeys.plist"
 
-defaults write com.apple.dock persistent-apps -array-add "<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/Applications/iTerm.app</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>"
+# Show hidden apps as faded in the dock
+defaults write com.apple.dock showhidden -bool TRUE
+
+# Dark mode
+defaults write -g AppleInterfaceStyle Dark
+
+# Hide the menu bar
+defaults write -g _HIHideMenuBar 1
+
+# Show the path bar in Finder
+defaults write com.apple.finder ShowPathbar -bool true
+
+# Disable walpaper tinting on windows
+defaults write -g AppleReduceDesktopTinting -int 1
+
+# Small sidebar icons
+defaults write -g NSTableViewDefaultSizeMode -int 1
+
+# Get a black menu bar & dock
+sudo defaults write com.apple.universalaccess reduceTransparency -bool true
+
+# Set screen saver to Aerial
+defaults -currentHost write com.apple.screensaver moduleDict -dict moduleName Aerial path "$HOME/Library/Screen Savers/Aerial.saver" type 0
+
+#curl https://media.macosicons.com/parse/files/macOSicons/7972c5733e050b2710da0c53b1a693ad_Brave_Browser.icns > /Applications/Brave\ Browser.app/Contents/Resources/app.icns
+#curl https://media.macosicons.com/parse/files/macOSicons/cfdc547031626b367796c9199b7ef5c3_Slack.icns > /Applications/Slack.app/Contents/Resources/electron.icns
+#curl https://media.macosicons.com/parse/files/macOSicons/61f2c5d7b372caf18db7fe52c6288cf1_Visual_Studio_Code.icns > /Applications/VSCodium.app/Contents/Resources/VSCodium.icns
+
+
+# Arrange the Dock icons
+__dock_item() {
+    printf '%s%s%s%s%s' \
+           '<dict><key>tile-data</key><dict><key>file-data</key><dict>' \
+           '<key>_CFURLString</key><string>' \
+           "$1" \
+           '</string><key>_CFURLStringType</key><integer>0</integer>' \
+           '</dict></dict></dict>'
+}
+
+defaults write com.apple.dock persistent-apps -array \
+    "$(__dock_item /Applications/iTerm.app)" \
+    "$(__dock_item /Applications/Brave\ Browser.app)" \
+    "$(__dock_item /Applications/Slack.app)" \
+    "$(__dock_item /System/Applications/Utilities/Activity\ Monitor.app)"
+
 
 killall Safari 2>/dev/null || true
 killall Finder
