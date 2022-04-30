@@ -12,17 +12,19 @@ endfunction
 
 
 let g:coc_global_extensions = [
+            \ 'coc-diagnostic',
             \ 'coc-docker',
             \ 'coc-eslint',
-            \ 'coc-diagnostic',
             \ 'coc-git',
             \ 'coc-go',
             \ 'coc-html',
             \ 'coc-json',
             \ 'coc-prettier',
-            \ 'coc-python',
+            \ 'coc-pyright',
+            \ 'coc-sh',
             \ 'coc-snippets',
             \ 'coc-solargraph',
+            \ 'coc-texlab',
             \ 'coc-tsserver',
             \ 'coc-yaml',
             \ ]
@@ -33,22 +35,24 @@ set shortmess+=c
 inoremap <silent><expr> <c-space> coc#refresh()
 
 " <Tab>: completion forward
+" Use tab for trigger completion with characters ahead and navigate.
+" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
+" other plugin before putting this into your config.
 inoremap <silent><expr> <TAB>
-            \ pumvisible() ? "\<C-N>" :
-            \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
-            \ <SID>check_back_space() ? "\<TAB>" :
-            \ coc#refresh()
-
-" <S-Tab>: completion back
-inoremap <silent><expr> <S-Tab> pumvisible() ? "\<C-P>" : "\<C-H>"
-
-" <CR>: confirm completion, or insert <CR>
-inoremap <expr> <CR> pumvisible() ? "\<C-Y>" : "\<CR>"
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+      "\ coc#expandableOrJumpable() ? \"\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
 function! s:check_back_space() abort
     let col = col('.') - 1
     return !col || getline('.')[col - 1] =~ '\s'
 endfunction
+
+" Make <CR> auto-select the first completion item and notify coc.nvim to
+" format on enter, <cr> could be remapped by other vim plugin
+" $inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : \"\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 " Use `[q` and `]q` to navigate diagnostics
 " Use `:CocDiagnostics` to get all diagnostics of current buffer in

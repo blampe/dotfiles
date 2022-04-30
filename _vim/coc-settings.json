@@ -1,11 +1,4 @@
 {
-  "diagnostic.checkCurrentLine": true,
-  "diagnostic.enable": true,
-  "diagnostic.locationlistUpdate": true,
-  "diagnostic.messageDelay": 0,
-
-  "git.addGBlameToVirtualText": true,
-
   "coc.preferences.formatOnSaveFiletypes": [
     "bash",
     "css",
@@ -18,9 +11,15 @@
     "ruby",
     "sh",
     "terraform",
+    "tex",
     "typescript",
     "yaml"
   ],
+
+  "diagnostic.checkCurrentLine": true,
+  "diagnostic.enable": true,
+  "diagnostic.locationlistUpdate": true,
+  "diagnostic.messageDelay": 0,
 
   "diagnostic-languageserver.filetypes": {
     "sh": "shellcheck"
@@ -34,6 +33,10 @@
       "args": ["-i", "2", "-bn", "-ci", "-sr"]
     }
   },
+
+  "git.addGBlameToVirtualText": true,
+
+  "go.goplsOptions": {},
 
   "languageserver": {
     "golang": {
@@ -55,11 +58,24 @@
   },
 
   "python.formatting.provider": "black",
+  "python.formatting.blackArgs": ["--line-length", "79"],
   "python.linting.pylintEnabled": false,
   "python.linting.flake8Enabled": true,
 
   "prettier.disableSuccessMessage": true,
 
   "solargraph.diagnostics": true,
-  "solargraph.hover": true
+  "solargraph.hover": true,
+
+  "suggest.numberSelect": false,
+  "suggest.removeDuplicateItems": true,
+
+  "texlab.build.onSave": true,
+  "texlab.build.executable": "/Library/TeX/texbin/pdflatex",
+  "texlab.chktex.onEdit": true,
+  "texlab.latexindent.modifyLineBreaks": true,
+
+  "yaml.schemas": {
+    "kubernetes": "/*.yaml"
+  }
 }

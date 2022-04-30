@@ -11,12 +11,16 @@ Plug 'fatih/vim-go', {'for': 'go'} " Language support
 Plug 'honza/vim-snippets' " Snippets
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim' " Fuzzy search
+Plug 'laher/fuzzymenu.vim'
 Plug 'mhinz/vim-startify' " MRU startup screen
 Plug 'moll/vim-node', {'for': 'javascript'} " Language support
+Plug 'lervag/vimtex' " Language support
 Plug 'rodjek/vim-puppet', {'for': 'puppet'} " Language support
+Plug 'rstacruz/vim-closer' " Smart closing brackets
 Plug 'scrooloose/nerdcommenter' " Smart comment blocks
 Plug 'solarnz/thrift.vim', {'for': 'thrift'} " Language support
 Plug 'tbabej/taskwiki', {'do': 'pip3 install --upgrade git+git://github.com/tbabej/tasklib@develop'} " Taskwarrior TODO lists
+Plug 'tpope/vim-endwise' " Smart closing keywords
 Plug 'tpope/vim-rails', {'for': 'ruby'} " Language support
 Plug 'tpope/vim-sensible' " Sensible defaults for basics
 Plug 'tpope/vim-unimpaired' " ]* and *[ helper commands
@@ -44,6 +48,12 @@ if has('nvim')
 else
     source ~/.vim/custom/vanilla.vim
 endif
+
+if has('g:vscode')
+    source ~/.vim/custom/vscode.vim
+endif
+
+source ~/.vim/custom/navigation.vim
 
 call plug#end()
 
@@ -100,7 +110,7 @@ let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
 let g:go_fmt_command = "goimports"
 let g:go_fmt_fail_silently = 1
-let g:go_def_mode = 'godef'
+let g:go_def_mapping_enabled = 0 " Handled by coc-go
 "}}}
 
 " vim-airline/vim-airline{{{
@@ -137,7 +147,7 @@ endif
 " Don't show the preview window on autocompletions.
 " set completeopt=menu,menuone,preview,noselect,noinsert
 "set completeopt=menuone,longest
-set completeopt=noinsert,menuone,noselect,preview
+"set completeopt=noinsert,menuone,noselect,preview
 
 " Keep a small completion window.
 set pumheight=9
@@ -146,9 +156,6 @@ set foldmethod=marker
 
 " Multiple windows, when created, are equal in size.
 set equalalways
-
-" Set where sp and vsp open new windows.
-set splitbelow splitright
 
 " Display line numbers on the left side.
 set number
@@ -163,10 +170,6 @@ set softtabstop=4
 " Use spaces, not tabs, for autoindent/tab key.
 set expandtab
 
-" Have a line indicate the cursor location.
-set cursorline
-set cursorcolumn
-
 " Don't wrap text at the edge of the window.
 set nowrap
 
@@ -178,9 +181,6 @@ set showmatch
 
 " (for only 1 second).
 set matchtime=1
-
-" Default to using case insensitive searches,
-set ignorecase
 
 " Highlight searches by default.
 set hlsearch
@@ -199,20 +199,6 @@ set confirm
 
 " Disable all bells. I hate ringing/flashing.
 set vb t_vb=
-
-" ===========================================================
-" KEY BINDINGS
-" ===========================================================
-
-" Inserts new line without going into insert mode.
-map <S-CR> O<ESC>
-map <CR> o<ESC>
-
-" Change the leader to be a comma vs slash.
-let mapleader=","
-
-" Toggle invisible chars
-map <leader>i :set list!<CR>
 
 " ===========================================================
 " BUFFERS AND FILE TYPES
@@ -242,3 +228,4 @@ autocmd Filetype markdown setlocal spell
 autocmd Filetype vimwiki setlocal spell
 autocmd FileType gitcommit setlocal spell
 autocmd filetype crontab setlocal nobackup nowritebackup
+autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab

@@ -1,12 +1,13 @@
-*logs*
 *.log
-*~
 *.py[co]
+*logs*
+*~
 .*.sw[nop]
 .DS_Store
 _config/karabiner/automatic_backups
 _task/*
-_taskrc.d/local
 _taskrc.d/context
+_taskrc.d/local
 _vim/.netrwhist
 _vim/bundle
+_vim/view
