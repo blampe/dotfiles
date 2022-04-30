@@ -4,7 +4,7 @@ include ~/.taskrc.d/local
 include ~/.taskrc.d/theme
 
 context.work=+work
-context.life=-work
+context.life=-work project:Life
 
 report.next.sort=urgency+
 report.next.filter=status:pending

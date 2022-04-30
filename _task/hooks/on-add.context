@@ -46,7 +46,7 @@ def get_config():
 def process(task):
     task.setdefault("tags", [])
 
-    if 'project' in task:
+    if task.get('project'):
         task['tags'] += [task['project'].lower().replace(" ", "_")]
         return
 
