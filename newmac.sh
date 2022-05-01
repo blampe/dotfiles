@@ -134,9 +134,11 @@ $BREW install fasd || true
 $BREW install fzf || true
 $BREW install geoip || true
 $BREW install go || true
+$BREW install gofumpt || true
 $BREW install htop-osx || true
 $BREW install jq || true
 $BREW install kubectl || true
+$BREW install latexindent || true
 $BREW install libksba || true
 $BREW install libmemcached || true
 $BREW install libxml2 || true
@@ -178,6 +180,13 @@ $BREW cleanup
 
 defaults write com.apple.dock persistent-apps -array-add "<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/Applications/iTerm.app</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>"
 killall Dock
+sudo /System/Library/PrivateFrameworks/Apple80211.framework/Versions/A/Resources/airport prefs joinMode=Strongest
+
+# Reduce motion
+defaults write NSGlobalDomain NSAutomaticWindowAnimationsEnabled -bool false
+
+# Instance switching between spaces
+defaults write com.apple.dock workspaces-edge-delay -float 0.1
 
 if [ ! "$(which ipython)" ]; then
   echo 'installing ipython'
