@@ -1,0 +1,94 @@
+{
+  "[go]": {
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": true
+    },
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "golang.go"
+  },
+  "[json]": {
+    "editor.codeActionsOnSave": {
+      "source.fixAll": true,
+      "source.fixAll.sortJSON": true,
+      "source.formatOnSave": true
+    },
+    "editor.defaultFormatter": "richie5um2.vscode-sort-json"
+  },
+  "breadcrumbs.enabled": false,
+  "customizeUI.activityBar": "bottom",
+  "gitlens.hovers.avatars": false,
+  "customizeUI.activityBarHideSettings": true,
+  "customizeUI.statusBarPosition": "under-panel",
+  "customizeUI.stylesheet": {
+    ".editor-actions": "height: var(--tab-height) !important; line-height: var(--tab-height) !important;",
+    ".tabs-container .monaco-icon-description-container": "display: none;",
+    ".tabs-container .monaco-icon-label": "height: var(--tab-height) !important; line-height: var(--tab-height) !important; font-size: var(--font-size-tab-title); !important",
+    ".tabs-container .monaco-icon-label:before": "height: var(--tab-height) !important; line-height: var(--tab-height) !important;",
+    ".tabs-container .tab": "height: var(--tab-height) !important; line-height: var(--tab-height) !important;",
+    ".tabs-container .tab-actions": "display: none; !important",
+    ":root": "--tab-height: 26px; --font-size-tab-title: 11px;"
+  },
+  "customizeUI.titleBar": "frameless",
+  "editor.glyphMargin": true,
+  "editor.tabCompletion": "on",
+  "editor.codeActionsOnSave": {
+    "source.fixAll": true,
+    "source.formatOnSave": true,
+    "source.organizeImports": true
+  },
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.folding": false,
+  "editor.fontSize": 11,
+  "editor.formatOnSave": true,
+  "editor.minimap.enabled": false,
+  "editor.quickSuggestions": {
+    "comments": "on",
+    "other": "on",
+    "strings": "on"
+  },
+  "editor.renderWhitespace": "boundary",
+  "editor.suggest.insertMode": "replace",
+  "explorer.confirmDelete": false,
+  "explorer.confirmDragAndDrop": false,
+  "gitlens.blame.avatars": false,
+  "gitlens.codeLens.enabled": false,
+  "gitlens.defaultDateStyle": "absolute",
+  "gitlens.heatmap.toggleMode": "file",
+  "go.formatTool": "gofumports",
+  "go.lintOnSave": "file",
+  "go.lintTool": "revive",
+  "gopls": {
+    "formatting.gofumpt": true,
+    "ui.diagnostic.staticcheck": true,
+    "ui.semanticTokens": true
+  },
+  "json.format.enable": true,
+  "oneDarkPro.vivid": true,
+  "problems.showCurrentInStatus": true,
+  "telemetry.telemetryLevel": "off",
+  "terminal.integrated.fontSize": 11,
+  "vscode-neovim.logLevel": "debug",
+  "vscode-neovim.neovimExecutablePaths.darwin": "/usr/local/bin/nvim",
+  "vscode-neovim.neovimInitVimPaths.darwin": "~/.vim/custom/vscode.vim",
+  "vscode-neovim.revealCursorScrollLine": true,
+  "vscode-neovim.textDecorationsAtTop": true,
+  "window.autoDetectColorScheme": true,
+  "window.newWindowDimensions": "maximized",
+  "window.titleBarStyle": "native",
+  "workbench.colorCustomizations": {
+    "[Solarized Dark]": {
+      "editor.background": "#111111"
+    }
+  },
+  "workbench.colorTheme": "GitHub Dark Default",
+  "workbench.editor.restoreViewState": true,
+  "workbench.editor.tabSizing": "shrink",
+  "workbench.iconTheme": "Monokai Pro Icons",
+  "workbench.preferredDarkColorTheme": "GitHub Dark Default",
+  "workbench.preferredHighContrastColorTheme": "GitHub Dark High Contrast",
+  "workbench.preferredHighContrastLightColorTheme": "GitHub Light Default",
+  "workbench.preferredLightColorTheme": "GitHub Light Default",
+  "workbench.editorAssociations": {
+    "*.plist": "default"
+  }
+}
