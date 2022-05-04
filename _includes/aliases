@@ -8,6 +8,8 @@ alias lal='ls -al'
 
 alias activate='source .env/bin/activate'
 
+alias rg="rg --smart-case"
+
 if [ -x /usr/local/bin/nvim ]; then
     alias vim='nvim'
 fi
