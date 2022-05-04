@@ -3,8 +3,8 @@
     "editor.codeActionsOnSave": {
       "source.organizeImports": true
     },
-    "editor.formatOnSave": true,
-    "editor.defaultFormatter": "golang.go"
+    "editor.defaultFormatter": "golang.go",
+    "editor.formatOnSave": true
   },
   "[json]": {
     "editor.codeActionsOnSave": {
@@ -14,9 +14,13 @@
     },
     "editor.defaultFormatter": "richie5um2.vscode-sort-json"
   },
+  "[python]": {
+    "editor.defaultFormatter": "ms-python.python",
+    "editor.wordBasedSuggestions": false,
+    "gitlens.codeLens.symbolScopes": ["!Module"]
+  },
   "breadcrumbs.enabled": false,
   "customizeUI.activityBar": "bottom",
-  "gitlens.hovers.avatars": false,
   "customizeUI.activityBarHideSettings": true,
   "customizeUI.statusBarPosition": "under-panel",
   "customizeUI.stylesheet": {
@@ -29,8 +33,6 @@
     ":root": "--tab-height: 26px; --font-size-tab-title: 11px;"
   },
   "customizeUI.titleBar": "frameless",
-  "editor.glyphMargin": true,
-  "editor.tabCompletion": "on",
   "editor.codeActionsOnSave": {
     "source.fixAll": true,
     "source.formatOnSave": true,
@@ -40,6 +42,7 @@
   "editor.folding": false,
   "editor.fontSize": 11,
   "editor.formatOnSave": true,
+  "editor.glyphMargin": true,
   "editor.minimap.enabled": false,
   "editor.quickSuggestions": {
     "comments": "on",
@@ -48,12 +51,14 @@
   },
   "editor.renderWhitespace": "boundary",
   "editor.suggest.insertMode": "replace",
+  "editor.tabCompletion": "on",
   "explorer.confirmDelete": false,
   "explorer.confirmDragAndDrop": false,
   "gitlens.blame.avatars": false,
   "gitlens.codeLens.enabled": false,
   "gitlens.defaultDateStyle": "absolute",
   "gitlens.heatmap.toggleMode": "file",
+  "gitlens.hovers.avatars": false,
   "go.formatTool": "gofumports",
   "go.lintOnSave": "file",
   "go.lintTool": "revive",
@@ -83,12 +88,11 @@
   "workbench.colorTheme": "GitHub Dark Default",
   "workbench.editor.restoreViewState": true,
   "workbench.editor.tabSizing": "shrink",
-  "workbench.iconTheme": "Monokai Pro Icons",
+  "workbench.editorAssociations": {
+    "*.plist": "default"
+  },
   "workbench.preferredDarkColorTheme": "GitHub Dark Default",
   "workbench.preferredHighContrastColorTheme": "GitHub Dark High Contrast",
   "workbench.preferredHighContrastLightColorTheme": "GitHub Light Default",
-  "workbench.preferredLightColorTheme": "GitHub Light Default",
-  "workbench.editorAssociations": {
-    "*.plist": "default"
-  }
+  "workbench.preferredLightColorTheme": "GitHub Light Default"
 }
