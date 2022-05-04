@@ -125,6 +125,7 @@ fi
 
 $BREW install ack || true
 $BREW install ag || true
+$BREW install asdf || true
 $BREW install cmake || true
 $BREW install colordiff || true
 $BREW install ctags || true

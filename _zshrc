@@ -94,6 +94,7 @@ ZSH_CUSTOM=~/.zsh
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
+    asdf
     colored-man-pages
     command-not-found
     fast-syntax-highlighting
@@ -160,5 +161,6 @@ which kubectl >/dev/null && source <(kubectl completion zsh)
 which plz >/dev/null && source <(plz --completion_script)
 which terraform >/dev/null && complete -o nospace -C /usr/local/bin/terraform terraform
 which fzf >/dev/null && source ~/.fzf.zsh
+which asdf >/dev/null && source /usr/local/opt/asdf/libexec/asdf.sh
 
 #zprof
