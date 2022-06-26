@@ -1,0 +1,18 @@
+k9s:
+  views:
+    v1/events:
+      sortColumn: LAST SEEN:desc
+    v1/pods:
+      columns:
+        - NAMESPACE
+        - NAME
+        - READY
+        - RESTARTS
+        - CPU
+        - MEM
+        - "%CPU/L"
+        - "%MEM/L"
+        - IP
+        - QOS
+        - NODE
+        - AGE
