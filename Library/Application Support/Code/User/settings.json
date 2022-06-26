@@ -6,6 +6,9 @@
     "editor.defaultFormatter": "golang.go",
     "editor.formatOnSave": true
   },
+  "[typescript]": {
+    "javascript.preferences.importModuleSpecifier": "non-relative"
+  },
   "[json]": {
     "editor.codeActionsOnSave": {
       "source.fixAll": true,
@@ -16,42 +19,48 @@
   },
   "[python]": {
     "editor.defaultFormatter": "ms-python.python",
-    "editor.wordBasedSuggestions": false,
-    "gitlens.codeLens.symbolScopes": ["!Module"]
+    "editor.wordBasedSuggestions": false
   },
-  "breadcrumbs.enabled": false,
+  "breadcrumbs.enabled": true,
+  "breadcrumbs.filePath": "off",
   "customizeUI.activityBar": "bottom",
   "customizeUI.activityBarHideSettings": true,
-  "customizeUI.statusBarPosition": "under-panel",
+  "customizeUI.statusBarPosition": "bottom",
   "customizeUI.stylesheet": {
-    ".editor-actions": "height: var(--tab-height) !important; line-height: var(--tab-height) !important;",
-    ".tabs-container .monaco-icon-description-container": "display: none;",
-    ".tabs-container .monaco-icon-label": "height: var(--tab-height) !important; line-height: var(--tab-height) !important; font-size: var(--font-size-tab-title); !important",
-    ".tabs-container .monaco-icon-label:before": "height: var(--tab-height) !important; line-height: var(--tab-height) !important;",
-    ".tabs-container .tab": "height: var(--tab-height) !important; line-height: var(--tab-height) !important;",
-    ".tabs-container .tab-actions": "display: none; !important",
-    ":root": "--tab-height: 26px; --font-size-tab-title: 11px;"
+    ".actions-container[aria-label='Editor actions'] .action-item .action-label:not([title='More Actions...'])": "display: none !important;"
   },
   "customizeUI.titleBar": "frameless",
+  "debug.console.closeOnEnd": true,
+  "debug.focusWindowOnBreak": false,
+  "debug.internalConsoleOptions": "openOnSessionStart",
+  "debug.openDebug": "neverOpen",
+  "debug.openExplorerOnEnd": false,
   "editor.codeActionsOnSave": {
     "source.fixAll": true,
     "source.formatOnSave": true,
     "source.organizeImports": true
   },
+  "editor.cursorBlinking": "phase",
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.folding": false,
+  "editor.fontFamily": "JetBrainsMono Nerd Font, Menlo, Monaco, 'Courier New', monospace",
+  "editor.fontLigatures": true,
   "editor.fontSize": 11,
   "editor.formatOnSave": true,
   "editor.glyphMargin": true,
+  "editor.hover.above": false,
+  "editor.hover.sticky": true,
   "editor.minimap.enabled": false,
   "editor.quickSuggestions": {
     "comments": "on",
     "other": "on",
     "strings": "on"
   },
-  "editor.renderWhitespace": "boundary",
+  "editor.renderWhitespace": "none",
   "editor.suggest.insertMode": "replace",
   "editor.tabCompletion": "on",
+  "editor.wordWrap": "off",
+  "errorLens.removeLinebreaks": false,
   "explorer.confirmDelete": false,
   "explorer.confirmDragAndDrop": false,
   "gitlens.blame.avatars": false,
@@ -64,14 +73,26 @@
   "go.lintTool": "revive",
   "gopls": {
     "formatting.gofumpt": true,
+    "ui.diagnostic.analyses": {
+      "nilness": true,
+      "shadow": true,
+      "unusedparams": true,
+      "unusedwrite": true,
+      "useany": true
+    },
     "ui.diagnostic.staticcheck": true,
     "ui.semanticTokens": true
   },
   "json.format.enable": true,
   "oneDarkPro.vivid": true,
   "problems.showCurrentInStatus": true,
+  "redhat.telemetry.enabled": false,
   "telemetry.telemetryLevel": "off",
   "terminal.integrated.fontSize": 11,
+  "terminal.integrated.gpuAcceleration": "off",
+  "testing.automaticallyOpenPeekView": "never",
+  "testing.openTesting": "openOnTestFailure",
+  "typescriptHero.imports.organizeOnSave": true,
   "vscode-neovim.logLevel": "debug",
   "vscode-neovim.neovimExecutablePaths.darwin": "/usr/local/bin/nvim",
   "vscode-neovim.neovimInitVimPaths.darwin": "~/.vim/custom/vscode.vim",
@@ -81,12 +102,11 @@
   "window.newWindowDimensions": "maximized",
   "window.titleBarStyle": "native",
   "workbench.colorCustomizations": {
-    "[Solarized Dark]": {
-      "editor.background": "#111111"
-    }
+    // "editor.background": "#111111"
   },
   "workbench.colorTheme": "GitHub Dark Default",
   "workbench.editor.restoreViewState": true,
+  "workbench.editor.showTabs": false,
   "workbench.editor.tabSizing": "shrink",
   "workbench.editorAssociations": {
     "*.plist": "default"

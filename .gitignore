@@ -4,6 +4,7 @@
 *~
 .*.sw[nop]
 .DS_Store
+.vscode
 _config/karabiner/automatic_backups
 _task/*
 _taskrc.d/context
