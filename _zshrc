@@ -161,6 +161,6 @@ which kubectl >/dev/null && source <(kubectl completion zsh)
 which plz >/dev/null && source <(plz --completion_script)
 which terraform >/dev/null && complete -o nospace -C /usr/local/bin/terraform terraform
 which fzf >/dev/null && source ~/.fzf.zsh
-which asdf >/dev/null && source /usr/local/opt/asdf/libexec/asdf.sh
+which asdf >/dev/null && source /usr/local/opt/asdf/libexec/asdf.sh && source "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/zshrc"
 
 #zprof
