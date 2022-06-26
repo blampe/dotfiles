@@ -142,12 +142,14 @@ $BREW install kubectl || true
 $BREW install latexindent || true
 $BREW install libksba || true
 $BREW install libmemcached || true
+$BREW install libvert || true
 $BREW install libxml2 || true
 $BREW install libxslt || true
 $BREW install libyaml || true
 $BREW install lzo || true
 $BREW install memcached || true
 $BREW install moreutils || true
+$BREW install multipass || true
 $BREW install mysql || true
 $BREW install nginx || true
 $BREW install node || true
@@ -182,6 +184,9 @@ $BREW cleanup
 defaults write com.apple.dock persistent-apps -array-add "<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/Applications/iTerm.app</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>"
 killall Dock
 sudo /System/Library/PrivateFrameworks/Apple80211.framework/Versions/A/Resources/airport prefs joinMode=Strongest
+
+# Remove once this is the default
+sudo multipass set local.driver=qemu
 
 # Reduce motion
 defaults write NSGlobalDomain NSAutomaticWindowAnimationsEnabled -bool false
