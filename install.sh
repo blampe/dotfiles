@@ -18,6 +18,12 @@ function link_file {
   ln -sfn "$source" "$target"
 }
 
+if [[ -eq "$(uname -p)" "arm" ]] ; then
+    BREW=/opt/homebrew/bin/brew
+else
+    BREW=/usr/local/bin/brew
+fi
+
 if ! [[ -e "/Library/Developer/CommandLineTools/usr/bin/git" ]]
 then
   # This temporary file prompts the 'softwareupdate' utility to list the Command Line Tools
@@ -42,11 +48,11 @@ then
   sudo "/bin/rm" "-f" "${clt_placeholder}" "${brew_placeholder}"
 fi &
 
-if [ ! "$(which brew)" ]; then # TODO(Darwin)
+if ! command -v $BREW ; then # TODO(Darwin)
   echo 'installing homebrew (requires sudo)'
   /usr/bin/sudo -v
-  /bin/bash -c "NONINTERACTIVE=1 $(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-  brew install git
+  /bin/bash -c "NONINTERACTIVE=1 $(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/9d6f09136c472978b4b18294d895010077008744/install.sh)"
+  $BREW install git
 fi
 
 if [ ! -d $HOME/src ]; then
@@ -73,7 +79,7 @@ pushd $HOME/src/dotfiles
 
 if [ $CASKS ] ; then
   for tap in $(cat brew/taps); do
-    brew tap $tap
+    $BREW tap $tap
   done
 fi
 
@@ -82,8 +88,8 @@ INSTALLED="$(for fullname in $(brew list -1 --full-name); do basename $fullname;
 FORMULAE=($(comm -23 <(cat brew/formulae) <(echo $INSTALLED) | tr '\n' ' '))
 CASKS=($(comm -23 <(cat brew/casks) <(echo $INSTALLED) | tr '\n' ' '))
 
-BOTTLE_INFO=$(brew info --json=v2 --bottle $FORMULAE)
-CASK_INFO=$(brew info --json=v2 $CASKS)
+BOTTLE_INFO=$($BREW info --json=v2 --bottle $FORMULAE)
+CASK_INFO=$($BREW info --json=v2 $CASKS)
 
 CURL=(curl -k -s --retry 3 --disable --cookie /dev/null --globoff --header 'Authorization: Bearer QQ==' --location)
 MACOS="big_sur"
@@ -91,7 +97,7 @@ MACOS="big_sur"
 BOTTLES=()
 PIDS=()
 
-CACHE_DIR="$(brew --cache)"
+CACHE_DIR="$($BREW --cache)"
 
 echo "fetching tarballs..."
 echo "$FORMULAE"
@@ -121,8 +127,8 @@ done <<< $(echo -E $CASK_INFO | jq -rc ".casks[] | .url")
 wait $PIDS
 
 echo "installing bottles and casks..."
-HOMEBREW_NO_INSTALL_CLEANUP=1 HOMEBREW_NO_INSTALLED_DEPENDENTS_CHECK=1 brew install $BOTTLES
-HOMEBREW_NO_INSTALL_CLEANUP=1 HOMEBREW_NO_INSTALLED_DEPENDENTS_CHECK=1 brew install --casks $CASKS
+HOMEBREW_NO_INSTALL_CLEANUP=1 HOMEBREW_NO_INSTALLED_DEPENDENTS_CHECK=1 $BREW install $BOTTLES
+HOMEBREW_NO_INSTALL_CLEANUP=1 HOMEBREW_NO_INSTALLED_DEPENDENTS_CHECK=1 $BREW install --casks $CASKS
 
 echo "installing dotfiles..."
 for i in _$1*
