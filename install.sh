@@ -21,7 +21,7 @@ function link_file {
 if ! [[ -e "/Library/Developer/CommandLineTools/usr/bin/git" ]]
 then
   # This temporary file prompts the 'softwareupdate' utility to list the Command Line Tools
-  brew_placeholder = "/Library/Developer/CommandLineTools/usr/bin/git"
+  brew_placeholder="/Library/Developer/CommandLineTools/usr/bin/git"
   clt_placeholder="/tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress"
   sudo touch $clt_placeholder $brew_placeholder
 
