@@ -18,7 +18,7 @@ function link_file {
   ln -sfn "$source" "$target"
 }
 
-if [[ -eq "$(uname -p)" "arm" ]] ; then
+if [ "$(uname -p)" = "arm" ] ; then
     BREW=/opt/homebrew/bin/brew
 else
     BREW=/usr/local/bin/brew
@@ -26,37 +26,18 @@ fi
 
 if ! [[ -e "/Library/Developer/CommandLineTools/usr/bin/git" ]]
 then
-  # This temporary file prompts the 'softwareupdate' utility to list the Command Line Tools
-  brew_placeholder="/Library/Developer/CommandLineTools/usr/bin/git"
-  clt_placeholder="/tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress"
-  sudo touch $clt_placeholder $brew_placeholder
+  echo "installing command line tools..."
+  sudo "/usr/bin/xcode-select" "--install"
+fi
 
-  clt_label_command="/usr/sbin/softwareupdate -l |
-                      grep -B 1 -E 'Command Line Tools' |
-                      awk -F'*' '/^ *\\*/ {print \$2}' |
-                      sed -e 's/^ *Label: //' -e 's/^ *//' |
-                      sort -V |
-                      tail -n1"
-  clt_label="$(chomp "$(/bin/bash -c "${clt_label_command}")")"
-
-  if [[ -n "${clt_label}" ]]
-  then
-    echo "installing ${clt_label}"
-    sudo "/usr/sbin/softwareupdate" "-i" "${clt_label}"
-    sudo "/usr/bin/xcode-select" "--switch" "/Library/Developer/CommandLineTools"
-  fi
-  sudo "/bin/rm" "-f" "${clt_placeholder}" "${brew_placeholder}"
-fi &
-
-if ! command -v $BREW ; then # TODO(Darwin)
-  echo 'installing homebrew (requires sudo)'
+if ! command -v $BREW ; then
+  echo "installing homebrew..."
   /usr/bin/sudo -v
-  /bin/bash -c "NONINTERACTIVE=1 $(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/9d6f09136c472978b4b18294d895010077008744/install.sh)"
+  /bin/bash -c "NONINTERACTIVE=1 $(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/4b43b8e6c3e854677ae052e3a7f790c20a8c1056/install.sh)"
   $BREW install git
 fi
 
 if [ ! -d $HOME/src ]; then
-  echo 'creating ~/src'
   mkdir $HOME/src
 fi
 
@@ -69,7 +50,6 @@ if [ ! $HOME/.ssh ]; then
 fi
 
 if [ ! -d $HOME/src/dotfiles ]; then
-  echo 'cloning dotfiles into ~/src'
   git clone https://github.com/blampe/dotfiles.git
   cd dotfiles # TODO(remove)
   git checkout origin/refactor # TODO(remove)
@@ -77,58 +57,8 @@ fi
 
 pushd $HOME/src/dotfiles
 
-if [ $CASKS ] ; then
-  for tap in $(cat brew/taps); do
-    $BREW tap $tap
-  done
-fi
-
-# Take the requested formulae/casks and subtract any that are already installed
-INSTALLED="$(for fullname in $(brew list -1 --full-name); do basename $fullname; done | sort)"
-FORMULAE=($(comm -23 <(cat brew/formulae) <(echo $INSTALLED) | tr '\n' ' '))
-CASKS=($(comm -23 <(cat brew/casks) <(echo $INSTALLED) | tr '\n' ' '))
-
-BOTTLE_INFO=$($BREW info --json=v2 --bottle $FORMULAE)
-CASK_INFO=$($BREW info --json=v2 $CASKS)
-
-CURL=(curl -k -s --retry 3 --disable --cookie /dev/null --globoff --header 'Authorization: Bearer QQ==' --location)
-MACOS="big_sur"
-
-BOTTLES=()
-PIDS=()
-
-CACHE_DIR="$($BREW --cache)"
-
-echo "fetching tarballs..."
-echo "$FORMULAE"
-
-while read name version url ; do
-  url_sha="$(echo -n $url | shasum -a 256 | head -c 64)"
-  file="$CACHE_DIR/downloads/$url_sha--$name--$version.$MACOS.bottle.tar.gz"
-
-  BOTTLES+=($file)
-
-  # Grab the tarball
-  $CURL $url > $file &
-  PIDS+=($!)
-done <<< $(echo -E $BOTTLE_INFO | jq -rc ".formulae[] | [.name, .pkg_version, .bottles.$MACOS.url, .bottles.all.url],(.dependencies[] | [.name, .pkg_version, .bottles.$MACOS.url, .bottles.all.url]) | @tsv" | sort | uniq)
-
-echo "$CASKS"
-
-while read url ; do
-  url_sha="$(echo -n $url | shasum -a 256 | head -c 64)"
-  file="$CACHE_DIR/downloads/$url_sha--$(basename $url)"
-
-  # Grab the tarball
-  $CURL $url > $file &
-  PIDS+=($!)
-done <<< $(echo -E $CASK_INFO | jq -rc ".casks[] | .url")
-
-wait $PIDS
-
-echo "installing bottles and casks..."
-HOMEBREW_NO_INSTALL_CLEANUP=1 HOMEBREW_NO_INSTALLED_DEPENDENTS_CHECK=1 $BREW install $BOTTLES
-HOMEBREW_NO_INSTALL_CLEANUP=1 HOMEBREW_NO_INSTALLED_DEPENDENTS_CHECK=1 $BREW install --casks $CASKS
+echo "installing homebrew packages..."
+$BREW bundle install
 
 echo "installing dotfiles..."
 for i in _$1*
@@ -137,10 +67,6 @@ do
 done
 
 git submodule update --init
-
-echo "installing zsh themes and plugins..."
-link_file "zsh/plugins" "${HOME}/.oh-my-zsh/custom/plugins"
-link_file "zsh/themes" "${HOME}/.oh-my-zsh/custom/themes"
 
 echo "installing vim plugins..."
 vim +PlugInstall +qall
@@ -153,6 +79,7 @@ if [[ `uname` =~ "Darwin" ]]; then
   done
 
   if [ -f ~/.macos ]; then
+      echo "applying macos settings..."
       . ~/.macos
   fi
 fi

@@ -10,3 +10,4 @@ _taskrc.d/local
 _taskrc.d/context
 _vim/.netrwhist
 _vim/bundle
+Brewfile.lock.json
